@@ -9,50 +9,25 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View,
-  Image
+  View
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import AppNav from './app/navigator/AppNav';
 
-const HomeScreen = () => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-    </View>
-);
+class App extends Component {
 
-const ProfileScreen = () => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Profile Screen</Text>
-    </View>
-);
+  constructor(props) {
+    super(props);
+  }
 
-const App = TabNavigator({
-    Home: {
-        screen: HomeScreen,
-        navigationOptions: {
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Image
-                    source={require('./res/images/ic_polular.png')}
-                    style={{ color: tintColor }}
-                />
-            ),
-        },
-    },
-    Profile: {
-        screen: ProfileScreen,
-        navigationOptions: {
-            tabBarLabel: 'Profile',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Image
-                    source={require('./res/images/ic_trending.png')}
-                    style={{ color: tintColor }}
-                />
-            ),
-        },
-    },
-});
+  render() {
+    return (
+      <AppNav
+        screenProps = {{navigation: this.props.navigation}}
+        style={{flex: 1}} />
+    )
+  }
+}
 
 export default App;
 
