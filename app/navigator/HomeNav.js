@@ -5,6 +5,7 @@ import {
   Button,
 } from 'react-native';
 import { StackNavigator,TabNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Popular from '../view/Popular';
 
 const homeIcon = require('../assets/ic_trending_up.png');
@@ -15,9 +16,10 @@ const HomeNav = TabNavigator({
     screen: Popular,
     navigationOptions: {
       tabBarIcon: ({ focused, tintColor }) => (
-        <Image
-          source={focused ? homeIconActive : homeIcon}
-          style={[styles.tabIcon, {tintColor: tintColor}]}
+        <Icon
+          name="trending-up"
+          color={tintColor}
+          size={32}
         />
       ),
     }
@@ -25,7 +27,7 @@ const HomeNav = TabNavigator({
 }, {
   tabBarPosition:'bottom',
   tabBarOptions: {
-    activeTintColor: '#000000',
+    activeTintColor: '#2196F3',
     inactiveTintColor:'#666666',
     showLabel:false,
     showIcon:true,

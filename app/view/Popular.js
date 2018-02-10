@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
 
 import {
   StyleSheet,
@@ -9,7 +10,11 @@ import {
 export default class Popular extends Component {
 
   render() {
-    return <Text>111</Text>;
+    return <View>
+      <ScrollableTabBar>
+          <Text tabLabel="Java">Java</Text>
+      </ScrollableTabBar>
+    </View>;
   }
 }
 

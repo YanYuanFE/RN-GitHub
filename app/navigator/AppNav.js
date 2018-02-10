@@ -19,7 +19,7 @@ const AppNav = StackNavigator({
 }, {
   initialRouteParams: {
     oneSceneNum: 0,
-    title: '一个'
+    title: '最热'
   }
 });
 
