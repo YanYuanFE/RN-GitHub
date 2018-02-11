@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import AppNav from './app/navigator/AppNav';
+import Popular from './app/view/Popular';
 
 class App extends Component {
 

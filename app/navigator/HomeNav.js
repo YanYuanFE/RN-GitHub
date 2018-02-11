@@ -19,14 +19,30 @@ const HomeNav = TabNavigator({
         <Icon
           name="trending-up"
           color={tintColor}
-          size={32}
+          size={25}
+        />
+      ),
+    },
+  },
+  Favorite: {
+    screen: Popular,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => (
+        <Icon
+          name="favorite-border"
+          color={tintColor}
+          size={25}
         />
       ),
     }
   },
 }, {
   tabBarPosition:'bottom',
+  // animationEnabled: false,
+  lazy: true,
+  // scrollEnabled: false,
   tabBarOptions: {
+    swipeEnabled: false,
     activeTintColor: '#2196F3',
     inactiveTintColor:'#666666',
     showLabel:false,

@@ -76,12 +76,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#2196F3',
     borderBottomWidth: 0.5,
     borderColor: '#DDDDDD',
   },
   titleText: {
-    color: '#000000',
+    color: '#FFF',
     fontSize: 16,
   },
   iconBtn: {
