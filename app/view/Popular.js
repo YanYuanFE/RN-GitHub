@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 
 import RepoCell from '../components/RepoCell';
+import NavigationBar from '../components/NavigationBar';
 
-class PopularTabItem extends Component {
+class PopularTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,9 +25,7 @@ class PopularTabItem extends Component {
     this.loadData();
   }
   loadData() {
-    const { routeName } = this.props.navigation.state;
-    console.log(this.props.navigation);
-    fetchPopularRepo(routeName)
+    fetchPopularRepo(this.props.tabLabel)
       .then(result => {
         console.log(JSON.stringify(result));
         this.setState({
@@ -42,69 +41,45 @@ class PopularTabItem extends Component {
   }
 
   render() {
-    return <View style={styles.tabContainer}>
-      <Text>1111</Text>
+    return <View style={styles.container}>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(data) => this.renderRow(data)}
+      >
+      </ListView>
     </View>
   }
 }
 
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
-      </View>
-    );
-  }
-}
-
-class SettingsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
-    );
-  }
-}
-
-const PopularTab = TabNavigator({
-  Java: { screen: HomeScreen },
-  JavaScript: { screen: SettingsScreen },
-}, {
-  tabBarPosition: 'top',
-  animationEnabled: false,
-  scrollEnabled: false,
-  lazy: true,
-  tabBarOptions: {
-    scrollEnabled: false,
-  }
-});
-
 export default class Popular extends Component {
   render() {
+    let navigationBar =
+      <NavigationBar
+        title={'最热'}
+        statusBar={{backgroundColor: '#2196F3'}}
+      />
     return (
-      <PopularTab/>
+      <View style={styles.container}>
+        {navigationBar}
+        <ScrollableTabView
+          renderTabBar={() => <ScrollableTabBar/>}
+          tabBarBackgroundColor="#2196F3"
+          tabBarActiveTextColor="#FFF"
+          tabBarInactiveTextColor="#FFF"
+          tabBarUnderlineStyle={{backgroundColor: '#FFF'}}
+          >
+          <PopularTab tabLabel="Java">Java</PopularTab>
+          <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>
+          <PopularTab tabLabel="Android">Android</PopularTab>
+          <PopularTab tabLabel="IOS">IOS</PopularTab>
+        </ScrollableTabView>
+      </View>
     )
   }
 }
 
 
-{/*<View style={styles.container}>*/}
-  {/*<ScrollableTabView*/}
-    {/*initialPage={0}*/}
-    {/*renderTabBar={() => <ScrollableTabBar/>}*/}
-    {/*tabBarBackgroundColor="#2196F3"*/}
-    {/*tabBarActiveTextColor="#FFF"*/}
-    {/*tabBarInactiveTextColor="#FFF"*/}
-    {/*tabBarUnderlineStyle={{backgroundColor: '#FFF'}}*/}
-  {/*>*/}
-    {/*<PopularTab tabLabel="Java">Java</PopularTab>*/}
-    {/*<PopularTab tabLabel="JavaScript">JavaScript</PopularTab>*/}
-    {/*<PopularTab tabLabel="Android">Android</PopularTab>*/}
-    {/*<PopularTab tabLabel="IOS">IOS</PopularTab>*/}
-  {/*</ScrollableTabView>*/}
-{/*</View>;*/}
+
 
 const styles = StyleSheet.create({
   container: {

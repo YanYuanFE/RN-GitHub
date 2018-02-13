@@ -9,11 +9,7 @@ const AppNav = StackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      header: (
-        <Toolbar
-          inHome={true} navigation={navigation}/>
-      )
-
+      header: null
     })
   }
 }, {
