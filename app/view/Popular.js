@@ -53,11 +53,12 @@ class PopularTab extends Component {
 
 export default class Popular extends Component {
   render() {
-    let navigationBar =
+    const navigationBar =
       <NavigationBar
         title={'最热'}
         statusBar={{backgroundColor: '#2196F3'}}
       />
+    console.log(navigationBar);
     return (
       <View style={styles.container}>
         {navigationBar}

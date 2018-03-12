@@ -44,20 +44,31 @@ export default class NavigationBar extends Component {
     }
   }
 
+  getButtonElement(data) {
+    return (
+      <View style={styles.navBarButton}>
+        {data ? data : null }
+      </View>
+    );
+  }
+
   render() {
-    let sattus = <View style={styles.statusBar}><StatusBar {...this.props.statusBar}/></View>
+    let statusBar = !this.props.statusBar.hidden ?
+      <View style={styles.statusBar}>
+        <StatusBar {...this.props.statusBar}/>
+      </View> : null;
     let titleView = this.props.titleView ? this.props.titleView : <Text style={styles.title}>{this.props.title}</Text>
-    let content =
-      <View>
-        {this.props.leftButton}
+    let content = this.props.hide ? null :
+      <View style={styles.navBar}>
+        {this.getButtonElement(this.props.leftButton)}
         <View style={styles.titleViewContainer}>
           {titleView}
         </View>
-        {this.props.rightButton}
+        {this.getButtonElement(this.props.rightButton)}
       </View>;
 
-    return <View style={styles.container}>
-      <StatusBar/>
+    return <View style={[styles.container, this.props.style]}>
+      {statusBar}
       {content}
     </View>
   }
