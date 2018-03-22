@@ -67,7 +67,7 @@ export default class Popular extends Component {
           tabBarBackgroundColor="#2196F3"
           tabBarActiveTextColor="#FFF"
           tabBarInactiveTextColor="#FFF"
-          tabBarUnderlineStyle={{backgroundColor: '#FFF'}}
+          tabBarUnderlineStyle={{backgroundColor: '#e7e7e7', height: 2}}
           >
           <PopularTab tabLabel="Java">Java</PopularTab>
           <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>

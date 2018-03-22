@@ -6,10 +6,9 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Popular from '../view/Popular';
 import TabNavigator from 'react-native-tab-navigator';
-const homeIcon = require('../assets/ic_trending_up.png');
-const homeIconActive = require('../assets/ic_trending_up_active.png');
+import Popular from '../view/Popular';
+import Trending from "../view/Trending";
 
 export default class HomeNav extends Component {
   constructor(props) {
@@ -42,7 +41,7 @@ export default class HomeNav extends Component {
             renderSelectedIcon={() => <Icon name="trending-up" color="#2196F3" size={25}/>}
             onPress={() => this.setState({selectedTab: 'trending'})}
           >
-            <Popular {...this.props}/>
+            <Trending {...this.props}/>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={selectedTab === 'favorite'}
