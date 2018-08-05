@@ -1,34 +1,35 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
+ *
+ * @format
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import { TabNavigator } from 'react-navigation';
-import AppNav from './app/navigator/AppNav';
-import Popular from './app/view/Popular';
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-class App extends Component {
+const instructions = Platform.select({
+  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  android:
+    'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
+});
 
-  constructor(props) {
-    super(props);
-  }
-
+type Props = {};
+export default class App extends Component<Props> {
   render() {
     return (
-      <AppNav />
-    )
+      <View style={styles.container}>
+	      <Icon name="ios-person" size={30} color="#4F8EF7" />
+        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
+      </View>
+    );
   }
 }
-
-export default App;
 
 const styles = StyleSheet.create({
   container: {
