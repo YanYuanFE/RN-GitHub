@@ -6,8 +6,16 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 class Hub {
-  constructor(file) {
-    this.file = file;
+  getCode() {}
+
+  getScope() {}
+
+  addHelper() {
+    throw new Error("Helpers are not supported by the default hub.");
+  }
+
+  buildError(node, msg, Error = TypeError) {
+    return new Error(msg);
   }
 
 }

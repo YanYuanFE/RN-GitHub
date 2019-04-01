@@ -1,5 +1,3 @@
-"use strict";
-
 exports = module.exports = function (...args) {
   return register(...args);
 };

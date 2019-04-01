@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,15 +10,22 @@
 'use strict';
 
 module.exports = (moduleName, instanceMethods) => {
-  const RealComponent = require.requireActual(moduleName);
+  const RealComponent = jest.requireActual(moduleName);
   const React = require('react');
 
   const SuperClass =
     typeof RealComponent === 'function' ? RealComponent : React.Component;
 
   const Component = class extends SuperClass {
+    static displayName = 'Component';
+
     render() {
-      const name = RealComponent.displayName || RealComponent.name;
+      const name =
+        RealComponent.displayName ||
+        RealComponent.name ||
+        (RealComponent.render // handle React.forwardRef
+          ? RealComponent.render.displayName || RealComponent.render.name
+          : 'Unknown');
 
       const props = Object.assign({}, RealComponent.defaultProps);
 
@@ -43,9 +50,9 @@ module.exports = (moduleName, instanceMethods) => {
     }
   };
 
-  if (RealComponent.propTypes != null) {
-    Component.propTypes = RealComponent.propTypes;
-  }
+  Object.keys(RealComponent).forEach(classStatic => {
+    Component[classStatic] = RealComponent[classStatic];
+  });
 
   if (instanceMethods != null) {
     Object.assign(Component.prototype, instanceMethods);

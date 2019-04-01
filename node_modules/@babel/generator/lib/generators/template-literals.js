@@ -9,6 +9,7 @@ exports.TemplateLiteral = TemplateLiteral;
 
 function TaggedTemplateExpression(node) {
   this.print(node.tag, node);
+  this.print(node.typeParameters, node);
   this.print(node.quasi, node);
 }
 

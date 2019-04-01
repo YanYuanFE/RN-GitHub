@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ const ReactNativeViewAttributes = require('ReactNativeViewAttributes');
 
 const createReactNativeComponentClass = require('createReactNativeComponentClass');
 const merge = require('merge');
-const invariant = require('fbjs/lib/invariant');
+const invariant = require('invariant');
 
 // Diff Helpers
 
@@ -150,11 +150,11 @@ class Surface extends React.Component {
   }
 
   render() {
-    const props = this.props;
-    const w = extractNumber(props.width, 0);
-    const h = extractNumber(props.height, 0);
+    const height = extractNumber(this.props.height, 0);
+    const width = extractNumber(this.props.width, 0);
+
     return (
-      <NativeSurfaceView style={[props.style, {width: w, height: h}]}>
+      <NativeSurfaceView style={[this.props.style, {height, width}]}>
         {this.props.children}
       </NativeSurfaceView>
     );
@@ -399,7 +399,19 @@ function extractStrokeJoin(strokeJoin) {
 // Note: ART has a notion of width and height on Shape but AFAIK it's a noop in
 // ReactART.
 
-class Shape extends React.Component {
+export type ShapeProps = {|
+  fill?: mixed,
+  stroke?: mixed,
+  strokeCap?: mixed,
+  strokeDash?: mixed,
+  strokeJoin?: mixed,
+  strokeWidth?: mixed,
+  x?: number,
+  y?: number,
+  opacity?: mixed,
+|};
+
+class Shape extends React.Component<ShapeProps> {
   render() {
     const props = this.props;
     const path = props.d || childrenAsString(props.children);
