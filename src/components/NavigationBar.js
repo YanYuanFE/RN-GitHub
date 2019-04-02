@@ -8,7 +8,6 @@ import {
   Platform,
   StatusBar
 } from 'react-native';
-
 const NAVBAR_HEIGHT_ANDROID = 50;
 const NAVBAR_HEIGHT_IOS = 44;
 const STATUS_BAR_HEIGHT = 20;
@@ -20,7 +19,7 @@ const StatusBarShape = {
 
 export default class NavigationBar extends Component {
   static propTypes = {
-    style: View.propTypes.style,
+    style: PropTypes.style,
     title: PropTypes.string,
     titleView: PropTypes.element,
     hide: PropTypes.bool,
@@ -33,6 +32,9 @@ export default class NavigationBar extends Component {
     statusBar: {
       barStyle: 'light-content',
       hidden: false
+    },
+    style: {
+      backgroundColor: "red"
     }
   }
 
@@ -67,10 +69,12 @@ export default class NavigationBar extends Component {
         {this.getButtonElement(this.props.rightButton)}
       </View>;
 
-    return <View style={[styles.container, this.props.style]}>
-      {statusBar}
-      {content}
-    </View>
+    return (
+      <View style={[styles.container, this.props.style]}>
+        {statusBar}
+        {content}
+      </View>
+    )
   }
 }
 

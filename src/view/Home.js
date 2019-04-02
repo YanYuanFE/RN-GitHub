@@ -11,7 +11,8 @@ export default class Home extends Component {
     return (
       <HomeNav
         screenProps = {{appNavigation: this.props.navigation}}
-        style = {{flex: 1}} />
+        style = {{flex: 1}}
+      />
     )
   }
 }

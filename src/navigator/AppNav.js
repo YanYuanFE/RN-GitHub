@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import Home from '../view/Home';
 import Toolbar from '../components/Toolbar';
 
-const AppNav = StackNavigator({
+const AppNav = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { TabNavigator } from 'react-navigation';
-import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
-import { fetchPopularRepo } from '../api/popular';
-
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import {
   StyleSheet,
   View,
   Text,
-  ListView
+  ListView,
+  Dimensions
 } from 'react-native';
-
+import { fetchPopularRepo } from '../api/popular';
 import RepoCell from '../components/RepoCell';
 import NavigationBar from '../components/NavigationBar';
 
@@ -18,13 +16,14 @@ class PopularTab extends Component {
     super(props);
     this.state = {
       result: '',
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
     }
   }
   componentDidMount() {
     this.loadData();
   }
-  loadData() {
+
+  loadData = () => {
     fetchPopularRepo(this.props.tabLabel)
       .then(result => {
         console.log(JSON.stringify(result));
@@ -36,44 +35,60 @@ class PopularTab extends Component {
     })
   }
 
-  renderRow(data) {
+  renderRow = (data) => {
     return <RepoCell data={data} />
   }
 
   render() {
-    return <View style={styles.container}>
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(data) => this.renderRow(data)}
-      >
-      </ListView>
-    </View>
+    const { dataSource } = this.state;
+    return (
+      <View style={styles.container}>
+        <ListView
+          dataSource={dataSource}
+          renderRow={(data) => this.renderRow(data)}
+        >
+        </ListView>
+      </View>
+    )
   }
 }
 
+const JavaRoute = () => <PopularTab tabLabel="Java">Java</PopularTab>;
+const JSRoute = () => <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>;
+
 export default class Popular extends Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'Java', title: 'Java' },
+      { key: 'JavaScript', title: 'JavaScript' },
+    ],
+  }
   render() {
-    const navigationBar =
-      <NavigationBar
-        title={'最热'}
-        statusBar={{backgroundColor: '#2196F3'}}
-      />
-    console.log(navigationBar);
     return (
       <View style={styles.container}>
-        {navigationBar}
-        <ScrollableTabView
-          renderTabBar={() => <ScrollableTabBar/>}
-          tabBarBackgroundColor="#2196F3"
-          tabBarActiveTextColor="#FFF"
-          tabBarInactiveTextColor="#FFF"
-          tabBarUnderlineStyle={{backgroundColor: '#e7e7e7', height: 2}}
-          >
-          <PopularTab tabLabel="Java">Java</PopularTab>
-          <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>
-          <PopularTab tabLabel="Android">Android</PopularTab>
-          <PopularTab tabLabel="IOS">IOS</PopularTab>
-        </ScrollableTabView>
+        <NavigationBar
+          style={{backgroundColor: "#2196F3"}}
+          title={'最热'}
+          statusBar={{backgroundColor: '#2196F3'}}
+        />
+        <TabView
+          navigationState={this.state}
+          renderScene={SceneMap({
+            Java: JavaRoute,
+            JavaScript: JSRoute,
+          })}
+          onIndexChange={index => this.setState({ index })}
+          initialLayout={{ width: Dimensions.get('window').width }}
+          renderTabBar={(props) => 
+            <TabBar 
+              {...props}
+              indicatorStyle={{ backgroundColor: 'white' }}
+              style={{ backgroundColor: '#2196F3' }}
+            />
+          }
+        >
+        </TabView>
       </View>
     )
   }

@@ -11,9 +11,9 @@ import {
   Text,
   View
 } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 import AppNav from './src/navigator/AppNav';
-import Popular from './src/view/Popular';
+// import Popular from './src/view/Popular';
 
 class App extends Component {
 
@@ -23,12 +23,12 @@ class App extends Component {
 
   render() {
     return (
-      <View>react native</View>
+      <Text>react native</Text>
     )
   }
 }
 
-export default App;
+export default createAppContainer(AppNav);
 
 const styles = StyleSheet.create({
   container: {
