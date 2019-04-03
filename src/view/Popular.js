@@ -8,8 +8,11 @@ import {
   Dimensions
 } from 'react-native';
 import { fetchPopularRepo } from '../api/popular';
+import RepositoryService, { TYPE } from '../services/RepositoryService';
 import RepoCell from '../components/RepoCell';
 import NavigationBar from '../components/NavigationBar';
+
+const popularService = new RepositoryService(TYPE.Popular);
 
 class PopularTab extends PureComponent {
   constructor(props) {
@@ -25,7 +28,7 @@ class PopularTab extends PureComponent {
 
   loadData = () => {
     const { tabLabel } = this.props;
-    fetchPopularRepo(tabLabel)
+    popularService.fetchData(tabLabel)
       .then(result => {
         console.log(JSON.stringify(result));
         this.setState({
@@ -34,7 +37,7 @@ class PopularTab extends PureComponent {
       }).catch((error) => {
       console.log(error);
     })
-  }
+  };
 
   renderRow = ({item}) => {
     return <RepoCell data={item} />;
@@ -44,14 +47,16 @@ class PopularTab extends PureComponent {
 
   render() {
     const { dataSource } = this.state;
+    console.log(dataSource);
     return (
       <View style={styles.container}>
         {
-          dataSource.length ? <FlatList
-            keyExtractor={this._keyExtractor}
-            data={dataSource}
-            renderItem={this.renderRow}
-          /> : <Text>加载中...</Text>
+          dataSource.length ?
+            <FlatList
+              keyExtractor={this._keyExtractor}
+              data={dataSource}
+              renderItem={this.renderRow}
+            /> : <Text>加载中...</Text>
         }
       </View>
     )
@@ -85,11 +90,16 @@ export default class Popular extends PureComponent {
           })}
           onIndexChange={index => this.setState({ index })}
           initialLayout={{ width: Dimensions.get('window').width }}
-          renderTabBar={(props) => 
-            <TabBar 
+          renderTabBar={(props) =>
+            <TabBar
               {...props}
               indicatorStyle={{ backgroundColor: 'white' }}
               style={{ backgroundColor: '#2196F3' }}
+              renderLabel={({ route, focused, color }) => (
+                <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
+                  {route.key}
+                </Text>
+              )}
             />
           }
         >
@@ -118,4 +128,4 @@ const styles = StyleSheet.create({
   tabList: {
     height:600
   }
-})
+});

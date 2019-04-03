@@ -48,7 +48,13 @@ export default class HomeNav extends Component {
             <TabBar
               {...props}
               indicatorStyle={{ backgroundColor: '#FFF' }}
-              style={{ backgroundColor: '#FFF' }}
+              style={{
+                backgroundColor: '#FFF',
+                shadowColor: 'black',
+                shadowOffset: {width: 0, height: 0},
+                shadowOpacity: 0.4,
+                shadowRadius: 5
+              }}
               activeColor="#2196F3"
               inactiveColor="#85929A"
               renderIcon={({ route, focused, color }) => {

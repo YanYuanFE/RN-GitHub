@@ -8,6 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "GitHubTrending": "^3.0.1",
     "react": "16.8.3",
     "react-native": "0.59.3",
     "react-native-gesture-handler": "^1.1.0",
