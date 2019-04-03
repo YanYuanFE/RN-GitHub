@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import {
   StyleSheet,
   View,
   Text,
-  ListView,
+  FlatList,
   Dimensions
 } from 'react-native';
 import { fetchPopularRepo } from '../api/popular';
 import RepoCell from '../components/RepoCell';
 import NavigationBar from '../components/NavigationBar';
 
-class PopularTab extends Component {
+class PopularTab extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       result: '',
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      dataSource: [],
     }
   }
   componentDidMount() {
@@ -24,30 +24,35 @@ class PopularTab extends Component {
   }
 
   loadData = () => {
-    fetchPopularRepo(this.props.tabLabel)
+    const { tabLabel } = this.props;
+    fetchPopularRepo(tabLabel)
       .then(result => {
         console.log(JSON.stringify(result));
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(result.items)
+          dataSource: result.items
         });
       }).catch((error) => {
       console.log(error);
     })
   }
 
-  renderRow = (data) => {
-    return <RepoCell data={data} />
+  renderRow = ({item}) => {
+    return <RepoCell data={item} />;
   }
+
+  _keyExtractor = (item, index) => item.id;
 
   render() {
     const { dataSource } = this.state;
     return (
       <View style={styles.container}>
-        <ListView
-          dataSource={dataSource}
-          renderRow={(data) => this.renderRow(data)}
-        >
-        </ListView>
+        {
+          dataSource.length ? <FlatList
+            keyExtractor={this._keyExtractor}
+            data={dataSource}
+            renderItem={this.renderRow}
+          /> : <Text>加载中...</Text>
+        }
       </View>
     )
   }
@@ -56,7 +61,7 @@ class PopularTab extends Component {
 const JavaRoute = () => <PopularTab tabLabel="Java">Java</PopularTab>;
 const JSRoute = () => <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>;
 
-export default class Popular extends Component {
+export default class Popular extends PureComponent {
   state = {
     index: 0,
     routes: [

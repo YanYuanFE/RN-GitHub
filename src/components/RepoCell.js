@@ -11,23 +11,25 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default class RepoCell extends Component {
   render() {
     const { data } = this.props;
-    return <View style={styles.cell_container}>
-      <Text style={styles.title}>{data.full_name}</Text>
-      <Text style={styles.description}>{data.description}</Text>
-      <View style={styles.row}>
+    return (
+      <View style={styles.cell_container}>
+        <Text style={styles.title}>{data.full_name}</Text>
+        <Text style={styles.description}>{data.description}</Text>
         <View style={styles.row}>
-          <Text>Author:</Text>
-          <Image
-            style={{height:22, width: 22}}
-            source={{uri: data.owner.avatar_url}} />
+          <View style={styles.row}>
+            <Text>Author:</Text>
+            <Image
+              style={{height:22, width: 22}}
+              source={{uri: data.owner.avatar_url}} />
+          </View>
+          <View style={{justifyContent:'space-between', flexDirection:'row'}}>
+            <Text>Star:</Text>
+            <Text>{data.stargazers_count}</Text>
+          </View>
+          <Icon name="grade" color="#2196F3" size={25}/>
         </View>
-        <View style={{justifyContent:'space-between', flexDirection:'row'}}>
-          <Text>Star:</Text>
-          <Text>{data.stargazers_count}</Text>
-        </View>
-        <Icon name="grade" color="#2196F3" size={25}/>
       </View>
-    </View>
+    )
   }
 }
 
