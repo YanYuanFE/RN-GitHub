@@ -11,9 +11,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Popular from '../pages/popular/Popular';
 import Trending from "../pages/trending/Trending";
+import Favorite from '../pages/favorite/Favorite';
 
 const popularRoute = () => <Popular />;
 const trendingRoute = () => <Trending />;
+const favoriteRoute = () => <Favorite />;
 
 export default class HomeNav extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ export default class HomeNav extends Component {
       routes: [
         { key: 'Popular', title: 'popular' },
         { key: 'Trending', title: 'trending' },
+        { key: 'Favorite', title: 'favorite' },
       ],
     }
   }
@@ -41,6 +44,7 @@ export default class HomeNav extends Component {
           renderScene={SceneMap({
             Popular: popularRoute,
             Trending: trendingRoute,
+            Favorite: favoriteRoute
           })}
           onIndexChange={index => this.setState({ index })}
           initialLayout={{ width: Dimensions.get('window').width }}

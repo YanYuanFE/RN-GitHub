@@ -3,7 +3,7 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	Image, TouchableHighlight
+	Image, TouchableHighlight, TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavigationService from "../services/NavigationService";
@@ -16,8 +16,17 @@ export default class TrendingRepo extends PureComponent {
 			title: data.fullName
 		});
 	};
+
+	handleFavorite = () => {
+		const { data, onFavorite } = this.props;
+		onFavorite(data, !data.isFavorite);
+	};
+
 	render() {
 		const { data } = this.props;
+		if (!data) {
+			return null;
+		}
 		return (
 			<View style={styles.cell_container}>
 				<Text style={styles.title}>{data.fullName}</Text>
@@ -35,12 +44,14 @@ export default class TrendingRepo extends PureComponent {
 								<Image
 									key={img}
 									style={styles.avatar}
-									source={{uri: img}} 
+									source={{uri: img}}
 								/>
 							))
 						}
 					</View>
-					<Icon name="grade" color="#2196F3" size={25}/>
+					<TouchableOpacity onPress={this.handleFavorite}>
+						<Icon name="grade" color={data.isFavorite ? "#2196F3" : "#E5E5E5"} size={25}/>
+					</TouchableOpacity>
 				</View>
 			</View>
 		)

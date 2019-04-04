@@ -5,7 +5,8 @@ import {
   View,
   Text,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavigationService from '../services/NavigationService';
@@ -18,6 +19,12 @@ export default class PopularRepo extends PureComponent {
       title: data.full_name
     });
   };
+
+  handleFavorite = () => {
+    const { data, onFavorite } = this.props;
+    onFavorite(data, !data.isFavorite);
+  };
+
   render() {
     const { data } = this.props;
     return (
@@ -31,13 +38,15 @@ export default class PopularRepo extends PureComponent {
             <Text>Author:</Text>
             <Image
               style={styles.avatar}
-              source={{uri: data.owner.avatar_url}} />
+              source={{uri: data.owner && data.owner.avatar_url}} />
           </View>
           <View style={{justifyContent:'space-between', flexDirection:'row'}}>
             <Text>Star:</Text>
             <Text>{data.stargazers_count}</Text>
           </View>
-          <Icon name="grade" color="#2196F3" size={25}/>
+          <TouchableOpacity onPress={this.handleFavorite}>
+            <Icon name="grade" color={data.isFavorite ? "#2196F3" : "#E5E5E5"} size={25}/>
+          </TouchableOpacity>
         </View>
       </View>
     )
