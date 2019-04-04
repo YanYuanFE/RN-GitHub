@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-
 import {
 	StyleSheet,
 	View,
@@ -16,19 +15,20 @@ export default class TrendingRepo extends PureComponent {
 				<Text style={styles.title}>{data.fullName}</Text>
 				<Text style={styles.description}>{data.description}</Text>
 				<View style={styles.row}>
+					<Text style={styles.description}>{data.meta}</Text>
+				</View>
+				<View style={styles.row}>
 					<View style={styles.row}>
-						<Text>{data.meta}</Text>
+						<Text style={styles.author}>Built by  </Text>
 						{
-							item.contributors.map(img => (
+							data.contributors.map(img => (
 								<Image
+									key={img}
 									style={{height:22, width: 22}}
-									source={{uri: img}} />
+									source={{uri: img}} 
+								/>
 							))
 						}
-					</View>
-					<View style={{justifyContent:'space-between', flexDirection:'row'}}>
-						<Text>Star:</Text>
-						<Text>{data.stargazers_count}</Text>
 					</View>
 					<Icon name="grade" color="#2196F3" size={25}/>
 				</View>
@@ -58,6 +58,11 @@ const styles = StyleSheet.create({
 		marginBottom: 2,
 		color: '#757575'
 	},
+	author: {
+        fontSize: 14,
+        marginBottom: 2,
+        color: '#757575'
+    },
 	cell_container: {
 		backgroundColor: 'white',
 		padding: 10,

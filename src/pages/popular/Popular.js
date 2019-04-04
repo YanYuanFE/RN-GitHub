@@ -7,61 +7,8 @@ import {
   FlatList,
   Dimensions
 } from 'react-native';
-import { fetchPopularRepo } from '../api/popular';
-import RepositoryService, { TYPE } from '../services/RepositoryService';
-import RepoCell from '../components/RepoCell';
-import NavigationBar from '../components/NavigationBar';
-
-const popularService = new RepositoryService(TYPE.Popular);
-
-class PopularTab extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      result: '',
-      dataSource: [],
-    }
-  }
-  componentDidMount() {
-    this.loadData();
-  }
-
-  loadData = () => {
-    const { tabLabel } = this.props;
-    popularService.fetchData(tabLabel)
-      .then(result => {
-        console.log(JSON.stringify(result));
-        this.setState({
-          dataSource: result.items
-        });
-      }).catch((error) => {
-      console.log(error);
-    })
-  };
-
-  renderRow = ({item}) => {
-    return <RepoCell data={item} />;
-  }
-
-  _keyExtractor = (item, index) => item.id;
-
-  render() {
-    const { dataSource } = this.state;
-    console.log(dataSource);
-    return (
-      <View style={styles.container}>
-        {
-          dataSource.length ?
-            <FlatList
-              keyExtractor={this._keyExtractor}
-              data={dataSource}
-              renderItem={this.renderRow}
-            /> : <Text>加载中...</Text>
-        }
-      </View>
-    )
-  }
-}
+import PopularTab from './PopularTab';
+import NavigationBar from '../../components/NavigationBar';
 
 const JavaRoute = () => <PopularTab tabLabel="Java">Java</PopularTab>;
 const JSRoute = () => <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>;
