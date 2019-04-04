@@ -1,25 +1,36 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
   StyleSheet,
   View,
   Text,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import NavigationService from '../services/NavigationService';
 
-export default class RepoCell extends Component {
+export default class PopularRepo extends PureComponent {
+  goDetail = () => {
+    const { data } = this.props;
+    NavigationService.navigate('Web', {
+      url: data.html_url,
+      title: data.full_name
+    });
+  };
   render() {
     const { data } = this.props;
     return (
       <View style={styles.cell_container}>
         <Text style={styles.title}>{data.full_name}</Text>
-        <Text style={styles.description}>{data.description}</Text>
+        <TouchableHighlight onPress={this.goDetail}>
+          <Text style={styles.description}>{data.description}</Text>
+        </TouchableHighlight>
         <View style={styles.row}>
           <View style={styles.row}>
             <Text>Author:</Text>
             <Image
-              style={{height:22, width: 22}}
+              style={styles.avatar}
               source={{uri: data.owner.avatar_url}} />
           </View>
           <View style={{justifyContent:'space-between', flexDirection:'row'}}>
@@ -53,6 +64,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 2,
     color: '#757575'
+  },
+  avatar: {
+    height: 22,
+    width: 22,
+    borderRadius: 11
   },
   cell_container: {
     backgroundColor: 'white',

@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import Popular from '../view/Popular';
-import Trending from "../view/Trending";
+import Popular from '../pages/popular/Popular';
+import Trending from "../pages/trending/Trending";
 
 const popularRoute = () => <Popular />;
 const trendingRoute = () => <Trending />;

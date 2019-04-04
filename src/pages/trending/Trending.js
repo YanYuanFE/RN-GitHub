@@ -1,19 +1,13 @@
 import React, { PureComponent } from 'react';
-
 import {
   StyleSheet,
   View,
   Text,
   Dimensions,
-  FlatList
 } from 'react-native';
-
-import TrendingRepo from '../components/TrendingRepo';
-import NavigationBar from '../components/NavigationBar';
-import RepositoryService, { TYPE } from '../services/RepositoryService';
-import {SceneMap, TabBar, TabView} from "react-native-tab-view";
-
-const trendingService = new RepositoryService(TYPE.Trending);
+import TrendingTab from './TrendingTab';
+import NavigationBar from '../../components/NavigationBar';
+import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 
 const JavaRoute = () => <TrendingTab tabLabel="Java">Java</TrendingTab>;
 const JSRoute = () => <TrendingTab tabLabel="JavaScript">JavaScript</TrendingTab>;
@@ -30,7 +24,7 @@ export default class Trending extends PureComponent {
     return (
       <View style={styles.container}>
         <NavigationBar
-          style={{backgroundColor: "#FFF"}}
+          style={{backgroundColor: "#2196F3"}}
           title={'趋势'}
           statusBar={{backgroundColor: '#2196F3'}}
         />
@@ -62,56 +56,6 @@ export default class Trending extends PureComponent {
 }
 
 
-class TrendingTab extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      result: '',
-      dataSource: [],
-    }
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData = () => {
-    const { tabLabel } = this.props;
-    trendingService.fetchData(tabLabel)
-      .then(data => {
-        console.log(data);
-        this.setState({
-          dataSource: data
-        });
-      }).catch(error => {
-        console.log(error);
-    })
-  };
-
-  renderRow = ({item}) => {
-    console.log(item);
-    return <TrendingRepo data={item} />;
-  }
-
-  _keyExtractor = (item, index) => item.fullName;
-
-  render() {
-    const { dataSource } = this.state;
-    console.log(dataSource);
-    return (
-      <View style={styles.container}>
-        {
-          dataSource.length ?
-            <FlatList
-              keyExtractor={this._keyExtractor}
-              data={dataSource}
-              renderItem={this.renderRow}
-            /> : <Text>加载中...</Text>
-        }
-      </View>
-    )
-  }
-}
 
 
 const styles = StyleSheet.create({

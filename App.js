@@ -13,7 +13,10 @@ import {
 } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import AppNav from './src/navigator/AppNav';
+import NavigationService from './src/services/NavigationService';
 // import Popular from './src/view/Popular';
+
+const AppContainer = createAppContainer(AppNav);
 
 class App extends Component {
 
@@ -23,12 +26,12 @@ class App extends Component {
 
   render() {
     return (
-      <Text>react native</Text>
+      <AppContainer ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)} />
     )
   }
 }
 
-export default createAppContainer(AppNav);
+export default App;
 
 const styles = StyleSheet.create({
   container: {

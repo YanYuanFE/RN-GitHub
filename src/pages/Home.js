@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   StyleSheet,
 } from 'react-native';
 
 import HomeNav from '../navigator/HomeNav';
 
-export default class Home extends Component {
+export default class HomeScreen extends PureComponent {
 
   render() {
     return (

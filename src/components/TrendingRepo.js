@@ -1,34 +1,44 @@
 import React, { PureComponent } from 'react';
-
 import {
 	StyleSheet,
 	View,
 	Text,
-	Image
+	Image, TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import NavigationService from "../services/NavigationService";
 
 export default class TrendingRepo extends PureComponent {
+	goDetail = () => {
+		const { data } = this.props;
+		NavigationService.navigate('Web', {
+			url: `https://github.com${data.url}`,
+			title: data.fullName
+		});
+	};
 	render() {
 		const { data } = this.props;
 		return (
 			<View style={styles.cell_container}>
 				<Text style={styles.title}>{data.fullName}</Text>
-				<Text style={styles.description}>{data.description}</Text>
+				<TouchableHighlight onPress={this.goDetail}>
+					<Text style={styles.description}>{data.description}</Text>
+				</TouchableHighlight>
+				<View style={styles.row}>
+					<Text style={styles.description}>{data.meta}</Text>
+				</View>
 				<View style={styles.row}>
 					<View style={styles.row}>
-						<Text>{data.meta}</Text>
+						<Text style={styles.author}>Built by  </Text>
 						{
-							item.contributors.map(img => (
+							data.contributors.map(img => (
 								<Image
-									style={{height:22, width: 22}}
-									source={{uri: img}} />
+									key={img}
+									style={styles.avatar}
+									source={{uri: img}} 
+								/>
 							))
 						}
-					</View>
-					<View style={{justifyContent:'space-between', flexDirection:'row'}}>
-						<Text>Star:</Text>
-						<Text>{data.stargazers_count}</Text>
 					</View>
 					<Icon name="grade" color="#2196F3" size={25}/>
 				</View>
@@ -58,6 +68,16 @@ const styles = StyleSheet.create({
 		marginBottom: 2,
 		color: '#757575'
 	},
+	author: {
+        fontSize: 14,
+        marginBottom: 2,
+        color: '#757575'
+    },
+	avatar: {
+		height: 22,
+		width: 22,
+		borderRadius: 11
+	},
 	cell_container: {
 		backgroundColor: 'white',
 		padding: 10,
@@ -73,4 +93,4 @@ const styles = StyleSheet.create({
 		shadowRadius: 1,
 		elevation:2
 	},
-})
+});
