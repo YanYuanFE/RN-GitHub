@@ -5,7 +5,7 @@ import API from '../api/api';
 
 export const TYPE = {
 	Popular: 'POPULAR',
-	Trending: 'TRINDING'
+	Trending: 'TRENDING'
 };
 
 export default class RepositoryService {
@@ -14,15 +14,71 @@ export default class RepositoryService {
 	}
 
 	fetchData = (repo) => {
+		let url;
 		if (this.type === TYPE.Popular) {
-			return this.fetchPopularData(API.GET_POPULAR_REPO(repo));
+			url = API.GET_POPULAR_REPO(repo);
 		} else if (this.type === TYPE.Trending) {
-			return this.fetchTrendingData(API.GET_TRENDING_REPO(repo));
+			url = API.GET_TRENDING_REPO(repo);
+		}
+
+		return new Promise((resolve, reject) => {
+			this.fetchLocalData(url).then(data => {
+				if (data) {
+					resolve(data);
+				} else {
+					this.fetchOnlineData(url).then(data => {
+						resolve(data);
+					}).catch(err => {
+						reject(err);
+					})
+				}
+			}).catch(err => {
+				this.fetchOnlineData(url).then(data => {
+					resolve(data);
+				}).catch(err => {
+					reject(err);
+				})
+			})
+		})
+	};
+
+	fetchLocalData = (url) => {
+		return new Promise((resolve, reject) => {
+			AsyncStorage.getItem(url, (error, result) => {
+				if (!error) {
+					try {
+						console.log(result);
+						const resultData = JSON.parse(result);
+						resolve(resultData.data);
+					} catch (e) {
+						reject(e);
+					}
+				} else {
+					reject(error);
+				}
+			})
+		})
+	};
+
+	fetchOnlineData = (url) => {
+		if (this.type === TYPE.Popular) {
+			return this.fetchPopularData(url);
+		} else if (this.type === TYPE.Trending) {
+			return this.fetchTrendingData(url);
 		}
 	};
 
 	fetchPopularData = (url) => {
-		return fetchUtils.get(url);
+		return new Promise((resolve, reject) => {
+			fetchUtils.get(url)
+				.then(data => {
+					resolve(data);
+					this.saveData(url, data);
+				})
+				.catch(error => {
+					reject(error);
+				})
+		});
 	};
 
 	fetchTrendingData = (url) => {
@@ -30,10 +86,17 @@ export default class RepositoryService {
 			new GitHubTrending().fetchTrending(url)
 				.then(data => {
 					resolve(data);
+					this.saveData(url, data);
 				})
 				.catch(error => {
 					reject(error);
 			})
 		});
+	};
+
+	saveData = (url, data, callback) => {
+		if (!url || !data) return;
+		const resultData = { data, time: new Date().getTime()};
+		AsyncStorage.setItem(url, JSON.stringify(resultData), callback);
 	}
 }

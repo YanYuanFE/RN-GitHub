@@ -3,17 +3,27 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	Image
+	Image, TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import NavigationService from "../services/NavigationService";
 
 export default class TrendingRepo extends PureComponent {
+	goDetail = () => {
+		const { data } = this.props;
+		NavigationService.navigate('Web', {
+			url: `https://github.com${data.url}`,
+			title: data.fullName
+		});
+	};
 	render() {
 		const { data } = this.props;
 		return (
 			<View style={styles.cell_container}>
 				<Text style={styles.title}>{data.fullName}</Text>
-				<Text style={styles.description}>{data.description}</Text>
+				<TouchableHighlight onPress={this.goDetail}>
+					<Text style={styles.description}>{data.description}</Text>
+				</TouchableHighlight>
 				<View style={styles.row}>
 					<Text style={styles.description}>{data.meta}</Text>
 				</View>
@@ -24,7 +34,7 @@ export default class TrendingRepo extends PureComponent {
 							data.contributors.map(img => (
 								<Image
 									key={img}
-									style={{height:22, width: 22}}
+									style={styles.avatar}
 									source={{uri: img}} 
 								/>
 							))
@@ -63,6 +73,11 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         color: '#757575'
     },
+	avatar: {
+		height: 22,
+		width: 22,
+		borderRadius: 11
+	},
 	cell_container: {
 		backgroundColor: 'white',
 		padding: 10,
@@ -78,4 +93,4 @@ const styles = StyleSheet.create({
 		shadowRadius: 1,
 		elevation:2
 	},
-})
+});

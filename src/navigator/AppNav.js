@@ -17,7 +17,6 @@ const AppNav = createStackNavigator(
     Web: {
       screen: WebScreen,
       navigationOptions: ({ navigation }) => ({
-        header: null
       })
     }
   },

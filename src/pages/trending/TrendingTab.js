@@ -47,7 +47,7 @@ export default class TrendingTab extends PureComponent {
       return (
         <View style={styles.container}>
           {
-            dataSource.length ?
+              dataSource && dataSource.length ?
               <FlatList
                 keyExtractor={this._keyExtractor}
                 data={dataSource}

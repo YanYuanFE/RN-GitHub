@@ -17,7 +17,7 @@ export default class PopularRepo extends PureComponent {
       url: data.html_url,
       title: data.full_name
     });
-  }
+  };
   render() {
     const { data } = this.props;
     return (
@@ -30,7 +30,7 @@ export default class PopularRepo extends PureComponent {
           <View style={styles.row}>
             <Text>Author:</Text>
             <Image
-              style={{height:22, width: 22}}
+              style={styles.avatar}
               source={{uri: data.owner.avatar_url}} />
           </View>
           <View style={{justifyContent:'space-between', flexDirection:'row'}}>
@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 2,
     color: '#757575'
+  },
+  avatar: {
+    height: 22,
+    width: 22,
+    borderRadius: 11
   },
   cell_container: {
     backgroundColor: 'white',
