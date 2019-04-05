@@ -11,7 +11,7 @@ import TrendingRepo from '../../components/TrendingRepo';
 import FavoriteService from '../../services/FavoriteService';
 import { checkFavorite } from '../../utils/utils';
 
-const favoriteService = new FavoriteService(TYPE.Popular);
+const favoriteService = new FavoriteService(TYPE.Trending);
 
 const trendingService = new RepositoryService(TYPE.Trending);
 export default class TrendingTab extends PureComponent {
@@ -36,7 +36,6 @@ export default class TrendingTab extends PureComponent {
 				isFavorite: checkFavorite(item, favoriteKeys)
 			}
 		});
-		console.log(dataSource);
 		this.setState({dataSource});
 	};
 
@@ -80,7 +79,6 @@ export default class TrendingTab extends PureComponent {
 
 	render() {
 		const {dataSource} = this.state;
-		console.log(dataSource);
 		return (
 			<View style={styles.container}>
 				{

@@ -6,14 +6,10 @@ import {
 	FlatList,
 	ActivityIndicator
 } from 'react-native';
-import RepositoryService, { TYPE } from '../../services/RepositoryService';
+import { TYPE } from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
 import TrendingRepo from '../../components/TrendingRepo';
-import { checkFavorite } from '../../utils/utils';
-
-const popularService = new RepositoryService(TYPE.Popular);
-
 
 export default class FavoriteTab extends PureComponent {
 	constructor(props) {
@@ -60,7 +56,7 @@ export default class FavoriteTab extends PureComponent {
 			<TrendingRepo data={item} onFavorite={this.handleFavorite} />;
 	}
 
-	_keyExtractor = (item, index) => item.id + '';
+	_keyExtractor = (item, index) => item.id ? item.id + '' : item.fullName;
 
 	render() {
 		const { dataSource } = this.state;
@@ -69,6 +65,7 @@ export default class FavoriteTab extends PureComponent {
 				{
 					dataSource.length ?
 						<FlatList
+							style={styles.list}
 							keyExtractor={this._keyExtractor}
 							data={dataSource}
 							renderItem={this.renderRow}
@@ -82,8 +79,11 @@ export default class FavoriteTab extends PureComponent {
 const styles = StyleSheet.create({
 	container: {
 		flex:1,
-		alignItems: 'center',
-		justifyContent: 'center',
+		// alignItems: 'center',
+		// justifyContent: 'center',
+	},
+	list: {
+		flex:1,
 	},
 	loading: {
 		flex: 1,

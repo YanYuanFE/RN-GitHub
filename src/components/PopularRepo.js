@@ -56,7 +56,6 @@ export default class PopularRepo extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   row: {
     justifyContent: 'space-between',
@@ -80,7 +79,8 @@ const styles = StyleSheet.create({
     borderRadius: 11
   },
   cell_container: {
-    backgroundColor: 'white',
+    flex: 1,
+    backgroundColor: '#FFF',
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     elevation:2
   },
-})
+});

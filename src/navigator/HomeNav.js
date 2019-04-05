@@ -10,12 +10,9 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Popular from '../pages/popular/Popular';
-import Trending from "../pages/trending/Trending";
+import Trending from '../pages/trending/Trending';
 import Favorite from '../pages/favorite/Favorite';
-
-const popularRoute = () => <Popular />;
-const trendingRoute = () => <Trending />;
-const favoriteRoute = () => <Favorite />;
+import My from '../pages/my/My';
 
 export default class HomeNav extends Component {
   constructor(props) {
@@ -23,9 +20,10 @@ export default class HomeNav extends Component {
     this.state = {
       index: 0,
       routes: [
-        { key: 'Popular', title: 'popular' },
-        { key: 'Trending', title: 'trending' },
-        { key: 'Favorite', title: 'favorite' },
+        { key: 'Popular', title: 'Popular' },
+        { key: 'Trending', title: 'Trending' },
+        { key: 'Favorite', title: 'Favorite' },
+        { key: 'My', title: 'My' },
       ],
     }
   }
@@ -34,7 +32,7 @@ export default class HomeNav extends Component {
       Popular: "all-inclusive",
       Trending: "trending-up",
       Favorite: "stars",
-      Person: "perm-identity"
+      My: "perm-identity"
     };
     return (
       <View style={styles.container}>
@@ -42,9 +40,10 @@ export default class HomeNav extends Component {
           tabBarPosition="bottom"
           navigationState={this.state}
           renderScene={SceneMap({
-            Popular: popularRoute,
-            Trending: trendingRoute,
-            Favorite: favoriteRoute
+            Popular: Popular,
+            Trending: Trending,
+            Favorite: Favorite,
+            My: My
           })}
           onIndexChange={index => this.setState({ index })}
           initialLayout={{ width: Dimensions.get('window').width }}
@@ -72,7 +71,7 @@ export default class HomeNav extends Component {
               }}
               renderLabel={({ route, focused, color }) => (
                 <Text style={{ color: focused ? "#2196F3" : color, margin: 0 }}>
-                  {route.key}
+                  {route.title}
                 </Text>
               )}
             />

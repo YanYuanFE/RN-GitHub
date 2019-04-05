@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import {
 	StyleSheet,
 	View,
@@ -10,7 +10,7 @@ import NavigationService from "../services/NavigationService";
 
 export default class TrendingRepo extends PureComponent {
 	goDetail = () => {
-		const { data } = this.props;
+		const {data} = this.props;
 		NavigationService.navigate('Web', {
 			url: `https://github.com${data.url}`,
 			title: data.fullName
@@ -18,12 +18,12 @@ export default class TrendingRepo extends PureComponent {
 	};
 
 	handleFavorite = () => {
-		const { data, onFavorite } = this.props;
+		const {data, onFavorite} = this.props;
 		onFavorite(data, !data.isFavorite);
 	};
 
 	render() {
-		const { data } = this.props;
+		const {data} = this.props;
 		if (!data) {
 			return null;
 		}
@@ -38,7 +38,7 @@ export default class TrendingRepo extends PureComponent {
 				</View>
 				<View style={styles.row}>
 					<View style={styles.row}>
-						<Text style={styles.author}>Built by  </Text>
+						<Text style={styles.author}>Built by </Text>
 						{
 							data.contributors.map(img => (
 								<Image
@@ -61,7 +61,6 @@ export default class TrendingRepo extends PureComponent {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-
 	},
 	row: {
 		justifyContent: 'space-between',
@@ -80,10 +79,10 @@ const styles = StyleSheet.create({
 		color: '#757575'
 	},
 	author: {
-        fontSize: 14,
-        marginBottom: 2,
-        color: '#757575'
-    },
+		fontSize: 14,
+		marginBottom: 2,
+		color: '#757575'
+	},
 	avatar: {
 		height: 22,
 		width: 22,
@@ -99,9 +98,9 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5,
 		borderRadius: 2,
 		shadowColor: 'gray',
-		shadowOffset: {width:0.5, height: 0.5},
+		shadowOffset: {width: 0.5, height: 0.5},
 		shadowOpacity: 0.4,
 		shadowRadius: 1,
-		elevation:2
+		elevation: 2
 	},
 });

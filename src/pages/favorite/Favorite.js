@@ -4,12 +4,11 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	FlatList,
 	Dimensions
 } from 'react-native';
 import FavoriteTab from './FavoriteTab';
 import NavigationBar from '../../components/NavigationBar';
-import RepositoryService, { TYPE } from '../../services/RepositoryService';
+import { TYPE } from '../../services/RepositoryService';
 
 const PopularRoute = () => <FavoriteTab tabLabel="Popular" type={TYPE.Popular} />;
 const TrendingRoute = () => <FavoriteTab tabLabel="Trending" type={TYPE.Trending} />;
