@@ -16,6 +16,7 @@ export default class FavoriteTab extends PureComponent {
 		super(props);
 		this.state = {
 			dataSource: [],
+			loading: false
 		};
 		this.favoriteService = new FavoriteService(props.type);
 	}
@@ -25,6 +26,7 @@ export default class FavoriteTab extends PureComponent {
 	}
 
 	loadData = () => {
+		this.setState({loading: true});
 		this.favoriteService.getAllItems()
 			.then(result => {
 				console.log(result);
@@ -34,10 +36,14 @@ export default class FavoriteTab extends PureComponent {
 						isFavorite: true
 					}
 				});
-				this.setState({dataSource});
+				this.setState({
+					dataSource,
+					loading: false
+				});
 			}).catch((error) => {
-			console.log(error);
-		})
+				console.log(error);
+				this.setState({loading: false});
+			})
 	};
 
 	handleFavorite = (item, isFavorite) => {
@@ -59,17 +65,18 @@ export default class FavoriteTab extends PureComponent {
 	_keyExtractor = (item, index) => item.id ? item.id + '' : item.fullName;
 
 	render() {
-		const { dataSource } = this.state;
+		const { dataSource, loading } = this.state;
 		return (
 			<View style={styles.container}>
 				{
-					dataSource.length ?
-						<FlatList
-							style={styles.list}
-							keyExtractor={this._keyExtractor}
-							data={dataSource}
-							renderItem={this.renderRow}
-						/> : <ActivityIndicator />
+					loading ?
+					<ActivityIndicator /> :
+					<FlatList
+						style={styles.list}
+						keyExtractor={this._keyExtractor}
+						data={dataSource}
+						renderItem={this.renderRow}
+					/>
 				}
 			</View>
 		)

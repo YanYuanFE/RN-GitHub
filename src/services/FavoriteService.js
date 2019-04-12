@@ -69,6 +69,8 @@ export default class FavoriteService {
 							reject(error);
 						}
 					})
+				} else {
+					resolve(items);
 				}
 			})
 		})
