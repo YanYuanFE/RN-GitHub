@@ -7,36 +7,71 @@ import {
   ActivityIndicator
 } from 'react-native';
 import RepositoryService, { TYPE } from '../../services/RepositoryService';
+import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
+import { checkFavorite } from '../../utils/utils';
 
 const popularService = new RepositoryService(TYPE.Popular);
-
+const favoriteService = new FavoriteService(TYPE.Popular);
 export default class PopularTab extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       dataSource: [],
     }
+    this.favoriteKeys = [];
   }
   componentDidMount() {
     this.loadData();
   }
 
+  flushFavoriteState = () => {
+    const items = this.data;
+    const favoriteKeys = this.favoriteKeys;
+    const dataSource = items.map(item => {
+        return {
+          ...item,
+          isFavorite: checkFavorite(item, favoriteKeys)
+        }
+    });
+    console.log(dataSource);
+    this.setState({dataSource});
+  };
+
+  getFavoriteKeys = () => {
+    favoriteService.getFavoriteKeys().then(keys => {
+      if (keys) {
+        this.favoriteKeys = keys;
+      }
+      this.flushFavoriteState();
+    }).catch(err => {
+      console.warn(err);
+      this.flushFavoriteState();
+    })
+  };
+
   loadData = () => {
     const { tabLabel } = this.props;
     popularService.fetchData(tabLabel)
       .then(result => {
-        console.log(JSON.stringify(result));
-        this.setState({
-          dataSource: result.items
-        });
+        console.log(result);
+        this.data = result.items;
+        this.getFavoriteKeys();
       }).catch((error) => {
       console.log(error);
     })
   };
 
+  handleFavorite = (item, isFavorite) => {
+    if (isFavorite) {
+      favoriteService.saveFavoriteItem(item.id.toString(), JSON.stringify(item), this.loadData);
+    } else {
+      favoriteService.removeFavoriteItem(item.id.toString(), this.loadData);
+    }
+  }
+
   renderRow = ({item}) => {
-    return <PopularRepo data={item} />;
+    return <PopularRepo data={item} onFavorite={this.handleFavorite} />;
   }
 
   _keyExtractor = (item, index) => item.id + '';

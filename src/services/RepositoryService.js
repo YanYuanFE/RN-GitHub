@@ -47,7 +47,6 @@ export default class RepositoryService {
 			AsyncStorage.getItem(url, (error, result) => {
 				if (!error) {
 					try {
-						console.log(result);
 						const resultData = JSON.parse(result);
 						resolve(resultData.data);
 					} catch (e) {
