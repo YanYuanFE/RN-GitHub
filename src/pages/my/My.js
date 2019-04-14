@@ -3,16 +3,31 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	FlatList,
-	ActivityIndicator
+	ScrollView,
+	TouchableHighlight
 } from 'react-native';
 import NavigationBar from '../../components/NavigationBar';
 import { TYPE } from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
-import PopularRepo from '../../components/PopularRepo';
-import TrendingRepo from '../../components/TrendingRepo';
+import Tag from './Tag';
+import NavigationService from "../../services/NavigationService";
+
+const MENU = {
+	CUSTOM_TAG: {
+		title: '自定义标签',
+		component: 'Tag',
+	}
+};
 
 export default class My extends PureComponent {
+	handleClick = (type) => {
+		const target = MENU.CUSTOM_TAG;
+		console.log(this.props);
+		NavigationService.navigate('Tag', {
+			data: target,
+		});
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -21,7 +36,13 @@ export default class My extends PureComponent {
 					title={'我的'}
 					statusBar={{backgroundColor: '#2196F3'}}
 				/>
-				<Text>My</Text>
+				<ScrollView>
+					<TouchableHighlight onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
+						<View>
+							<Text>标签管理</Text>
+						</View>
+					</TouchableHighlight>
+				</ScrollView>
 			</View>
 		)
 	}

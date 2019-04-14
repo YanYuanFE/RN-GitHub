@@ -68,11 +68,11 @@ export default class PopularTab extends PureComponent {
     } else {
       favoriteService.removeFavoriteItem(item.id.toString(), this.loadData);
     }
-  }
+  };
 
   renderRow = ({item}) => {
     return <PopularRepo data={item} onFavorite={this.handleFavorite} />;
-  }
+  };
 
   _keyExtractor = (item, index) => item.id + '';
 

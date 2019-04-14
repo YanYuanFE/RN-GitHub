@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../pages/Home';
 import WebScreen from '../pages/web/WebView';
+import Tag from '../pages/my/Tag';
 import Toolbar from '../components/Toolbar';
 
 const AppNav = createStackNavigator(
@@ -16,6 +17,11 @@ const AppNav = createStackNavigator(
     },
     Web: {
       screen: WebScreen,
+      navigationOptions: ({ navigation }) => ({
+      })
+    },
+    Tag: {
+      screen: Tag,
       navigationOptions: ({ navigation }) => ({
       })
     }

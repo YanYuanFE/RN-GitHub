@@ -1,5 +1,4 @@
-import { AsyncStorage } from 'react-native';
-import GitHubTrending from 'GitHubTrending';
+import AsyncStorage from '@react-native-community/async-storage';
 import fetchUtils from '../utils/fetch';
 import API from '../api/api';
 
@@ -82,19 +81,6 @@ export default class RepositoryService {
 				.catch(error => {
 					reject(error);
 				})
-		});
-	};
-
-	fetchTrendingData = (url) => {
-		return new Promise((resolve, reject) => {
-			new GitHubTrending().fetchTrending(url)
-				.then(data => {
-					resolve(data);
-					this.saveData(url, data);
-				})
-				.catch(error => {
-					reject(error);
-			})
 		});
 	};
 

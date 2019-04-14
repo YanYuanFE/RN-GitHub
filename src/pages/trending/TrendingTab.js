@@ -19,7 +19,7 @@ export default class TrendingTab extends PureComponent {
 		super(props);
 		this.state = {
 			dataSource: [],
-		}
+		};
 		this.favoriteKeys = [];
 	}
 
@@ -55,7 +55,7 @@ export default class TrendingTab extends PureComponent {
 		const {tabLabel} = this.props;
 		trendingService.fetchData(tabLabel)
 			.then(data => {
-				//   console.log(data);
+				console.log(data);
 				this.data = data;
 				this.getFavoriteKeys();
 			}).catch(error => {
@@ -69,13 +69,13 @@ export default class TrendingTab extends PureComponent {
 		} else {
 			favoriteService.removeFavoriteItem(item.name, this.fetchData);
 		}
-	}
+	};
 
 	renderRow = ({item}) => {
 		return <TrendingRepo data={item} onFavorite={this.handleFavorite}/>;
-	}
+	};
 
-	_keyExtractor = (item, index) => item.fullName;
+	_keyExtractor = (item, index) => item.name;
 
 	render() {
 		const {dataSource} = this.state;
