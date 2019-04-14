@@ -65,9 +65,9 @@ export default class TrendingTab extends PureComponent {
 
 	handleFavorite = (item, isFavorite) => {
 		if (isFavorite) {
-			favoriteService.saveFavoriteItem(item.fullName, JSON.stringify(item), this.fetchData);
+			favoriteService.saveFavoriteItem(item.name, JSON.stringify(item), this.fetchData);
 		} else {
-			favoriteService.removeFavoriteItem(item.fullName, this.fetchData);
+			favoriteService.removeFavoriteItem(item.name, this.fetchData);
 		}
 	}
 

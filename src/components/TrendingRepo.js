@@ -12,8 +12,8 @@ export default class TrendingRepo extends PureComponent {
 	goDetail = () => {
 		const {data} = this.props;
 		NavigationService.navigate('Web', {
-			url: `https://github.com${data.url}`,
-			title: data.fullName
+			url: data.url,
+			title: data.name
 		});
 	};
 
@@ -29,22 +29,19 @@ export default class TrendingRepo extends PureComponent {
 		}
 		return (
 			<View style={styles.cell_container}>
-				<Text style={styles.title}>{data.fullName}</Text>
+				<Text style={styles.title}>{data.name}</Text>
 				<TouchableHighlight onPress={this.goDetail}>
 					<Text style={styles.description}>{data.description}</Text>
 				</TouchableHighlight>
 				<View style={styles.row}>
-					<Text style={styles.description}>{data.meta}</Text>
-				</View>
-				<View style={styles.row}>
 					<View style={styles.row}>
 						<Text style={styles.author}>Built by </Text>
 						{
-							data.contributors.map(img => (
+							(data.builtBy || []).map(item => (
 								<Image
-									key={img}
+									key={item.username}
 									style={styles.avatar}
-									source={{uri: img}}
+									source={{uri: item.avatar}}
 								/>
 							))
 						}

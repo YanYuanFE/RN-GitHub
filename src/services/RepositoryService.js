@@ -13,12 +13,12 @@ export default class RepositoryService {
 		this.type = type;
 	}
 
-	fetchData = (repo) => {
+	fetchData = (language) => {
 		let url;
 		if (this.type === TYPE.Popular) {
-			url = API.GET_POPULAR_REPO(repo);
+			url = API.GET_POPULAR_REPO(language);
 		} else if (this.type === TYPE.Trending) {
-			url = API.GET_TRENDING_REPO(repo);
+			url = API.GET_TRENDING_REPO(language);
 		}
 
 		return new Promise((resolve, reject) => {
@@ -60,11 +60,16 @@ export default class RepositoryService {
 	};
 
 	fetchOnlineData = (url) => {
-		if (this.type === TYPE.Popular) {
-			return this.fetchPopularData(url);
-		} else if (this.type === TYPE.Trending) {
-			return this.fetchTrendingData(url);
-		}
+		return new Promise((resolve, reject) => {
+			fetchUtils.get(url)
+				.then(data => {
+					resolve(data);
+					this.saveData(url, data);
+				})
+				.catch(error => {
+					reject(error);
+				})
+		});
 	};
 
 	fetchPopularData = (url) => {
