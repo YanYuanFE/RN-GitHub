@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d440ef7f-38b9-4161-8d89-bab977189482" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/my/My.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopularRepo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopularRepo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TrendingRepo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TrendingRepo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigator/HomeNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigator/HomeNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/favorite/Favorite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/favorite/Favorite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/favorite/FavoriteTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/favorite/FavoriteTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/trending/TrendingTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/trending/TrendingTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FavoriteService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FavoriteService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,11 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/TrendingRepo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="83" column="20" lean-forward="true" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1200">
+              <caret line="83" column="20" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -38,7 +27,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PopularRepo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
+            <state relative-caret-position="1136">
               <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -50,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/favorite/Favorite.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+            <state relative-caret-position="1104">
+              <caret line="79" selection-start-line="62" selection-end-line="79" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -74,7 +63,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/FavoriteService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
+            <state relative-caret-position="944">
               <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
             </state>
           </provider>
@@ -92,10 +81,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/navigator/HomeNav.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
+            <state relative-caret-position="320">
               <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -107,11 +96,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/my/My.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+            <state relative-caret-position="80">
+              <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="373">
+              <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -150,8 +148,9 @@
         <option value="$PROJECT_DIR$/src/components/TrendingRepo.js" />
         <option value="$PROJECT_DIR$/src/pages/favorite/FavoriteTab.js" />
         <option value="$PROJECT_DIR$/src/components/PopularRepo.js" />
-        <option value="$PROJECT_DIR$/src/pages/my/My.js" />
         <option value="$PROJECT_DIR$/src/navigator/HomeNav.js" />
+        <option value="$PROJECT_DIR$/src/pages/my/My.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -175,6 +174,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -182,53 +182,10 @@
               <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="navigator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="my" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RN-GitHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RN-GitHub" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,18 +228,18 @@
       <workItem from="1554291140420" duration="5053000" />
       <workItem from="1554379117627" duration="1202000" />
       <workItem from="1554381258438" duration="7287000" />
-      <workItem from="1554431634464" duration="1760000" />
+      <workItem from="1554431634464" duration="2119000" />
+      <workItem from="1554646898254" duration="10000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16705000" />
+    <option name="totallyTimeSpent" value="17074000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="34" y="24" width="1400" height="776" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -294,7 +251,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.36695907" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.36695907" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32894737" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -316,13 +273,6 @@
           <folding>
             <element signature="e#89#130#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -403,16 +353,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/popular/PopularTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="944">
-          <caret line="70" column="3" selection-start-line="64" selection-start-column="2" selection-end-line="70" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/trending/Trending.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -435,8 +375,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/TrendingRepo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="83" column="20" lean-forward="true" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
+        <state relative-caret-position="1200">
+          <caret line="83" column="20" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PopularRepo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1136">
+          <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -445,25 +392,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/favorite/Favorite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/FavoriteService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PopularRepo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
+        <state relative-caret-position="1104">
+          <caret line="79" selection-start-line="62" selection-end-line="79" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -480,10 +410,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/My.js">
+    <entry file="file://$PROJECT_DIR$/src/services/FavoriteService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        <state relative-caret-position="944">
+          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/popular/PopularTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="944">
+          <caret line="70" column="3" selection-start-line="64" selection-start-column="2" selection-end-line="70" selection-end-column="3" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -492,11 +429,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/navigator/HomeNav.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="320">
           <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/my/My.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
         </state>
       </provider>
     </entry>
