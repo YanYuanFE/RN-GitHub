@@ -5,23 +5,46 @@ import {
   View,
   Text,
   FlatList,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
+import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 
-const JavaRoute = () => <PopularTab tabLabel="Java">Java</PopularTab>;
-const JSRoute = () => <PopularTab tabLabel="JavaScript">JavaScript</PopularTab>;
-
+const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 export default class Popular extends PureComponent {
-  state = {
-    index: 0,
-    routes: [
-      { key: 'Java', title: 'Java' },
-      { key: 'JavaScript', title: 'JavaScript' },
-    ],
+  constructor(props) {
+    super(props);
+    this.loadLanguage();
   }
+  state = {
+    languages: [],
+    index: 0,
+    routes: [],
+    loading: true
+  };
+
+  loadLanguage = () => {
+    this.setState({loading: true});
+    languageService.fetchData().then(languages => {
+      this.setState({
+        languages,
+        routes: languages.map(language => ({key: language.name, title: language.name})),
+        loading: false
+      });
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+
   render() {
+    const { index, routes, languages, loading } = this.state;
+    const map = {};
+    languages.forEach((language) => {
+      const LanguageRoute = () => <PopularTab tabLabel={language.name} />;
+      map[language.name] = LanguageRoute;
+    });
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -29,28 +52,27 @@ export default class Popular extends PureComponent {
           title={'最热'}
           statusBar={{backgroundColor: '#2196F3'}}
         />
-        <TabView
-          navigationState={this.state}
-          renderScene={SceneMap({
-            Java: JavaRoute,
-            JavaScript: JSRoute,
-          })}
-          onIndexChange={index => this.setState({ index })}
-          initialLayout={{ width: Dimensions.get('window').width }}
-          renderTabBar={(props) =>
-            <TabBar
-              {...props}
-              indicatorStyle={{ backgroundColor: 'white' }}
-              style={{ backgroundColor: '#2196F3' }}
-              renderLabel={({ route, focused, color }) => (
-                <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
-                  {route.key}
-                </Text>
-              )}
+        {
+          loading ? <ActivityIndicator /> :
+            <TabView
+              navigationState={{index, routes}}
+              renderScene={SceneMap(map)}
+              onIndexChange={index => this.setState({ index })}
+              initialLayout={{ width: Dimensions.get('window').width }}
+              renderTabBar={(props) =>
+                <TabBar
+                  {...props}
+                  indicatorStyle={{ backgroundColor: 'white' }}
+                  style={{ backgroundColor: '#2196F3' }}
+                  renderLabel={({ route, focused, color }) => (
+                    <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
+                      {route.key}
+                    </Text>
+                  )}
+                />
+              }
             />
-          }
-        >
-        </TabView>
+        }
       </View>
     )
   }

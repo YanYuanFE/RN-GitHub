@@ -4,3 +4,12 @@ export const checkFavorite = (target, items) => {
 		return id.toString() === item;
 	})
 };
+
+export const updateArray = (arr, target) => {
+	arr.forEach((item, i) => {
+		if (item === target) {
+			arr.splice(i, 1)
+		}
+	});
+	arr.push(target);
+};

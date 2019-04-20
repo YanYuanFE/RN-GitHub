@@ -7,7 +7,7 @@ import {
 	TouchableHighlight
 } from 'react-native';
 import NavigationBar from '../../components/NavigationBar';
-import { TYPE } from '../../services/RepositoryService';
+import { TYPE_LANGUAGE } from '../../services/LanguageService';
 import FavoriteService from '../../services/FavoriteService';
 import Tag from './Tag';
 import NavigationService from "../../services/NavigationService";
@@ -16,6 +16,7 @@ const MENU = {
 	CUSTOM_TAG: {
 		title: '自定义标签',
 		component: 'Tag',
+		flag: TYPE_LANGUAGE.FLAG_KEY
 	}
 };
 
@@ -38,8 +39,8 @@ export default class My extends PureComponent {
 				/>
 				<ScrollView>
 					<TouchableHighlight onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
-						<View>
-							<Text>标签管理</Text>
+						<View style={styles.line}>
+							<Text style={styles.title}>标签管理</Text>
 						</View>
 					</TouchableHighlight>
 				</ScrollView>
@@ -57,12 +58,18 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	tabContainer: {
+	line: {
 		flex:1,
-		backgroundColor: 'red'
+		borderBottomWidth: 1,
+		borderBottomColor: '#2196F3',
+		borderStyle: 'solid'
 	},
-	tabList: {
-		height:600
+	title: {
+		marginLeft: 10,
+		marginTop: 10,
+		marginBottom: 5,
+		fontSize: 14,
+		color: 'gray'
 	}
 });
 

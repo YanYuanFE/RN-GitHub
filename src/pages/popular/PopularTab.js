@@ -18,7 +18,7 @@ export default class PopularTab extends PureComponent {
     super(props);
     this.state = {
       dataSource: [],
-    }
+    };
     this.favoriteKeys = [];
   }
   componentDidMount() {
