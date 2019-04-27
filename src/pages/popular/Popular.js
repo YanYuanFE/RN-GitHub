@@ -16,7 +16,6 @@ const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 export default class Popular extends PureComponent {
   constructor(props) {
     super(props);
-    this.loadLanguage();
   }
   state = {
     languages: [],
@@ -24,6 +23,10 @@ export default class Popular extends PureComponent {
     routes: [],
     loading: true
   };
+
+  componentDidMount(): void {
+    this.loadLanguage();
+  }
 
   loadLanguage = () => {
     this.setState({loading: true});

@@ -47,7 +47,7 @@ export default class FavoriteTab extends PureComponent {
 	};
 
 	handleFavorite = (item, isFavorite) => {
-		const key = item.id ? item.id.toString() : item.fullName;
+		const key = item.id ? item.id.toString() : item.name;
 		if (isFavorite) {
 			this.favoriteService.saveFavoriteItem(key, JSON.stringify(item), this.loadData);
 		} else {
@@ -62,7 +62,7 @@ export default class FavoriteTab extends PureComponent {
 			<TrendingRepo data={item} onFavorite={this.handleFavorite} />;
 	}
 
-	_keyExtractor = (item, index) => item.id ? item.id + '' : item.fullName;
+	_keyExtractor = (item, index) => item.id ? item.id + '' : item.name;
 
 	render() {
 		const { dataSource, loading } = this.state;

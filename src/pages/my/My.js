@@ -4,8 +4,10 @@ import {
 	View,
 	Text,
 	ScrollView,
-	TouchableHighlight
+	TouchableHighlight,
+	Image
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import NavigationBar from '../../components/NavigationBar';
 import { TYPE_LANGUAGE } from '../../services/LanguageService';
 import FavoriteService from '../../services/FavoriteService';
@@ -17,14 +19,18 @@ const MENU = {
 		title: '自定义标签',
 		component: 'Tag',
 		flag: TYPE_LANGUAGE.FLAG_KEY
+	},
+	CUSTOM_LANGUAGE: {
+		title: '自定义语言',
+		component: 'Tag',
+		flag: TYPE_LANGUAGE.FLAG_LANGUAGE
 	}
 };
 
 export default class My extends PureComponent {
-	handleClick = (type) => {
-		const target = MENU.CUSTOM_TAG;
+	handleClick = (target) => {
 		console.log(this.props);
-		NavigationService.navigate('Tag', {
+		NavigationService.navigate(target.component, {
 			data: target,
 		});
 	};
@@ -38,9 +44,33 @@ export default class My extends PureComponent {
 					statusBar={{backgroundColor: '#2196F3'}}
 				/>
 				<ScrollView>
+					<TouchableHighlight>
+						<View style={[styles.item, {height: 90}]}>
+							<View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+								<Icon name={'logo-github'} color={'#2196F3'} size={40} />
+								<Text>RN-GitHub</Text>
+							</View>
+						</View>
+					</TouchableHighlight>
+					<Text style={styles.groupTitle}>趋势管理</Text>
+					<TouchableHighlight onPress={() => this.handleClick(MENU.CUSTOM_LANGUAGE)}>
+						<View style={styles.group}>
+							<Text style={styles.title}>自定义语言</Text>
+							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
+						</View>
+					</TouchableHighlight>
+					<Text style={styles.groupTitle}>最热管理</Text>
 					<TouchableHighlight onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
-						<View style={styles.line}>
-							<Text style={styles.title}>标签管理</Text>
+						<View style={styles.group}>
+							<Text style={styles.title}>自定义标签</Text>
+							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
+						</View>
+					</TouchableHighlight>
+					<Text style={styles.groupTitle}>设置</Text>
+					<TouchableHighlight onPress={() => {}}>
+						<View style={styles.group}>
+							<Text style={styles.title}>主题设置</Text>
+							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
 						</View>
 					</TouchableHighlight>
 				</ScrollView>
@@ -62,14 +92,33 @@ const styles = StyleSheet.create({
 		flex:1,
 		borderBottomWidth: 1,
 		borderBottomColor: '#2196F3',
-		borderStyle: 'solid'
+		borderStyle: 'solid',
 	},
-	title: {
+	group: {
+		alignItems: 'center',
+		flexDirection: 'row',
+		paddingLeft: 10,
+		paddingRight: 10,
+		borderBottomWidth: 1,
+		borderBottomColor: '#2196F3',
+		borderStyle: 'solid',
+	},
+	groupTitle: {
 		marginLeft: 10,
 		marginTop: 10,
 		marginBottom: 5,
 		fontSize: 14,
 		color: 'gray'
-	}
+	},
+	title: {
+		flex:1,
+	},
+	item: {
+		backgroundColor: 'white',
+		padding: 10, height: 60,
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		flexDirection: 'row'
+	},
 });
 

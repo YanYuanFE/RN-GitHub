@@ -4,13 +4,13 @@ import {
 	View,
 	Text,
 	ScrollView,
-	TouchableHighlight,
+	TouchableOpacity,
 	Platform
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
-import { updateArray } from '../../utils/utils';
+import { updateArray, remove } from '../../utils/utils';
 
 export default class Tag extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
@@ -23,6 +23,11 @@ export default class Tag extends PureComponent {
 			headerTitleStyle: {
 				fontWeight: 'bold',
 			},
+			headerRight: (
+				<TouchableOpacity onPress={navigation.getParam('save')}>
+					<Text style={{color: '#FFF'}}>保存</Text>
+				</TouchableOpacity>
+			)
 		};
 	};
 
@@ -34,12 +39,14 @@ export default class Tag extends PureComponent {
 
 	componentDidMount() {
 		const { navigation } = this.props;
+	  navigation.setParams({ save: this.handleSave });
 		this.languageService = new LanguageService(navigation.getParam('data').flag);
 		this.loadData();
 	}
 
 	loadData = () => {
 		this.languageService.fetchData().then(data => {
+			console.log(data);
 			this.setState({
 				dataList: data
 			})
@@ -49,9 +56,34 @@ export default class Tag extends PureComponent {
 	};
 
 	handleChange = (data) => {
-		data.checked = !data.checked;
-		updateArray(this.changeDatas, data);
+		const { dataList } = this.state;
+		const changeList = dataList.map(item => {
+			return item.name === data.name ? {
+				...data,
+				checked: !data.checked
+			} : item;
+		});
+		console.log(changeList);
+		this.setState({
+			dataList: changeList
+		});
+		// data.checked = !data.checked;
+		// updateArray(this.changeDatas, data);
 		console.log(this.changeDatas);
+	};
+
+	handleSave = () => {
+		const { dataList } = this.state;
+		console.log(dataList);
+		// if (this.changeDatas.length === 0) {
+		// 	this.props.navigation.goBack();
+		// 	return;
+		// }
+		// this.changeDatas.forEach((item => {
+		// 	remove()
+		// }))
+
+		this.languageService.saveData(dataList);
 	}
 
 	render () {

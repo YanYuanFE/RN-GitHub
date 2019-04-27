@@ -15,7 +15,7 @@ export default class FavoriteService {
 				callback && callback();
 			}
 		})
-	}
+	};
 
 	updateFavoriteKeys = (key, isFavorite) => {
 		AsyncStorage.getItem(this.favoriteKey, (error, result) => {

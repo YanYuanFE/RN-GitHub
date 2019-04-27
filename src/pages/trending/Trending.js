@@ -15,7 +15,6 @@ const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 export default class Trending extends PureComponent {
   constructor(props) {
     super(props);
-    this.loadLanguage();
   }
   state = {
     index: 0,
@@ -26,6 +25,11 @@ export default class Trending extends PureComponent {
     languages: [],
     loading: true
   };
+
+  componentDidMount(): void {
+    this.loadLanguage();
+  }
+
   loadLanguage = () => {
     this.setState({loading: true});
     languageService.fetchData().then(result => {
