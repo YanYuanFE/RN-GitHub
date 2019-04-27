@@ -10,11 +10,7 @@ import TrendingTab from './TrendingTab';
 import NavigationBar from '../../components/NavigationBar';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
-import PopularTab from "../popular/Popular";
 
-
-const JavaRoute = () => <TrendingTab tabLabel="Java">Java</TrendingTab>;
-const JSRoute = () => <TrendingTab tabLabel="JavaScript">JavaScript</TrendingTab>;
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 export default class Trending extends PureComponent {
   constructor(props) {
@@ -32,7 +28,9 @@ export default class Trending extends PureComponent {
   };
   loadLanguage = () => {
     this.setState({loading: true});
-    languageService.fetchData().then(languages => {
+    languageService.fetchData().then(result => {
+      const languages = result.filter(item => item.checked);
+      console.log(languages);
       this.setState({
         languages,
         routes: languages.map(language => ({key: language.name, title: language.name})),
@@ -46,7 +44,7 @@ export default class Trending extends PureComponent {
     const { index, routes, languages, loading } = this.state;
     const map = {};
     languages.forEach((language) => {
-      const LanguageRoute = () => <PopularTab tabLabel={language.name} />;
+      const LanguageRoute = () => <TrendingTab tabLabel={language.name} />;
       map[language.name] = LanguageRoute;
     });
     return (
@@ -66,6 +64,7 @@ export default class Trending extends PureComponent {
               renderTabBar={(props) =>
                 <TabBar
                   {...props}
+                  scrollEnabled={true}
                   indicatorStyle={{ backgroundColor: 'white' }}
                   style={{ backgroundColor: '#2196F3' }}
                   renderLabel={({ route, focused, color }) => (

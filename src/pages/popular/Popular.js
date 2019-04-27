@@ -27,7 +27,8 @@ export default class Popular extends PureComponent {
 
   loadLanguage = () => {
     this.setState({loading: true});
-    languageService.fetchData().then(languages => {
+    languageService.fetchData().then(result => {
+      const languages = result.filter(item => item.checked);
       this.setState({
         languages,
         routes: languages.map(language => ({key: language.name, title: language.name})),
@@ -61,6 +62,7 @@ export default class Popular extends PureComponent {
               initialLayout={{ width: Dimensions.get('window').width }}
               renderTabBar={(props) =>
                 <TabBar
+                  scrollEnabled={true}
                   {...props}
                   indicatorStyle={{ backgroundColor: 'white' }}
                   style={{ backgroundColor: '#2196F3' }}
