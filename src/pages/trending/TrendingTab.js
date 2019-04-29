@@ -4,7 +4,7 @@ import {
 	View,
 	Text,
 	FlatList,
-	ActivityIndicator
+	ActivityIndicator, DeviceEventEmitter
 } from 'react-native';
 import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import TrendingRepo from '../../components/TrendingRepo';
@@ -26,6 +26,11 @@ export default class TrendingTab extends PureComponent {
 
 	componentDidMount() {
 		this.fetchData();
+		this.listener = DeviceEventEmitter.addListener('FAVORITEDCHANGED_TRENDING', this.getFavoriteKeys);
+	}
+
+	componentWillUnmount(): void {
+		this.listener && this.listener.remove();
 	}
 
 	flushFavoriteState = () => {

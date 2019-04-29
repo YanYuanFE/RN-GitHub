@@ -4,7 +4,8 @@ import {
   View,
   Text,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  DeviceEventEmitter
 } from 'react-native';
 import RepositoryService, { TYPE } from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
@@ -24,6 +25,11 @@ export default class PopularTab extends PureComponent {
   }
   componentDidMount() {
     this.loadData();
+    this.listener = DeviceEventEmitter.addListener('FAVORITECHANGED_POPULAR', this.getFavoriteKeys);
+  }
+
+  componentWillUnmount(): void {
+    this.listener && this.listener.remove();
   }
 
   flushFavoriteState = () => {

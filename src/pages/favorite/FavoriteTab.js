@@ -4,7 +4,7 @@ import {
 	View,
 	Text,
 	FlatList,
-	ActivityIndicator
+	DeviceEventEmitter
 } from 'react-native';
 import { TYPE } from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
@@ -47,20 +47,23 @@ export default class FavoriteTab extends PureComponent {
 	};
 
 	handleFavorite = (item, isFavorite) => {
+		const { type } = this.props;
 		const key = item.id ? item.id.toString() : item.name;
 		if (isFavorite) {
 			this.favoriteService.saveFavoriteItem(key, JSON.stringify(item), this.loadData);
 		} else {
 			this.favoriteService.removeFavoriteItem(key, this.loadData);
 		}
-	}
+		const CHANGE_FLAG = type === TYPE.Popular ? 'FAVORITECHANGED_POPULAR' : 'FAVORITEDCHANGED_TRENDING';
+		DeviceEventEmitter.emit(CHANGE_FLAG);
+	};
 
 	renderRow = ({item}) => {
 		const { type } = this.props;
 		return type === TYPE.Popular ?
 			<PopularRepo data={item} onFavorite={this.handleFavorite} /> :
 			<TrendingRepo data={item} onFavorite={this.handleFavorite} />;
-	}
+	};
 
 	_keyExtractor = (item, index) => item.id ? item.id + '' : item.name;
 
@@ -68,18 +71,14 @@ export default class FavoriteTab extends PureComponent {
 		const { dataSource, loading } = this.state;
 		return (
 			<View style={styles.container}>
-				{
-					loading ?
-					<ActivityIndicator /> :
-					<FlatList
-						style={styles.list}
-						refreshing={loading}
-						onRefresh={this.loadData}
-						keyExtractor={this._keyExtractor}
-						data={dataSource}
-						renderItem={this.renderRow}
-					/>
-				}
+				<FlatList
+					style={styles.list}
+					refreshing={loading}
+					onRefresh={this.loadData}
+					keyExtractor={this._keyExtractor}
+					data={dataSource}
+					renderItem={this.renderRow}
+				/>
 			</View>
 		)
 	}

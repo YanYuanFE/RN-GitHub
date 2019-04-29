@@ -61,9 +61,10 @@ export default class FavoriteService {
 				if (keys) {
 					AsyncStorage.multiGet(keys, (error, stores) => {
 						if (!error) {
-							items = stores.map(result => {
-								return JSON.parse(result[1]);
-							})
+							console.log(stores);
+							stores.forEach(result => {
+								result[1] && items.push(JSON.parse(result[1]));
+							});
 							resolve(items);
 						} else {
 							reject(error);
