@@ -73,6 +73,8 @@ export default class FavoriteTab extends PureComponent {
 					<ActivityIndicator /> :
 					<FlatList
 						style={styles.list}
+						refreshing={loading}
+						onRefresh={this.loadData}
 						keyExtractor={this._keyExtractor}
 						data={dataSource}
 						renderItem={this.renderRow}

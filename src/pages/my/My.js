@@ -97,10 +97,10 @@ const styles = StyleSheet.create({
 	group: {
 		alignItems: 'center',
 		flexDirection: 'row',
-		paddingLeft: 10,
-		paddingRight: 10,
+		marginLeft: 10,
+		marginRight: 10,
 		borderBottomWidth: 1,
-		borderBottomColor: '#2196F3',
+		borderBottomColor: '#E8E8E8',
 		borderStyle: 'solid',
 	},
 	groupTitle: {

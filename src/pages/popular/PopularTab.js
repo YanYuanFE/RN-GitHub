@@ -18,6 +18,7 @@ export default class PopularTab extends PureComponent {
     super(props);
     this.state = {
       dataSource: [],
+      loading: false
     };
     this.favoriteKeys = [];
   }
@@ -35,7 +36,10 @@ export default class PopularTab extends PureComponent {
         }
     });
     console.log(dataSource);
-    this.setState({dataSource});
+    this.setState({
+      dataSource,
+      loading: false
+    });
   };
 
   getFavoriteKeys = () => {
@@ -52,6 +56,7 @@ export default class PopularTab extends PureComponent {
 
   loadData = () => {
     const { tabLabel } = this.props;
+    this.setState({loading: true});
     popularService.fetchData(tabLabel)
       .then(result => {
         console.log(result);
@@ -77,17 +82,16 @@ export default class PopularTab extends PureComponent {
   _keyExtractor = (item, index) => item.id + '';
 
   render() {
-    const { dataSource } = this.state;
+    const { dataSource, loading } = this.state;
     return (
       <View style={styles.container}>
-        {
-          dataSource.length ?
-            <FlatList
-              keyExtractor={this._keyExtractor}
-              data={dataSource}
-              renderItem={this.renderRow}
-            /> : <ActivityIndicator />
-        }
+        <FlatList
+          refreshing={loading}
+          onRefresh={this.loadData}
+          keyExtractor={this._keyExtractor}
+          data={dataSource}
+          renderItem={this.renderRow}
+        />
       </View>
     )
   }
