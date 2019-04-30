@@ -4,15 +4,35 @@ import {
   View,
   Text,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native';
 import TrendingTab from './TrendingTab';
 import NavigationBar from '../../components/NavigationBar';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 export default class Trending extends PureComponent {
+  static navigationOptions = ({ navigation }) => {
+    const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
+      return {
+        title: '趋势',
+        headerStyle: {
+            backgroundColor: '#2196F3',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+        },
+        headerRight: (
+            <TouchableOpacity onPress={navigation.push('save')}>
+                <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
+            </TouchableOpacity>
+        )
+      }
+  }
   constructor(props) {
     super(props);
   }
@@ -54,9 +74,9 @@ export default class Trending extends PureComponent {
     return (
       <View style={styles.container}>
         <NavigationBar
-          style={{backgroundColor: "#2196F3"}}
-          title={'趋势'}
-          statusBar={{backgroundColor: '#2196F3'}}
+            style={{backgroundColor: "#2196F3"}}
+            title={'趋势'}
+            statusBar={{backgroundColor: '#2196F3'}}
         />
         {
           loading ? <ActivityIndicator/> :

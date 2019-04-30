@@ -46,7 +46,7 @@ export default class NavigationBar extends Component {
     }
   }
 
-  getButtonElement(data) {
+  getButtonElement = (data) => {
     return (
       <View style={styles.navBarButton}>
         {data ? data : null }
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3'
   },
   navBar: {
-    justifyContent: 'space-between',
     alignItems:'center',
     height: Platform.OS === 'ios' ? NAVBAR_HEIGHT_IOS : NAVBAR_HEIGHT_ANDROID,
     backgroundColor: '#2196F3',
@@ -96,11 +95,7 @@ const styles = StyleSheet.create({
   titleViewContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    left: 40,
-    right: 40,
-    top: 0,
-    bottom: 0,
+    flex: 1,
   },
   title: {
     fontSize: 20,
@@ -108,5 +103,9 @@ const styles = StyleSheet.create({
   },
   statusBar: {
     height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0
-  }
+  },
+  navBarButton: {
+    alignItems: 'center',
+    width: 40
+  },
 });

@@ -6,11 +6,15 @@ import {
   Text,
   FlatList,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
+import NavigationService from "../../services/NavigationService";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 export default class Popular extends PureComponent {
@@ -44,6 +48,7 @@ export default class Popular extends PureComponent {
 
   render() {
     const { index, routes, languages, loading } = this.state;
+    const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
     const map = {};
     languages.forEach((language) => {
       const LanguageRoute = () => <PopularTab tabLabel={language.name} />;
@@ -52,9 +57,14 @@ export default class Popular extends PureComponent {
     return (
       <View style={styles.container}>
         <NavigationBar
-          style={{backgroundColor: "#2196F3"}}
-          title={'最热'}
-          statusBar={{backgroundColor: '#2196F3'}}
+            style={{backgroundColor: "#2196F3"}}
+            title={'最热'}
+            statusBar={{backgroundColor: '#2196F3'}}
+            rightButton={
+              <TouchableOpacity onPress={() => NavigationService.navigate('Tag')}>
+                <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
+              </TouchableOpacity>
+            }
         />
         {
           loading ? <ActivityIndicator /> :
