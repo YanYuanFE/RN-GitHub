@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -17,7 +17,7 @@ const StatusBarShape = {
   hidden: PropTypes.bool
 }
 
-export default class NavigationBar extends Component {
+export default class NavigationBar extends PureComponent {
   static propTypes = {
     style: PropTypes.object,
     title: PropTypes.string,
@@ -55,7 +55,7 @@ export default class NavigationBar extends Component {
   }
 
   render() {
-    const {statusBar} = this.props;
+    const { statusBar, leftButton, rightButton, title, hide } = this.props;
     let statusBarComp = !statusBar.hidden ?
       <View style={styles.statusBar}>
         <StatusBar 
@@ -63,14 +63,14 @@ export default class NavigationBar extends Component {
           barStyle="light-content"
         />
       </View> : null;
-    let titleView = this.props.titleView ? this.props.titleView : <Text style={styles.title}>{this.props.title}</Text>
-    let content = this.props.hide ? null :
+    let titleView = <Text style={styles.title}>{title}</Text>;
+    let content = hide ? null :
       <View style={styles.navBar}>
-        {this.getButtonElement(this.props.leftButton)}
+        {this.getButtonElement(leftButton)}
         <View style={styles.titleViewContainer}>
           {titleView}
         </View>
-        {this.getButtonElement(this.props.rightButton)}
+        {this.getButtonElement(rightButton)}
       </View>;
 
     return (

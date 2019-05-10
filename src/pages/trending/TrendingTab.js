@@ -89,6 +89,7 @@ export default class TrendingTab extends PureComponent {
 
 	render() {
 		const { dataSource, loading } = this.state;
+		console.log(dataSource);
 		return (
 			<View style={styles.container}>
 				<FlatList

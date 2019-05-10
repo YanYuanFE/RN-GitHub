@@ -5368,6 +5368,13 @@ react-native-vector-icons@^6.4.2:
     prop-types "^15.6.2"
     yargs "^13.2.2"
 
+react-native-walkthrough-tooltip@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-walkthrough-tooltip/-/react-native-walkthrough-tooltip-0.5.3.tgz#61ab4ae3e932472e82bc2d59bdb5cc1203e5d854"
+  integrity sha512-05NvUhqN/limYRiEgzwQVWL44uoN0Uz5UiyNJVFNgm8FRTqCTfi7/Li595LEi/GU54AM82bID8BGkPpoRjJP7w==
+  dependencies:
+    prop-types "^15.6.1"
+
 react-native-webview@^5.6.1:
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-5.6.1.tgz#6b4c7d441e4b4546410c475c2e6e63f6747bc6b5"
