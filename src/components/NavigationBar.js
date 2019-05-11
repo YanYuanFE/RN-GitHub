@@ -56,7 +56,7 @@ export default class NavigationBar extends PureComponent {
   };
 
   render() {
-    const { statusBar, leftButton, rightButton, title, hide } = this.props;
+    const { statusBar, leftButton, rightButton, title, hide, titleView } = this.props;
     let statusBarComp = !statusBar.hidden ?
       <View style={styles.statusBar}>
         <StatusBar
@@ -64,12 +64,12 @@ export default class NavigationBar extends PureComponent {
           barStyle="light-content"
         />
       </View> : null;
-    let titleView = <Text style={styles.title}>{title}</Text>;
+    let titleContent = titleView || <Text style={styles.title}>{title}</Text>;
     let content = hide ? null :
       <View style={styles.navBar}>
         {this.getButtonElement(leftButton)}
         <View style={styles.titleViewContainer}>
-          {titleView}
+          {titleContent}
         </View>
         {this.getButtonElement(rightButton)}
       </View>;

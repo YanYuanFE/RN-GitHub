@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   TouchableOpacity
 } from 'react-native';
+import Tooltip from 'react-native-walkthrough-tooltip';
 import TrendingTab from './TrendingTab';
 import NavigationBar from '../../components/NavigationBar';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -14,25 +15,17 @@ import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
+const sinceList = [{
+  label: '今日',
+  value: 'daily'
+}, {
+  label: '本周',
+  value: 'weekly'
+}, {
+  label: '本月',
+  value: 'monthly'
+}];
 export default class Trending extends PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
-      return {
-        title: '趋势',
-        headerStyle: {
-            backgroundColor: '#2196F3',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
-        headerRight: (
-            <TouchableOpacity onPress={navigation.push('save')}>
-                <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
-            </TouchableOpacity>
-        )
-      }
-  }
   constructor(props) {
     super(props);
   }
@@ -43,7 +36,9 @@ export default class Trending extends PureComponent {
       { key: 'JavaScript', title: 'JavaScript' },
     ],
     languages: [],
-    loading: true
+    loading: true,
+    since: sinceList[0],
+    toolTipVisible: false
   };
 
   componentDidMount(): void {
@@ -64,6 +59,33 @@ export default class Trending extends PureComponent {
       console.log(error);
     });
   };
+
+  renderTitle = () => {
+    const { since } = this.state;
+    const sinceView = (
+      <View>
+        {
+          sinceList.map(item => <TouchableOpacity><Text>{item.label}</Text></TouchableOpacity>)
+        }
+      </View>
+    );
+    return (
+      <View>
+        <Tooltip
+          animated
+          isVisible={this.state.toolTipVisible}
+          content={sinceView}
+          placement="bottom"
+          onClose={() => this.setState({ toolTipVisible: false })}
+          >
+          <TouchableOpacity style={styles.titleView} onPress={() => this.setState({ toolTipVisible: true })}>
+            <Text style={styles.title}>{`趋势 ${since.label}`}</Text>
+            <Icon name={'ios-arrow-down'} color={'#FFF'} size={12}/>
+          </TouchableOpacity>
+        </Tooltip>
+      </View>
+    )
+  }
   render() {
     const { index, routes, languages, loading } = this.state;
     const map = {};
@@ -75,7 +97,7 @@ export default class Trending extends PureComponent {
       <View style={styles.container}>
         <NavigationBar
             style={{backgroundColor: "#2196F3"}}
-            title={'趋势'}
+            titleView={this.renderTitle()}
             statusBar={{backgroundColor: '#2196F3'}}
         />
         {
@@ -116,6 +138,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  titleView: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 18,
+    color: '#FFFFFF',
+    fontWeight: '400'
   },
   tabContainer: {
     flex:1,
