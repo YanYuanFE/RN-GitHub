@@ -38,7 +38,6 @@ export default class Trending extends PureComponent {
     languages: [],
     loading: true,
     since: sinceList[0],
-    toolTipVisible: false
   };
 
   componentDidMount(): void {
@@ -49,7 +48,6 @@ export default class Trending extends PureComponent {
     this.setState({loading: true});
     languageService.fetchData().then(result => {
       const languages = result.filter(item => item.checked);
-      console.log(languages);
       this.setState({
         languages,
         routes: languages.map(language => ({key: language.name, title: language.name})),
@@ -60,34 +58,12 @@ export default class Trending extends PureComponent {
     });
   };
 
-  renderTitle = () => {
-    const { since } = this.state;
-    const sinceView = (
-      <View>
-        {
-          sinceList.map(item => <TouchableOpacity><Text>{item.label}</Text></TouchableOpacity>)
-        }
-      </View>
-    );
-    return (
-      <View>
-        <Tooltip
-          animated
-          isVisible={this.state.toolTipVisible}
-          content={sinceView}
-          placement="bottom"
-          onClose={() => this.setState({ toolTipVisible: false })}
-          >
-          <TouchableOpacity style={styles.titleView} onPress={() => this.setState({ toolTipVisible: true })}>
-            <Text style={styles.title}>{`趋势 ${since.label}`}</Text>
-            <Icon name={'ios-arrow-down'} color={'#FFF'} size={12}/>
-          </TouchableOpacity>
-        </Tooltip>
-      </View>
-    )
-  }
+  handleTabChange = index => this.setState({ index })
+
+  handleSinceChange = (item) => this.setState({since: item});
+
   render() {
-    const { index, routes, languages, loading } = this.state;
+    const { index, routes, languages, loading, since } = this.state;
     const map = {};
     languages.forEach((language) => {
       const LanguageRoute = () => <TrendingTab tabLabel={language.name} />;
@@ -97,7 +73,7 @@ export default class Trending extends PureComponent {
       <View style={styles.container}>
         <NavigationBar
             style={{backgroundColor: "#2196F3"}}
-            titleView={this.renderTitle()}
+            titleView={<SinceView since={since} onChange={this.handleSinceChange}/>}
             statusBar={{backgroundColor: '#2196F3'}}
         />
         {
@@ -105,7 +81,7 @@ export default class Trending extends PureComponent {
             <TabView
               navigationState={{index, routes}}
               renderScene={SceneMap(map)}
-              onIndexChange={index => this.setState({ index })}
+              onIndexChange={this.handleTabChange}
               initialLayout={{ width: Dimensions.get('window').width }}
               renderTabBar={(props) =>
                 <TabBar
@@ -127,7 +103,52 @@ export default class Trending extends PureComponent {
   }
 }
 
-
+class SinceView extends PureComponent {
+  state = {
+    toolTipVisible: false
+  };
+  togglePopover = () => {
+    this.setState((prevState) => {
+      return { toolTipVisible: !prevState.toolTipVisible }
+    })
+  };
+  handleClick = (item) => {
+    const { onChange } = this.props;
+    onChange(item);
+    this.togglePopover();
+  };
+  render() {
+    const { toolTipVisible } = this.state;
+    const { since } = this.props;
+    const sinceView = (
+        <View style={styles.sinceView}>
+          {
+            sinceList.map(item => (
+                <TouchableOpacity onPress={() => this.handleClick(item)} key={item.value} style={styles.sinceItem}>
+                  <Text style={styles.sinceText}>{item.label}</Text>
+                </TouchableOpacity>
+            ))
+          }
+        </View>
+    );
+    return (
+        <View>
+          <Tooltip
+              animated={false}
+              isVisible={toolTipVisible}
+              content={sinceView}
+              placement="bottom"
+              onClose={this.togglePopover}
+          >
+            <TouchableOpacity style={styles.titleView} onPress={this.togglePopover}>
+              <Text style={styles.title}>{`趋势 ${since.label}`}</Text>
+              <Icon name={'ios-arrow-down'} color={'#FFF'} size={12}/>
+            </TouchableOpacity>
+          </Tooltip>
+        </View>
+    )
+  }
+}
 
 
 const styles = StyleSheet.create({
@@ -154,5 +175,16 @@ const styles = StyleSheet.create({
   },
   tabList: {
     height:600
+  },
+  sinceText: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#2196F3',
+  },
+  sinceView: {
+    backgroundColor: '#FFF'
+  },
+  sinceItem: {
+    marginTop: 10
   }
 });

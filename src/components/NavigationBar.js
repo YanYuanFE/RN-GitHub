@@ -47,7 +47,6 @@ export default class NavigationBar extends PureComponent {
   }
 
   getButtonElement = (data) => {
-    console.log(data);
     return (
       <View style={styles.navBarButton}>
         {data ? data : null }

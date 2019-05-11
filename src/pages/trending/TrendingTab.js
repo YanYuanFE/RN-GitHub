@@ -25,6 +25,7 @@ export default class TrendingTab extends PureComponent {
 	}
 
 	componentDidMount() {
+		console.log('mount');
 		this.fetchData();
 		this.listener = DeviceEventEmitter.addListener('FAVORITEDCHANGED_TRENDING', this.getFavoriteKeys);
 	}
@@ -61,7 +62,7 @@ export default class TrendingTab extends PureComponent {
 	};
 
 	fetchData = () => {
-		const {tabLabel} = this.props;
+		const { tabLabel } = this.props;
 		this.setState({loading: true});
 		trendingService.fetchData(tabLabel)
 			.then(data => {
@@ -85,7 +86,7 @@ export default class TrendingTab extends PureComponent {
 		return <TrendingRepo data={item} onFavorite={this.handleFavorite}/>;
 	};
 
-	_keyExtractor = (item, index) => item.name;
+	_keyExtractor = (item, index) => item.url;
 
 	render() {
 		const { dataSource, loading } = this.state;
