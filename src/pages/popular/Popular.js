@@ -10,13 +10,14 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
+import Icon from "react-native-vector-icons/Ionicons";
 import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 import NavigationService from "../../services/NavigationService";
-import Icon from "react-native-vector-icons/Ionicons";
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
+
 export default class Popular extends PureComponent {
   constructor(props) {
     super(props);
@@ -47,18 +48,20 @@ export default class Popular extends PureComponent {
   };
 
   handleClick = () => {
-    console.log(11);
     NavigationService.navigate('Search');
   };
 
   render() {
     const { index, routes, languages, loading } = this.state;
     const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
-    const map = {};
-    languages.forEach((language) => {
-      const LanguageRoute = () => <PopularTab tabLabel={language.name} />;
-      map[language.name] = LanguageRoute;
-    });
+    const mapRoute = languages.reduce((map, item) => {
+      const route = () => <PopularTab tabLabel={item.name} />;
+      return {
+        ...map,
+        [item.name]: route
+      }
+    }, {});
+
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -75,7 +78,7 @@ export default class Popular extends PureComponent {
           loading ? <ActivityIndicator /> :
             <TabView
               navigationState={{index, routes}}
-              renderScene={SceneMap(map)}
+              renderScene={SceneMap(mapRoute)}
               onIndexChange={index => this.setState({ index })}
               initialLayout={{ width: Dimensions.get('window').width }}
               renderTabBar={(props) =>
@@ -96,10 +99,7 @@ export default class Popular extends PureComponent {
       </View>
     )
   }
-}
-
-
-
+};
 
 const styles = StyleSheet.create({
   container: {

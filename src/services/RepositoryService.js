@@ -12,12 +12,12 @@ export default class RepositoryService {
 		this.type = type;
 	}
 
-	fetchData = (language) => {
+	fetchData = (language, since) => {
 		let url;
 		if (this.type === TYPE.Popular) {
 			url = API.GET_POPULAR_REPO(language);
 		} else if (this.type === TYPE.Trending) {
-			url = API.GET_TRENDING_REPO(language);
+			url = API.GET_TRENDING_REPO(language, since);
 		}
 
 		return new Promise((resolve, reject) => {

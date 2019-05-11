@@ -58,17 +58,19 @@ export default class Trending extends PureComponent {
     });
   };
 
-  handleTabChange = index => this.setState({ index })
+  handleTabChange = index => this.setState({ index });
 
   handleSinceChange = (item) => this.setState({since: item});
 
   render() {
     const { index, routes, languages, loading, since } = this.state;
-    const map = {};
-    languages.forEach((language) => {
-      const LanguageRoute = () => <TrendingTab tabLabel={language.name} />;
-      map[language.name] = LanguageRoute;
-    });
+    const mapRoute = languages.reduce((map, item) => {
+      const route = () => <TrendingTab tabLabel={item.name} since={since} />;
+      return {
+        ...map,
+        [item.name]: route
+      }
+    }, {});
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -80,7 +82,7 @@ export default class Trending extends PureComponent {
           loading ? <ActivityIndicator/> :
             <TabView
               navigationState={{index, routes}}
-              renderScene={SceneMap(map)}
+              renderScene={SceneMap(mapRoute)}
               onIndexChange={this.handleTabChange}
               initialLayout={{ width: Dimensions.get('window').width }}
               renderTabBar={(props) =>

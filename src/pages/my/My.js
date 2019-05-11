@@ -4,7 +4,7 @@ import {
 	View,
 	Text,
 	ScrollView,
-	TouchableHighlight,
+	TouchableOpacity,
 	Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -44,35 +44,35 @@ export default class My extends PureComponent {
 					statusBar={{backgroundColor: '#2196F3'}}
 				/>
 				<ScrollView>
-					<TouchableHighlight>
+					<TouchableOpacity>
 						<View style={[styles.item, {height: 90}]}>
 							<View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
 								<Icon name={'logo-github'} color={'#2196F3'} size={40} />
 								<Text>RN-GitHub</Text>
 							</View>
 						</View>
-					</TouchableHighlight>
-					<Text style={styles.groupTitle}>趋势管理</Text>
-					<TouchableHighlight onPress={() => this.handleClick(MENU.CUSTOM_LANGUAGE)}>
-						<View style={styles.group}>
-							<Text style={styles.title}>自定义语言</Text>
-							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
-						</View>
-					</TouchableHighlight>
+					</TouchableOpacity>
 					<Text style={styles.groupTitle}>最热管理</Text>
-					<TouchableHighlight onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
+					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
 						<View style={styles.group}>
 							<Text style={styles.title}>自定义标签</Text>
 							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
 						</View>
-					</TouchableHighlight>
+					</TouchableOpacity>
+					<Text style={styles.groupTitle}>趋势管理</Text>
+					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_LANGUAGE)}>
+						<View style={styles.group}>
+							<Text style={styles.title}>自定义语言</Text>
+							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
+						</View>
+					</TouchableOpacity>
 					<Text style={styles.groupTitle}>设置</Text>
-					<TouchableHighlight onPress={() => {}}>
+					<TouchableOpacity onPress={() => {}}>
 						<View style={styles.group}>
 							<Text style={styles.title}>主题设置</Text>
 							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
 						</View>
-					</TouchableHighlight>
+					</TouchableOpacity>
 				</ScrollView>
 			</View>
 		)

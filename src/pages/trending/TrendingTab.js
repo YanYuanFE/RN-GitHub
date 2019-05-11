@@ -12,8 +12,8 @@ import FavoriteService from '../../services/FavoriteService';
 import { checkFavorite } from '../../utils/utils';
 
 const favoriteService = new FavoriteService(TYPE.Trending);
-
 const trendingService = new RepositoryService(TYPE.Trending);
+
 export default class TrendingTab extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -62,11 +62,10 @@ export default class TrendingTab extends PureComponent {
 	};
 
 	fetchData = () => {
-		const { tabLabel } = this.props;
+		const { tabLabel, since } = this.props;
 		this.setState({loading: true});
-		trendingService.fetchData(tabLabel)
+		trendingService.fetchData(tabLabel, since.value)
 			.then(data => {
-				console.log(data);
 				this.data = data;
 				this.getFavoriteKeys();
 			}).catch(error => {
@@ -90,16 +89,18 @@ export default class TrendingTab extends PureComponent {
 
 	render() {
 		const { dataSource, loading } = this.state;
-		console.log(dataSource);
 		return (
 			<View style={styles.container}>
-				<FlatList
-					refreshing={loading}
-					onRefresh={this.fetchData}
-					keyExtractor={this._keyExtractor}
-					data={dataSource}
-					renderItem={this.renderRow}
-				/>
+				{
+					loading ? <ActivityIndicator size={'large'} animating={loading} style={styles.loading} /> :
+						<FlatList
+							refreshing={loading}
+							onRefresh={this.fetchData}
+							keyExtractor={this._keyExtractor}
+							data={dataSource}
+							renderItem={this.renderRow}
+						/>
+				}
 			</View>
 		)
 	}
