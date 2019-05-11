@@ -98,7 +98,7 @@ export default class Tag extends PureComponent {
 								<CheckBox
 									isChecked={item.checked}
 									key={item.name}
-									style={{flex:1, padding: 10}}
+									style={styles.checkbox}
 									onClick={() => this.handleChange(item)}
 									leftText={item.name}
 									checkedImage={<Icon name={`${iconType}-checkbox`} color={'#2196F3'} size={25} />}
@@ -126,4 +126,11 @@ const styles = StyleSheet.create({
 		height: 0.3,
 		backgroundColor: 'darkgray',
 	},
-})
+	checkbox: {
+		flex:1,
+		padding: 10,
+		borderBottomWidth: 1,
+		borderBottomColor: '#E8E8E8',
+		borderStyle: 'solid',
+	}
+});
