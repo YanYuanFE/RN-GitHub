@@ -46,6 +46,11 @@ export default class Popular extends PureComponent {
     });
   };
 
+  handleClick = () => {
+    console.log(11);
+    NavigationService.navigate('Search');
+  };
+
   render() {
     const { index, routes, languages, loading } = this.state;
     const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
@@ -61,7 +66,7 @@ export default class Popular extends PureComponent {
             title={'最热'}
             statusBar={{backgroundColor: '#2196F3'}}
             rightButton={
-              <TouchableOpacity onPress={() => NavigationService.navigate('Tag')}>
+              <TouchableOpacity onPress={this.handleClick} style={styles.search}>
                 <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
               </TouchableOpacity>
             }
@@ -111,5 +116,11 @@ const styles = StyleSheet.create({
   },
   tabList: {
     height:600
+  },
+  search: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });

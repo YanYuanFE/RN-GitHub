@@ -41,6 +41,17 @@ export default class RepositoryService {
 		})
 	};
 
+	searchData = (key) => {
+		const url = API.GET_POPULAR_REPO(key);
+		return new Promise((resolve, reject) => {
+			this.fetchOnlineData(url).then(data => {
+				resolve(data);
+			}).catch(err => {
+				reject(err);
+			})
+		});
+	};
+
 	fetchLocalData = (url) => {
 		return new Promise((resolve, reject) => {
 			AsyncStorage.getItem(url, (error, result) => {

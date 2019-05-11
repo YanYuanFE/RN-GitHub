@@ -47,18 +47,19 @@ export default class NavigationBar extends PureComponent {
   }
 
   getButtonElement = (data) => {
+    console.log(data);
     return (
       <View style={styles.navBarButton}>
         {data ? data : null }
       </View>
     );
-  }
+  };
 
   render() {
     const { statusBar, leftButton, rightButton, title, hide } = this.props;
     let statusBarComp = !statusBar.hidden ?
       <View style={styles.statusBar}>
-        <StatusBar 
+        <StatusBar
           {...statusBar}
           barStyle="light-content"
         />
@@ -89,7 +90,6 @@ const styles = StyleSheet.create({
   navBar: {
     alignItems:'center',
     height: Platform.OS === 'ios' ? NAVBAR_HEIGHT_IOS : NAVBAR_HEIGHT_ANDROID,
-    backgroundColor: '#2196F3',
     flexDirection: 'row'
   },
   titleViewContainer: {
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
   },
   navBarButton: {
     alignItems: 'center',
-    width: 40
+    width: 40,
+    height: '100%',
   },
 });
