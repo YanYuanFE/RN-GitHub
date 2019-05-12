@@ -35,8 +35,12 @@ export default class LanguageService {
 		})
 	};
 
-	saveData = (data) => {
+	saveData = (data, callback) => {
 		const stringData = JSON.stringify(data);
-		AsyncStorage.setItem(this.flag, stringData);
+		AsyncStorage.setItem(this.flag, stringData, (error, result) => {
+			if (!error) {
+				callback && callback();
+			}
+		});
 	}
 }

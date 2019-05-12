@@ -73,6 +73,7 @@ export default class Tag extends PureComponent {
 	};
 
 	handleSave = () => {
+		const { navigation } = this.props;
 		const { dataList } = this.state;
 		console.log(dataList);
 		// if (this.changeDatas.length === 0) {
@@ -83,8 +84,8 @@ export default class Tag extends PureComponent {
 		// 	remove()
 		// }))
 
-		this.languageService.saveData(dataList);
-	}
+		this.languageService.saveData(dataList, () => navigation.goBack());
+	};
 
 	render () {
 		const { dataList } = this.state;
