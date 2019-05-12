@@ -11,13 +11,12 @@ export default class FavoriteService {
 	saveFavoriteItem = (key, value, callback) => {
 		AsyncStorage.setItem(key, value, (error, result) => {
 			if (!error) {
-				this.updateFavoriteKeys(key, true);
-				callback && callback();
+				this.updateFavoriteKeys(key, true, callback);
 			}
 		})
 	};
 
-	updateFavoriteKeys = (key, isFavorite) => {
+	updateFavoriteKeys = (key, isFavorite, callback) => {
 		AsyncStorage.getItem(this.favoriteKey, (error, result) => {
 			if (!error) {
 				let favoriteKeys = result ? JSON.parse(result) : [];
@@ -27,10 +26,14 @@ export default class FavoriteService {
 				} else {
 					if (index !== -1) favoriteKeys.splice(index, 1);
 				}
-				AsyncStorage.setItem(this.favoriteKey, JSON.stringify(favoriteKeys));
+				AsyncStorage.setItem(this.favoriteKey, JSON.stringify(favoriteKeys), (error, result) => {
+					if (!error) {
+						callback && callback();
+					}
+				});
 			}
 		});
-	}
+	};
 
 	getFavoriteKeys = () => {
 		return new Promise((resolve, reject) => {
@@ -47,13 +50,13 @@ export default class FavoriteService {
 	removeFavoriteItem = (key, callback) => {
 		AsyncStorage.removeItem(key, (error, result) => {
 			if (!error) {
-				this.updateFavoriteKeys(key, false);
-				callback && callback();
+				this.updateFavoriteKeys(key, false, callback);
 			}
 		})
 	}
 
 	getAllItems = () => {
+		console.log(11)
 		return new Promise((resolve, reject) => {
 			this.getFavoriteKeys().then(keys => {
 				let items = [];

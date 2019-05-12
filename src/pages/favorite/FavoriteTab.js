@@ -22,7 +22,14 @@ export default class FavoriteTab extends PureComponent {
 	}
 
 	componentDidMount() {
+		const { type } = this.props;
+		console.log(type);
 		this.loadData();
+		this.listener = DeviceEventEmitter.addListener(`FAVORITECHANGED_${type}`, this.loadData);
+	}
+
+	componentWillUnmount(): void {
+		this.listener && this.listener.remove();
 	}
 
 	loadData = () => {
@@ -49,13 +56,16 @@ export default class FavoriteTab extends PureComponent {
 	handleFavorite = (item, isFavorite) => {
 		const { type } = this.props;
 		const key = item.id ? item.id.toString() : item.name;
-		if (isFavorite) {
-			this.favoriteService.saveFavoriteItem(key, JSON.stringify(item), this.loadData);
-		} else {
-			this.favoriteService.removeFavoriteItem(key, this.loadData);
-		}
 		const CHANGE_FLAG = type === TYPE.Popular ? 'FAVORITECHANGED_POPULAR' : 'FAVORITEDCHANGED_TRENDING';
-		DeviceEventEmitter.emit(CHANGE_FLAG);
+		const cb = () => {
+			DeviceEventEmitter.emit(CHANGE_FLAG);
+			this.loadData();
+		};
+		if (isFavorite) {
+			this.favoriteService.saveFavoriteItem(key, JSON.stringify(item), cb);
+		} else {
+			this.favoriteService.removeFavoriteItem(key, cb);
+		}
 	};
 
 	renderRow = ({item}) => {

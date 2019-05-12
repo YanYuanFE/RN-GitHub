@@ -25,7 +25,6 @@ export default class TrendingTab extends PureComponent {
 	}
 
 	componentDidMount() {
-		console.log('mount');
 		this.fetchData();
 		this.listener = DeviceEventEmitter.addListener('FAVORITEDCHANGED_TRENDING', this.getFavoriteKeys);
 	}
@@ -74,10 +73,14 @@ export default class TrendingTab extends PureComponent {
 	};
 
 	handleFavorite = (item, isFavorite) => {
+		const cb = () => {
+			DeviceEventEmitter.emit('FAVORITECHANGED_TRENDING');
+			this.fetchData();
+		};
 		if (isFavorite) {
-			favoriteService.saveFavoriteItem(item.name, JSON.stringify(item), this.fetchData);
+			favoriteService.saveFavoriteItem(item.name, JSON.stringify(item), cb);
 		} else {
-			favoriteService.removeFavoriteItem(item.name, this.fetchData);
+			favoriteService.removeFavoriteItem(item.name, cb);
 		}
 	};
 

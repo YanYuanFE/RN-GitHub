@@ -41,7 +41,6 @@ export default class PopularTab extends PureComponent {
           isFavorite: checkFavorite(item, favoriteKeys)
         }
     });
-    console.log(dataSource);
     this.setState({
       dataSource,
       loading: false
@@ -74,10 +73,14 @@ export default class PopularTab extends PureComponent {
   };
 
   handleFavorite = (item, isFavorite) => {
+    const cb = () => {
+      DeviceEventEmitter.emit('FAVORITECHANGED_POPULAR');
+      this.loadData();
+    };
     if (isFavorite) {
-      favoriteService.saveFavoriteItem(item.id.toString(), JSON.stringify(item), this.loadData);
+      favoriteService.saveFavoriteItem(item.id.toString(), JSON.stringify(item), cb);
     } else {
-      favoriteService.removeFavoriteItem(item.id.toString(), this.loadData);
+      favoriteService.removeFavoriteItem(item.id.toString(), cb);
     }
   };
 
