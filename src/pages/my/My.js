@@ -24,6 +24,11 @@ const MENU = {
 		title: '自定义语言',
 		component: 'Tag',
 		flag: TYPE_LANGUAGE.FLAG_LANGUAGE
+	},
+	CUSTOM_THEME: {
+		title: '主题设置',
+		component: 'Theme',
+		flag: 'TYPE_THEME'
 	}
 };
 
@@ -67,7 +72,7 @@ export default class My extends PureComponent {
 						</View>
 					</TouchableOpacity>
 					<Text style={styles.groupTitle}>设置</Text>
-					<TouchableOpacity onPress={() => {}}>
+					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_THEME)}>
 						<View style={styles.group}>
 							<Text style={styles.title}>主题设置</Text>
 							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />

@@ -5,9 +5,16 @@ import {
 	Text,
 	ScrollView,
 	TouchableOpacity,
-	Platform
+    Platform,
+    TouchableHighlight,
+    Dimensions
 } from 'react-native';
 import { ThemeColors } from '../../api/themes';
+const screenW = Dimensions.get('window').width;
+const cols = 3;
+const cellWH = 100;
+const vMargin = (screenW - cellWH * cols) / (cols + 1);
+const hMargin = 25;
 
 export default class Tag extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -26,26 +33,31 @@ export default class Tag extends PureComponent {
 				</TouchableOpacity>
 			)
 		};
-	};
+    };
+    onSelectTheme = (key) => {
+        console.log(key);
+    }
     render() {
         return(
             <View style={styles.container}>
-                {
-                    Object.keys(ThemeColors).map(key => {
-                        return (
-                            <TouchableHighlight
-                                key={key}
-                                style={{flex: 1}}
-                                underlayColor='white'
-                                onPress={()=>this.onSelectTheme(key)}
-                            >
-                                <View style={[{backgroundColor: ThemeColors[key]}, styles.themeItem]}>
-                                    <Text style={styles.themeText}>{key}</Text>
-                                </View>
-                            </TouchableHighlight>
-                        )
-                    })
-                }
+                <ScrollView contentContainerStyle={styles.wrapper}>
+                    {
+                        Object.keys(ThemeColors).map(key => {
+                            return (
+                                <TouchableHighlight
+                                    key={key}
+                                    style={[{backgroundColor: ThemeColors[key]}, styles.themeItem]}
+                                    underlayColor='white'
+                                    onPress={()=>this.onSelectTheme(key)}
+                                >
+                                    <View>
+                                        <Text style={styles.themeText}>{key}</Text>
+                                    </View>
+                                </TouchableHighlight>
+                            )
+                        })
+                    }
+                </ScrollView>
             </View>
         )
     }
@@ -54,24 +66,28 @@ export default class Tag extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 10,
-        marginTop: Platform.OS === 'ios' ? 20 : 10,
         backgroundColor: 'white',
-        borderRadius: 3,
-        shadowColor: 'gray',
-        shadowOffset: {width: 2, height: 2},
-        shadowOpacity: 0.5,
-        shadowRadius: 2,
-        padding: 3
+        // borderRadius: 3,
+        // shadowColor: 'gray',
+        // shadowOffset: {width: 2, height: 2},
+        // shadowOpacity: 0.5,
+        // shadowRadius: 2,
+        // padding: 3
+    },
+    wrapper: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        flex: 1,
     },
     themeItem: {
-        flex: 1,
-        height: 120,
-        margin: 3,
-        padding: 3,
-        borderRadius: 2,
+        borderRadius: 4,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: cellWH,
+        height: cellWH,
+        marginLeft: vMargin,
+        marginTop: hMargin
     },
     themeText: {
         color: 'white',
