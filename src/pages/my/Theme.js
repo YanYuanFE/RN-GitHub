@@ -7,9 +7,11 @@ import {
 	TouchableOpacity,
     Platform,
     TouchableHighlight,
-    Dimensions
+    Dimensions,
+    FlatList,
 } from 'react-native';
-import { ThemeColors } from '../../api/themes';
+import ThemeCard from '../../components/ThemeCard';
+import { ThemeColors, Palette } from '../../api/themes';
 const screenW = Dimensions.get('window').width;
 const cols = 3;
 const cellWH = 100;
@@ -34,30 +36,29 @@ export default class Tag extends PureComponent {
 			)
 		};
     };
-    onSelectTheme = (key) => {
+    handleSelect = (key) => {
         console.log(key);
     }
+    renderRow = ({item}) => {
+        return <ThemeCard data={item} onSelect={this.handleSelect} />;
+    };
+    
+    _keyExtractor = (item, index) => item.title;
+    
     render() {
+        const dataSource = Object.keys(Palette).map(key => {
+            return {
+                title: key,
+                data: Palette[key]
+            }
+        })
         return(
             <View style={styles.container}>
-                <ScrollView contentContainerStyle={styles.wrapper}>
-                    {
-                        Object.keys(ThemeColors).map(key => {
-                            return (
-                                <TouchableHighlight
-                                    key={key}
-                                    style={[{backgroundColor: ThemeColors[key]}, styles.themeItem]}
-                                    underlayColor='white'
-                                    onPress={()=>this.onSelectTheme(key)}
-                                >
-                                    <View>
-                                        <Text style={styles.themeText}>{key}</Text>
-                                    </View>
-                                </TouchableHighlight>
-                            )
-                        })
-                    }
-                </ScrollView>
+                <FlatList
+                    keyExtractor={this._keyExtractor}
+                    data={dataSource}
+                    renderItem={this.renderRow}
+                />   
             </View>
         )
     }
@@ -94,4 +95,4 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 16,
     }
-})
+});
