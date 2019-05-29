@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     themeText: {
-    color: '#2d3748',
-      fontSize: 14,
-},
+        color: '#2d3748',
+        fontSize: 14,
+    },
     themeSubText: {
         color: '#2d3748',
         fontSize: 12,
