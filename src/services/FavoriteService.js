@@ -56,7 +56,6 @@ export default class FavoriteService {
 	}
 
 	getAllItems = () => {
-		console.log(11)
 		return new Promise((resolve, reject) => {
 			this.getFavoriteKeys().then(keys => {
 				let items = [];

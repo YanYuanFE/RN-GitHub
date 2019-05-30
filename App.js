@@ -4,29 +4,33 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent, Provider } from 'react';
 import {
-  Platform,
   StyleSheet,
-  Text,
-  View
 } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import AppNav from './src/navigator/AppNav';
 import NavigationService from './src/services/NavigationService';
-// import Popular from './src/view/Popular';
 
 const AppContainer = createAppContainer(AppNav);
 
-class App extends Component {
-
+class App extends PureComponent {
   constructor(props) {
     super(props);
   }
 
+  state = {
+    theme: ''
+  }
+
   render() {
+    const { theme } = this.state;
     return (
-      <AppContainer ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)} />
+      <Provider value={{theme}}>
+        <AppContainer
+          ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)} 
+        />
+      </Provider>
     )
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   StyleSheet,
   Image,
@@ -14,7 +14,7 @@ import Trending from '../pages/trending/Trending';
 import Favorite from '../pages/favorite/Favorite';
 import My from '../pages/my/My';
 
-export default class HomeNav extends Component {
+export default class HomeNav extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
