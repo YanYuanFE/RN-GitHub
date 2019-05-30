@@ -15,7 +15,7 @@ const hMargin = 10;
 
 export default class ThemeCard extends PureComponent {
     render() {
-        const { data } = this.props;
+        const { data, onSelect } = this.props;
         const item = data.data;
         return (
             <View style={styles.container}>
@@ -31,7 +31,7 @@ export default class ThemeCard extends PureComponent {
                                     key={key}
                                     style={[{backgroundColor: item[key]}, styles.themeBtn]}
                                     underlayColor='white'
-                                    onPress={()=>this.onSelectTheme(key)}
+                                    onPress={() => onSelect(item[key])}
                                   >
                                       <View></View>
                                   </TouchableHighlight>

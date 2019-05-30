@@ -13,6 +13,7 @@ import Popular from '../pages/popular/Popular';
 import Trending from '../pages/trending/Trending';
 import Favorite from '../pages/favorite/Favorite';
 import My from '../pages/my/My';
+import {ThemeContext} from "../context/themeContext";
 
 export default class HomeNav extends PureComponent {
   constructor(props) {
@@ -27,7 +28,10 @@ export default class HomeNav extends PureComponent {
       ],
     }
   }
+  static contextType = ThemeContext;
   render() {
+    console.log(this.context);
+    const { theme } = this.context;
     const icons = {
       Popular: "all-inclusive",
       Trending: "trending-up",
@@ -58,19 +62,19 @@ export default class HomeNav extends PureComponent {
                 shadowOpacity: 0.4,
                 shadowRadius: 5
               }}
-              activeColor="#2196F3"
+              activeColor={theme}
               inactiveColor="#85929A"
               renderIcon={({ route, focused, color }) => {
                 return (
                   <Icon
                     name={icons[route.key]}
-                    color={focused ? "#2196F3" : color}
+                    color={focused ? theme : color}
                     size={25}
                   />
                 )
               }}
               renderLabel={({ route, focused, color }) => (
-                <Text style={{ color: focused ? "#2196F3" : color, margin: 0 }}>
+                <Text style={{ color: focused ? theme : color, margin: 0 }}>
                   {route.title}
                 </Text>
               )}

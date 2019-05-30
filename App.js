@@ -4,15 +4,19 @@
  * @flow
  */
 
-import React, { PureComponent, Provider } from 'react';
+import React, { PureComponent, createContext } from 'react';
 import {
   StyleSheet,
 } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import AppNav from './src/navigator/AppNav';
 import NavigationService from './src/services/NavigationService';
+import {Palette} from "./src/api/themes";
+import ThemeService from "./src/services/ThemeService";
+import { ThemeContext } from './src/context/themeContext';
 
 const AppContainer = createAppContainer(AppNav);
+const themeService = new ThemeService();
 
 class App extends PureComponent {
   constructor(props) {
@@ -20,17 +24,23 @@ class App extends PureComponent {
   }
 
   state = {
-    theme: ''
+    theme: Palette.Blue["400"]
+  };
+
+  componentDidMount() {
+    themeService.getTheme().then(data => {
+      this.setState({theme: data});
+    })
   }
 
   render() {
     const { theme } = this.state;
     return (
-      <Provider value={{theme}}>
+      <ThemeContext.Provider value={{theme}}>
         <AppContainer
-          ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)} 
+          ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)}
         />
-      </Provider>
+      </ThemeContext.Provider>
     )
   }
 }

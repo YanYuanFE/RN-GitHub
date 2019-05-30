@@ -12,12 +12,13 @@ import {
 } from 'react-native';
 import ThemeCard from '../../components/ThemeCard';
 import { ThemeColors, Palette } from '../../api/themes';
+import ThemeService from "../../services/ThemeService";
 const screenW = Dimensions.get('window').width;
 const cols = 3;
 const cellWH = 100;
 const vMargin = (screenW - cellWH * cols) / (cols + 1);
 const hMargin = 25;
-
+const themeService = new ThemeService();
 export default class Tag extends PureComponent {
     static navigationOptions = ({ navigation }) => {
 		return {
@@ -38,27 +39,29 @@ export default class Tag extends PureComponent {
     };
     handleSelect = (key) => {
         console.log(key);
+	      const { navigation } = this.props;
+        themeService.saveTheme(key, () => navigation.goBack())
     }
     renderRow = ({item}) => {
         return <ThemeCard data={item} onSelect={this.handleSelect} />;
     };
-    
+
     _keyExtractor = (item, index) => item.title;
-    
+
     render() {
         const dataSource = Object.keys(Palette).map(key => {
             return {
                 title: key,
                 data: Palette[key]
             }
-        })
+        });
         return(
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={this._keyExtractor}
                     data={dataSource}
                     renderItem={this.renderRow}
-                />   
+                />
             </View>
         )
     }
