@@ -44,7 +44,7 @@ export default class Theme extends PureComponent {
 			navigation.goBack();
 		};
         themeService.saveTheme(key, cb);
-    }
+    };
     renderRow = ({item}) => {
         return <ThemeCard data={item} onSelect={this.handleSelect} />;
     };

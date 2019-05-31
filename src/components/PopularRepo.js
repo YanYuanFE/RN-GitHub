@@ -25,7 +25,7 @@ export default class PopularRepo extends PureComponent {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, theme } = this.props;
     return (
       <View style={styles.cell_container}>
         <Text style={styles.title}>{data.full_name}</Text>
@@ -44,7 +44,7 @@ export default class PopularRepo extends PureComponent {
             <Text>{data.stargazers_count}</Text>
           </View>
           <TouchableOpacity onPress={this.handleFavorite}>
-            <Icon name="grade" color={data.isFavorite ? "#2196F3" : "#E5E5E5"} size={25}/>
+            <Icon name="grade" color={data.isFavorite ? theme : "#E5E5E5"} size={25}/>
           </TouchableOpacity>
         </View>
       </View>

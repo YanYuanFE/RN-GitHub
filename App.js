@@ -6,6 +6,7 @@
 
 import React, { PureComponent, createContext } from 'react';
 import {
+  DeviceEventEmitter,
   StyleSheet,
 } from 'react-native';
 import { createAppContainer } from 'react-navigation';
@@ -28,10 +29,19 @@ class App extends PureComponent {
   };
 
   componentDidMount() {
+    this.getTheme();
+    this.listener = DeviceEventEmitter.addListener('THEME_CHANGED', this.getTheme);
+  }
+
+  componentWillUnmount(): void {
+    this.listener && this.listener.remove();
+  }
+
+  getTheme = () => {
     themeService.getTheme().then(data => {
       this.setState({theme: data});
     })
-  }
+  };
 
   render() {
     const { theme } = this.state;

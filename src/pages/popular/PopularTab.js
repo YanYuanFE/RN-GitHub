@@ -11,6 +11,7 @@ import RepositoryService, { TYPE } from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
 import { checkFavorite } from '../../utils/utils';
+import { ThemeContext } from '../../context/themeContext';
 
 const popularService = new RepositoryService(TYPE.Popular);
 const favoriteService = new FavoriteService(TYPE.Popular);
@@ -23,6 +24,7 @@ export default class PopularTab extends PureComponent {
     };
     this.favoriteKeys = [];
   }
+  static contextType = ThemeContext;
   componentDidMount() {
     this.loadData();
     this.listener = DeviceEventEmitter.addListener('FAVORITECHANGED_POPULAR', this.getFavoriteKeys);
@@ -85,7 +87,8 @@ export default class PopularTab extends PureComponent {
   };
 
   renderRow = ({item}) => {
-    return <PopularRepo data={item} onFavorite={this.handleFavorite} />;
+    const { theme } = this.context;
+    return <PopularRepo data={item} onFavorite={this.handleFavorite} theme={theme} />;
   };
 
   _keyExtractor = (item, index) => item.id + '';
