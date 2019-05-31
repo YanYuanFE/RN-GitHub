@@ -29,9 +29,9 @@ export default class PopularRepo extends PureComponent {
     return (
       <View style={styles.cell_container}>
         <Text style={styles.title}>{data.full_name}</Text>
-        <TouchableHighlight onPress={this.goDetail}>
+        <TouchableOpacity onPress={this.goDetail}>
           <Text style={styles.description}>{data.description}</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
         <View style={styles.row}>
           <View style={styles.row}>
             <Text>Author:</Text>

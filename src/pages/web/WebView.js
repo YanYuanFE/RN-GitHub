@@ -4,15 +4,15 @@ import {
     ActivityIndicator,
     StyleSheet, StatusBar, Platform
 } from 'react-native';
-import NavigationBar from '../../components/NavigationBar';
 import { WebView } from 'react-native-webview';
+import { ThemeContext } from '../../context/themeContext';
 
 export default class WebPage extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.getParam('title'),
             headerStyle: {
-                backgroundColor: '#2196F3',
+                backgroundColor: navigation.getParam('theme'),
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -20,6 +20,13 @@ export default class WebPage extends PureComponent {
             },
         };
     };
+    static contextType = ThemeContext;
+
+    componentDidMount() {
+        const { navigation } = this.props;
+        const { theme } = this.context;
+        navigation.setParams({theme});
+    }
     render() {
         const { navigation } = this.props;
         const url = navigation.getParam('url');

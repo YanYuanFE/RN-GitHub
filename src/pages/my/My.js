@@ -38,8 +38,12 @@ export default class My extends PureComponent {
 	static contextType = ThemeContext;
 	handleClick = (target) => {
 		console.log(this.props);
+		const { theme } = this.context;
 		NavigationService.navigate(target.component, {
-			data: target,
+			data: {
+				...target,
+				theme
+			},
 		});
 	};
 

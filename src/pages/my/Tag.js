@@ -20,7 +20,7 @@ export default class Tag extends PureComponent {
 		return {
 			title: navigation.getParam('data').title,
 			headerStyle: {
-				backgroundColor: '#2196F3',
+				backgroundColor: navigation.getParam('data').theme,
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -43,7 +43,7 @@ export default class Tag extends PureComponent {
 
 	componentDidMount() {
 		const { navigation } = this.props;
-	  	navigation.setParams({ save: this.handleSave });
+		navigation.setParams({ save: this.handleSave });
 		this.languageService = new LanguageService(navigation.getParam('data').flag);
 		this.loadData();
 	}

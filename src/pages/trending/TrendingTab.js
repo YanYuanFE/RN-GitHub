@@ -10,6 +10,7 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import TrendingRepo from '../../components/TrendingRepo';
 import FavoriteService from '../../services/FavoriteService';
 import { checkFavorite } from '../../utils/utils';
+import { ThemeContext } from '../../context/themeContext';
 
 const favoriteService = new FavoriteService(TYPE.Trending);
 const trendingService = new RepositoryService(TYPE.Trending);
@@ -23,6 +24,8 @@ export default class TrendingTab extends PureComponent {
 		};
 		this.favoriteKeys = [];
 	}
+
+	static contextType = ThemeContext;
 
 	componentDidMount() {
 		this.fetchData();
@@ -85,7 +88,8 @@ export default class TrendingTab extends PureComponent {
 	};
 
 	renderRow = ({item}) => {
-		return <TrendingRepo data={item} onFavorite={this.handleFavorite}/>;
+		const { theme } = this.context;
+		return <TrendingRepo data={item} onFavorite={this.handleFavorite} theme={theme} />;
 	};
 
 	_keyExtractor = (item, index) => item.url;

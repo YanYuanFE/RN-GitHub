@@ -13,6 +13,7 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import { checkFavorite } from '../../utils/utils';
 import PopularRepo from '../../components/PopularRepo';
+import { ThemeContext } from '../../context/themeContext';
 
 const searchService = new RepositoryService();
 const favoriteService = new FavoriteService(TYPE.Popular);
@@ -22,7 +23,7 @@ export default class Search extends PureComponent {
 		return {
 			title: '搜索',
 			headerStyle: {
-				backgroundColor: '#2196F3',
+				backgroundColor: navigation.getParam('theme'),
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -30,6 +31,7 @@ export default class Search extends PureComponent {
 			},
 		};
 	};
+	static contextType = ThemeContext;
 	state = {
 		value: '',
 		dataSource: [],
@@ -37,6 +39,12 @@ export default class Search extends PureComponent {
 	};
 	favoriteKeys = [];
 	data = [];
+
+	componentDidMount() {
+		const { navigation } = this.props;
+		const { theme } = this.context;
+		navigation.setParams({theme});
+	}
 
 	flushFavoriteState = () => {
 		const items = this.data;
@@ -47,7 +55,6 @@ export default class Search extends PureComponent {
 				isFavorite: checkFavorite(item, favoriteKeys)
 			}
 		});
-		console.log(dataSource);
 		this.setState({
 			dataSource,
 			loading: false
@@ -78,7 +85,8 @@ export default class Search extends PureComponent {
 	};
 
 	renderRow = ({item}) => {
-		return <PopularRepo data={item} onFavorite={this.handleFavorite} />;
+		const { theme } = this.context;
+		return <PopularRepo data={item} onFavorite={this.handleFavorite} theme={theme} />;
 	};
 
 	handleFavorite = (item, isFavorite) => {
@@ -93,11 +101,12 @@ export default class Search extends PureComponent {
 
 	render() {
 		const { value, loading, dataSource } = this.state;
+		const { theme } = this.context;
 		return (
 			<View style={styles.container}>
 				<View style={styles.search}>
-					<TextInput style={styles.input} autoFoucs value={value} onChangeText={(value) => this.setState({value})}/>
-					<TouchableOpacity style={styles.title} onPress={this.handleSearch}>
+					<TextInput style={[styles.input, {borderColor: theme}]} autoFoucs value={value} onChangeText={(value) => this.setState({value})}/>
+					<TouchableOpacity style={[styles.title, {backgroundColor: theme}]} onPress={this.handleSearch}>
 						<Text style={styles.text}>搜索</Text>
 					</TouchableOpacity>
 				</View>
@@ -129,7 +138,6 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		height: 40,
-		borderColor: '#2196F3',
 		borderWidth: 1,
 		flex: 1,
 		marginLeft: 10,
@@ -138,7 +146,6 @@ const styles = StyleSheet.create({
 	title: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#2196F3',
 		marginLeft: 10,
 		paddingLeft: 10,
 		paddingRight: 10,

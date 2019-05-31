@@ -25,7 +25,7 @@ class App extends PureComponent {
   }
 
   state = {
-    theme: Palette.Blue["400"]
+    theme: null
   };
 
   componentDidMount() {
@@ -45,6 +45,9 @@ class App extends PureComponent {
 
   render() {
     const { theme } = this.state;
+    if (!theme) {
+      return null;
+    }
     return (
       <ThemeContext.Provider value={{theme}}>
         <AppContainer

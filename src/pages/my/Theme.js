@@ -23,7 +23,7 @@ export default class Theme extends PureComponent {
 		return {
 			title: "主题设置",
 			headerStyle: {
-				backgroundColor: '#2196F3',
+				backgroundColor: navigation.getParam('data').theme,
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -40,9 +40,9 @@ export default class Theme extends PureComponent {
         console.log(key);
         const { navigation } = this.props;
         const cb = () => {
-			DeviceEventEmitter.emit('THEME_CHANGED');
-			navigation.goBack();
-		};
+					DeviceEventEmitter.emit('THEME_CHANGED');
+					navigation.goBack();
+				};
         themeService.saveTheme(key, cb);
     };
     renderRow = ({item}) => {

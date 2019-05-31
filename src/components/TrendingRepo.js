@@ -23,7 +23,7 @@ export default class TrendingRepo extends PureComponent {
 	};
 
 	render() {
-		const {data} = this.props;
+		const { data, theme } = this.props;
 		if (!data) {
 			return null;
 		}
@@ -47,7 +47,7 @@ export default class TrendingRepo extends PureComponent {
 						}
 					</View>
 					<TouchableOpacity onPress={this.handleFavorite}>
-						<Icon name="grade" color={data.isFavorite ? "#2196F3" : "#E5E5E5"} size={25}/>
+						<Icon name="grade" color={data.isFavorite ? theme : '#E5E5E5'} size={25}/>
 					</TouchableOpacity>
 				</View>
 			</View>

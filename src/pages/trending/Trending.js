@@ -79,7 +79,7 @@ export default class Trending extends PureComponent {
       <View style={styles.container}>
         <NavigationBar
             style={{backgroundColor: theme}}
-            titleView={<SinceView since={since} onChange={this.handleSinceChange}/>}
+            titleView={<SinceView since={since} onChange={this.handleSinceChange} theme={theme} />}
             statusBar={{backgroundColor: theme}}
         />
         {
@@ -125,13 +125,13 @@ class SinceView extends PureComponent {
   };
   render() {
     const { toolTipVisible } = this.state;
-    const { since } = this.props;
+    const { since, theme } = this.props;
     const sinceView = (
         <View style={styles.sinceView}>
           {
             sinceList.map(item => (
                 <TouchableOpacity onPress={() => this.handleClick(item)} key={item.value} style={styles.sinceItem}>
-                  <Text style={styles.sinceText}>{item.label}</Text>
+                  <Text style={[styles.sinceText, {color: theme}]}>{item.label}</Text>
                 </TouchableOpacity>
             ))
           }
@@ -185,7 +185,6 @@ const styles = StyleSheet.create({
   sinceText: {
     paddingLeft: 10,
     paddingRight: 10,
-    color: '#2196F3',
   },
   sinceView: {
     backgroundColor: '#FFF'
