@@ -5,12 +5,15 @@ import {
 	Text,
 	ScrollView,
 	TouchableOpacity,
-	Platform
+	Platform,
+	DeviceEventEmitter
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 import { updateArray, remove } from '../../utils/utils';
+import { ThemeContext } from '../../context/themeContext';
+
 
 export default class Tag extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
@@ -30,6 +33,7 @@ export default class Tag extends PureComponent {
 			)
 		};
 	};
+	static contextType = ThemeContext;
 
 	state = {
 		dataList: []
@@ -39,7 +43,7 @@ export default class Tag extends PureComponent {
 
 	componentDidMount() {
 		const { navigation } = this.props;
-	  navigation.setParams({ save: this.handleSave });
+	  	navigation.setParams({ save: this.handleSave });
 		this.languageService = new LanguageService(navigation.getParam('data').flag);
 		this.loadData();
 	}
@@ -83,12 +87,17 @@ export default class Tag extends PureComponent {
 		// this.changeDatas.forEach((item => {
 		// 	remove()
 		// }))
+		const cb = () => {
+			DeviceEventEmitter.emit('THEME_CHANGED');
+			navigation.goBack();
+		};
 
-		this.languageService.saveData(dataList, () => navigation.goBack());
+		this.languageService.saveData(dataList, cb);
 	};
 
 	render () {
 		const { dataList } = this.state;
+		const { theme } = this.context;
 		const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
 		return (
 			<View style={styles.container}>
@@ -102,8 +111,8 @@ export default class Tag extends PureComponent {
 									style={styles.checkbox}
 									onClick={() => this.handleChange(item)}
 									leftText={item.name}
-									checkedImage={<Icon name={`${iconType}-checkbox`} color={'#2196F3'} size={25} />}
-									unCheckedImage={<Icon name={`${iconType}-checkbox-outline`} color={'#2196F3'} size={25} />}
+									checkedImage={<Icon name={`${iconType}-checkbox`} color={theme} size={25} />}
+									unCheckedImage={<Icon name={`${iconType}-checkbox-outline`} color={theme} size={25} />}
 								/>
 							)
 						})

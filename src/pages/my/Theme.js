@@ -3,10 +3,8 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	ScrollView,
+	DeviceEventEmitter,
 	TouchableOpacity,
-    Platform,
-    TouchableHighlight,
     Dimensions,
     FlatList,
 } from 'react-native';
@@ -19,7 +17,8 @@ const cellWH = 100;
 const vMargin = (screenW - cellWH * cols) / (cols + 1);
 const hMargin = 25;
 const themeService = new ThemeService();
-export default class Tag extends PureComponent {
+
+export default class Theme extends PureComponent {
     static navigationOptions = ({ navigation }) => {
 		return {
 			title: "主题设置",
@@ -39,8 +38,12 @@ export default class Tag extends PureComponent {
     };
     handleSelect = (key) => {
         console.log(key);
-	      const { navigation } = this.props;
-        themeService.saveTheme(key, () => navigation.goBack())
+        const { navigation } = this.props;
+        const cb = () => {
+			DeviceEventEmitter.emit('THEME_CHANGED');
+			navigation.goBack();
+		};
+        themeService.saveTheme(key, cb);
     }
     renderRow = ({item}) => {
         return <ThemeCard data={item} onSelect={this.handleSelect} />;

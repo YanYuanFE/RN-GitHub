@@ -14,7 +14,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
-import NavigationService from "../../services/NavigationService";
+import NavigationService from '../../services/NavigationService';
+import { ThemeContext } from '../../context/themeContext';
+
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 
@@ -22,6 +24,7 @@ export default class Popular extends PureComponent {
   constructor(props) {
     super(props);
   }
+  static contextType = ThemeContext;
   state = {
     languages: [],
     index: 0,
@@ -53,6 +56,7 @@ export default class Popular extends PureComponent {
 
   render() {
     const { index, routes, languages, loading } = this.state;
+    const { theme } = this.context;
     const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
     const mapRoute = languages.reduce((map, item) => {
       const route = () => <PopularTab tabLabel={item.name} />;
@@ -65,9 +69,9 @@ export default class Popular extends PureComponent {
     return (
       <View style={styles.container}>
         <NavigationBar
-            style={{backgroundColor: "#2196F3"}}
+            style={{backgroundColor: theme}}
             title={'最热'}
-            statusBar={{backgroundColor: '#2196F3'}}
+            statusBar={{backgroundColor: theme}}
             rightButton={
               <TouchableOpacity onPress={this.handleClick} style={styles.search}>
                 <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
@@ -86,7 +90,7 @@ export default class Popular extends PureComponent {
                   scrollEnabled={true}
                   {...props}
                   indicatorStyle={{ backgroundColor: 'white' }}
-                  style={{ backgroundColor: '#2196F3' }}
+                  style={{ backgroundColor: theme }}
                   renderLabel={({ route, focused, color }) => (
                     <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
                       {route.key}

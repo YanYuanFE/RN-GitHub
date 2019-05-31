@@ -13,6 +13,8 @@ import { TYPE_LANGUAGE } from '../../services/LanguageService';
 import FavoriteService from '../../services/FavoriteService';
 import Tag from './Tag';
 import NavigationService from "../../services/NavigationService";
+import { ThemeContext } from '../../context/themeContext';
+
 
 const MENU = {
 	CUSTOM_TAG: {
@@ -33,6 +35,7 @@ const MENU = {
 };
 
 export default class My extends PureComponent {
+	static contextType = ThemeContext;
 	handleClick = (target) => {
 		console.log(this.props);
 		NavigationService.navigate(target.component, {
@@ -41,18 +44,19 @@ export default class My extends PureComponent {
 	};
 
 	render() {
+		const { theme } = this.context;
 		return (
 			<View style={styles.container}>
 				<NavigationBar
-					style={{backgroundColor: "#2196F3"}}
+					style={{backgroundColor: theme}}
 					title={'我的'}
-					statusBar={{backgroundColor: '#2196F3'}}
+					statusBar={{backgroundColor: theme}}
 				/>
 				<ScrollView>
 					<TouchableOpacity>
 						<View style={[styles.item, {height: 90}]}>
 							<View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-								<Icon name={'logo-github'} color={'#2196F3'} size={40} />
+								<Icon name={'logo-github'} color={theme} size={40} />
 								<Text>RN-GitHub</Text>
 							</View>
 						</View>
@@ -61,21 +65,21 @@ export default class My extends PureComponent {
 					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
 						<View style={styles.group}>
 							<Text style={styles.title}>自定义标签</Text>
-							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
+							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
 						</View>
 					</TouchableOpacity>
 					<Text style={styles.groupTitle}>趋势管理</Text>
 					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_LANGUAGE)}>
 						<View style={styles.group}>
 							<Text style={styles.title}>自定义语言</Text>
-							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
+							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
 						</View>
 					</TouchableOpacity>
 					<Text style={styles.groupTitle}>设置</Text>
 					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_THEME)}>
 						<View style={styles.group}>
 							<Text style={styles.title}>主题设置</Text>
-							<Icon name={'ios-arrow-forward'} color={'#2196F3'} size={25} />
+							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
 						</View>
 					</TouchableOpacity>
 				</ScrollView>

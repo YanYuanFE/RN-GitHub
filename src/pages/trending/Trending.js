@@ -13,6 +13,8 @@ import NavigationBar from '../../components/NavigationBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
+import { ThemeContext } from '../../context/themeContext';
+
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 const sinceList = [{
@@ -29,6 +31,7 @@ export default class Trending extends PureComponent {
   constructor(props) {
     super(props);
   }
+  static contextType = ThemeContext;
   state = {
     index: 0,
     routes: [
@@ -64,6 +67,7 @@ export default class Trending extends PureComponent {
 
   render() {
     const { index, routes, languages, loading, since } = this.state;
+    const { theme } = this.context;
     const mapRoute = languages.reduce((map, item) => {
       const route = () => <TrendingTab tabLabel={item.name} since={since} />;
       return {
@@ -74,9 +78,9 @@ export default class Trending extends PureComponent {
     return (
       <View style={styles.container}>
         <NavigationBar
-            style={{backgroundColor: "#2196F3"}}
+            style={{backgroundColor: theme}}
             titleView={<SinceView since={since} onChange={this.handleSinceChange}/>}
-            statusBar={{backgroundColor: '#2196F3'}}
+            statusBar={{backgroundColor: theme}}
         />
         {
           loading ? <ActivityIndicator/> :
@@ -90,7 +94,7 @@ export default class Trending extends PureComponent {
                   {...props}
                   scrollEnabled={true}
                   indicatorStyle={{ backgroundColor: 'white' }}
-                  style={{ backgroundColor: '#2196F3' }}
+                  style={{ backgroundColor: theme }}
                   renderLabel={({ route, focused, color }) => (
                     <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
                       {route.key}

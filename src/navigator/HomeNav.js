@@ -13,7 +13,7 @@ import Popular from '../pages/popular/Popular';
 import Trending from '../pages/trending/Trending';
 import Favorite from '../pages/favorite/Favorite';
 import My from '../pages/my/My';
-import {ThemeContext} from "../context/themeContext";
+import { ThemeContext } from '../context/themeContext';
 
 export default class HomeNav extends PureComponent {
   constructor(props) {
