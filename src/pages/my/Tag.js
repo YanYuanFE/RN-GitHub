@@ -6,7 +6,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Platform,
-	DeviceEventEmitter
+	DeviceEventEmitter, Dimensions
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -14,6 +14,7 @@ import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 import { updateArray, remove } from '../../utils/utils';
 import { ThemeContext } from '../../context/themeContext';
 
+const screenW = Dimensions.get('window').width;
 
 export default class Tag extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
@@ -101,7 +102,7 @@ export default class Tag extends PureComponent {
 		const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
 		return (
 			<View style={styles.container}>
-				<ScrollView>
+				<ScrollView contentContainerStyle={styles.wrapper}>
 					{
 						dataList.map((item, index) => {
 							return(
@@ -128,6 +129,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#f3f2f2'
 	},
+	wrapper: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+	},
 	item: {
 		flexDirection: 'row',
 	},
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'darkgray',
 	},
 	checkbox: {
-		flex:1,
+		width: screenW/2 - 2,
 		padding: 10,
 		borderBottomWidth: 1,
 		borderBottomColor: '#E8E8E8',
