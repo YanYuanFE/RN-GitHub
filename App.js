@@ -51,6 +51,7 @@ class App extends PureComponent {
     return (
       <ThemeContext.Provider value={{theme}}>
         <AppContainer
+          screenProps={{ theme }}
           ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)}
         />
       </ThemeContext.Provider>

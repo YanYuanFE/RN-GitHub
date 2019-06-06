@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { SafeAreaView } from 'react-navigation';
 import Popular from '../pages/popular/Popular';
 import Trending from '../pages/trending/Trending';
 import Favorite from '../pages/favorite/Favorite';
@@ -30,7 +31,6 @@ export default class HomeNav extends PureComponent {
   }
   static contextType = ThemeContext;
   render() {
-    console.log(this.context);
     const { theme } = this.context;
     const icons = {
       Popular: "all-inclusive",
@@ -39,49 +39,51 @@ export default class HomeNav extends PureComponent {
       My: "perm-identity"
     };
     return (
-      <View style={styles.container}>
-        <TabView
-          tabBarPosition="bottom"
-          navigationState={this.state}
-          renderScene={SceneMap({
-            Popular: Popular,
-            Trending: Trending,
-            Favorite: Favorite,
-            My: My
-          })}
-          onIndexChange={index => this.setState({ index })}
-          initialLayout={{ width: Dimensions.get('window').width }}
-          renderTabBar={props =>
-            <TabBar
-              {...props}
-              indicatorStyle={{ backgroundColor: '#FFF' }}
-              style={{
-                backgroundColor: '#FFF',
-                shadowColor: 'black',
-                shadowOffset: {width: 0, height: 0},
-                shadowOpacity: 0.4,
-                shadowRadius: 5
-              }}
-              activeColor={theme}
-              inactiveColor="#85929A"
-              renderIcon={({ route, focused, color }) => {
-                return (
-                  <Icon
-                    name={icons[route.key]}
-                    color={focused ? theme : color}
-                    size={25}
-                  />
-                )
-              }}
-              renderLabel={({ route, focused, color }) => (
-                <Text style={{ color: focused ? theme : color, margin: 0 }}>
-                  {route.title}
-                </Text>
-              )}
-            />
-          }
-        />
-      </View>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
+        <View style={styles.container}>
+          <TabView
+            tabBarPosition="bottom"
+            navigationState={this.state}
+            renderScene={SceneMap({
+              Popular: Popular,
+              Trending: Trending,
+              Favorite: Favorite,
+              My: My
+            })}
+            onIndexChange={index => this.setState({ index })}
+            initialLayout={{ width: Dimensions.get('window').width }}
+            renderTabBar={props =>
+              <TabBar
+                {...props}
+                indicatorStyle={{ backgroundColor: '#FFF' }}
+                style={{
+                  backgroundColor: '#FFF',
+                  shadowColor: 'black',
+                  shadowOffset: {width: 0, height: 0},
+                  shadowOpacity: 0.4,
+                  shadowRadius: 5
+                }}
+                activeColor={theme}
+                inactiveColor="#85929A"
+                renderIcon={({ route, focused, color }) => {
+                  return (
+                    <Icon
+                      name={icons[route.key]}
+                      color={focused ? theme : color}
+                      size={25}
+                    />
+                  )
+                }}
+                renderLabel={({ route, focused, color }) => (
+                  <Text style={{ color: focused ? theme : color, margin: 0 }}>
+                    {route.title}
+                  </Text>
+                )}
+              />
+            }
+          />
+        </View>
+      </SafeAreaView>
     )
   }
 }
@@ -89,6 +91,7 @@ export default class HomeNav extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF'
   },
   image: {
     height: 26,
