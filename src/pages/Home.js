@@ -4,15 +4,28 @@ import {
 } from 'react-native';
 
 import HomeNav from '../navigator/HomeNav';
+import {SafeAreaView} from 'react-navigation';
+import {ThemeContext} from '../context/themeContext';
 
 export default class HomeScreen extends PureComponent {
-
+  static contextType = ThemeContext;
   render() {
+    const { theme } = this.context;
+    const { screenProps, navigation } = this.props;
     return (
-      <HomeNav
-        screenProps = {{appNavigation: this.props.navigation}}
-        style = {{flex: 1}}
-      />
+      <SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
+        <HomeNav
+          screenProps = {{appNavigation: navigation, theme: screenProps.theme}}
+          style = {{flex: 1}}
+        />
+      </SafeAreaView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF'
+  }
+});

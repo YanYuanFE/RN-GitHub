@@ -75,7 +75,6 @@ export default class NavigationBar extends PureComponent {
 
     return (
       <View style={[styles.container, this.props.style]}>
-        {statusBarComp}
         {content}
       </View>
     )

@@ -19,11 +19,11 @@ const searchService = new RepositoryService();
 const favoriteService = new FavoriteService(TYPE.Popular);
 
 export default class Search extends PureComponent {
-	static navigationOptions = ({ navigation }) => {
+	static navigationOptions = ({ navigation, screenProps }) => {
 		return {
 			title: '搜索',
 			headerStyle: {
-				backgroundColor: navigation.getParam('theme'),
+				backgroundColor: screenProps.theme,
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {

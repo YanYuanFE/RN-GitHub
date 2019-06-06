@@ -59,11 +59,9 @@ export default class FavoriteService {
 		return new Promise((resolve, reject) => {
 			this.getFavoriteKeys().then(keys => {
 				let items = [];
-				console.log(this.favoriteKey, keys);
 				if (keys) {
 					AsyncStorage.multiGet(keys, (error, stores) => {
 						if (!error) {
-							console.log(stores);
 							stores.forEach(result => {
 								result[1] && items.push(JSON.parse(result[1]));
 							});

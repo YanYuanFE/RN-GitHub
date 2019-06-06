@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { SafeAreaView } from 'react-navigation';
 import Popular from '../pages/popular/Popular';
 import Trending from '../pages/trending/Trending';
@@ -16,7 +17,14 @@ import Favorite from '../pages/favorite/Favorite';
 import My from '../pages/my/My';
 import { ThemeContext } from '../context/themeContext';
 
-export default class HomeNav extends PureComponent {
+const icons = {
+  Popular: "all-inclusive",
+  Trending: "trending-up",
+  Favorite: "stars",
+  My: "perm-identity"
+};
+
+class HomeNav extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,12 +40,6 @@ export default class HomeNav extends PureComponent {
   static contextType = ThemeContext;
   render() {
     const { theme } = this.context;
-    const icons = {
-      Popular: "all-inclusive",
-      Trending: "trending-up",
-      Favorite: "stars",
-      My: "perm-identity"
-    };
     return (
       <SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
         <View style={styles.container}>
@@ -87,6 +89,41 @@ export default class HomeNav extends PureComponent {
     )
   }
 }
+
+const Home =  createBottomTabNavigator(
+  {
+    Popular: Popular,
+    Trending: Trending,
+    Favorite: Favorite,
+    My: My
+  },
+  {
+    defaultNavigationOptions: ({ navigation, screenProps }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName = icons[routeName];
+
+        return <Icon name={iconName} size={25} color={focused ? screenProps.theme : tintColor} />;
+      },
+      tabBarLabel: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        return (
+          <Text style={{ color: focused ? screenProps.theme : tintColor, margin: 0 }}>
+            {routeName}
+          </Text>
+        )
+      }
+    }),
+    tabBarOptions: {
+      inactiveTintColor: 'gray',
+      safeAreaInset: {
+        bottom: 'never'
+      }
+    },
+  }
+);
+
+export default createAppContainer(Home);
 
 const styles = StyleSheet.create({
   container: {

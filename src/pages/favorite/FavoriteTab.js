@@ -26,7 +26,6 @@ export default class FavoriteTab extends PureComponent {
 
 	componentDidMount() {
 		const { type } = this.props;
-		console.log(type);
 		this.loadData();
 		this.listener = DeviceEventEmitter.addListener(`FAVORITECHANGED_${type}`, this.loadData);
 	}
@@ -39,7 +38,6 @@ export default class FavoriteTab extends PureComponent {
 		this.setState({loading: true});
 		this.favoriteService.getAllItems()
 			.then(result => {
-				console.log(result);
 				const dataSource = result.map(item => {
 					return {
 						...item,

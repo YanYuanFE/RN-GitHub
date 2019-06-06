@@ -66,7 +66,6 @@ export default class PopularTab extends PureComponent {
     this.setState({loading: true});
     popularService.fetchData(tabLabel)
       .then(result => {
-        console.log(result);
         this.data = result.items;
         this.getFavoriteKeys();
       }).catch((error) => {

@@ -108,6 +108,7 @@ export default class Popular extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex:1,
+    backgroundColor: '#FFF'
   },
   loading: {
     flex: 1,
