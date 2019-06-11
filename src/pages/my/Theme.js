@@ -11,6 +11,7 @@ import {
 import ThemeCard from '../../components/ThemeCard';
 import { ThemeColors, Palette } from '../../api/themes';
 import ThemeService from "../../services/ThemeService";
+
 const screenW = Dimensions.get('window').width;
 const cols = 3;
 const cellWH = 100;
@@ -31,7 +32,7 @@ export default class Theme extends PureComponent {
 			},
 			headerRight: (
 				<TouchableOpacity onPress={navigation.getParam('save')}>
-					<Text style={{color: '#FFF'}}>保存</Text>
+					<Text style={{color: '#FFF', marginRight: 10 }}>保存</Text>
 				</TouchableOpacity>
 			)
 		};

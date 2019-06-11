@@ -11,10 +11,6 @@ import NavigationBar from '../../components/NavigationBar';
 import { TYPE } from '../../services/RepositoryService';
 import { ThemeContext } from '../../context/themeContext';
 
-
-const PopularRoute = () => <FavoriteTab tabLabel="Popular" type={TYPE.Popular} />;
-const TrendingRoute = () => <FavoriteTab tabLabel="Trending" type={TYPE.Trending} />;
-
 export default class Favorite extends PureComponent {
 	state = {
 		index: 0,
@@ -27,6 +23,8 @@ export default class Favorite extends PureComponent {
 
 	render() {
 		const { theme } = this.context;
+		const PopularRoute = () => <FavoriteTab tabLabel="Popular" type={TYPE.Popular} />;
+        const TrendingRoute = () => <FavoriteTab tabLabel="Trending" type={TYPE.Trending} />;
 		return (
 			<View style={styles.container}>
 				<NavigationBar

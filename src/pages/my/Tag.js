@@ -29,7 +29,7 @@ export default class Tag extends PureComponent {
 			},
 			headerRight: (
 				<TouchableOpacity onPress={navigation.getParam('save')}>
-					<Text style={{color: '#FFF'}}>保存</Text>
+					<Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
 				</TouchableOpacity>
 			)
 		};

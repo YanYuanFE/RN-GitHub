@@ -108,7 +108,7 @@ const Home =  createBottomTabNavigator(
       tabBarLabel: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         return (
-          <Text style={{ color: focused ? screenProps.theme : tintColor, margin: 0 }}>
+          <Text style={{ color: focused ? screenProps.theme : tintColor, textAlign: 'center' }}>
             {routeName}
           </Text>
         )

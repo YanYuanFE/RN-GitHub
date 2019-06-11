@@ -10,7 +10,7 @@ import { TYPE } from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
 import TrendingRepo from '../../components/TrendingRepo';
-import {ThemeContext} from '../../context/themeContext';
+import { ThemeContext } from '../../context/themeContext';
 
 export default class FavoriteTab extends PureComponent {
 	constructor(props) {
@@ -72,6 +72,7 @@ export default class FavoriteTab extends PureComponent {
 	renderRow = ({item}) => {
 		const { type } = this.props;
 		const { theme } = this.context;
+		console.log(theme);
 		return type === TYPE.Popular ?
 			<PopularRepo data={item} onFavorite={this.handleFavorite} theme={theme} /> :
 			<TrendingRepo data={item} onFavorite={this.handleFavorite} theme={theme} />;
