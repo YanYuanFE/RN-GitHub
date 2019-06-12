@@ -9,7 +9,7 @@ import {
     FlatList,
 } from 'react-native';
 import ThemeCard from '../../components/ThemeCard';
-import { ThemeColors, Palette } from '../../api/themes';
+import { Palette } from '../../api/themes';
 import ThemeService from "../../services/ThemeService";
 
 const screenW = Dimensions.get('window').width;
@@ -20,11 +20,11 @@ const hMargin = 25;
 const themeService = new ThemeService();
 
 export default class Theme extends PureComponent {
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = ({ navigation, screenProps }) => {
 		return {
 			title: "主题设置",
 			headerStyle: {
-				backgroundColor: navigation.getParam('data').theme,
+				backgroundColor: screenProps.theme,
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -37,15 +37,17 @@ export default class Theme extends PureComponent {
 			)
 		};
     };
+
     handleSelect = (key) => {
         console.log(key);
         const { navigation } = this.props;
         const cb = () => {
-					DeviceEventEmitter.emit('THEME_CHANGED');
-					navigation.goBack();
-				};
+            DeviceEventEmitter.emit('THEME_CHANGED');
+            navigation.goBack();
+        };
         themeService.saveTheme(key, cb);
     };
+
     renderRow = ({item}) => {
         return <ThemeCard data={item} onSelect={this.handleSelect} />;
     };

@@ -5,13 +5,10 @@ import {
 	Text,
 	ScrollView,
 	TouchableOpacity,
-	Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NavigationBar from '../../components/NavigationBar';
 import { TYPE_LANGUAGE } from '../../services/LanguageService';
-import FavoriteService from '../../services/FavoriteService';
-import Tag from './Tag';
 import NavigationService from "../../services/NavigationService";
 import { ThemeContext } from '../../context/themeContext';
 

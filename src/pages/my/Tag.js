@@ -11,17 +11,16 @@ import {
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
-import { updateArray, remove } from '../../utils/utils';
 import { ThemeContext } from '../../context/themeContext';
 
 const screenW = Dimensions.get('window').width;
 
 export default class Tag extends PureComponent {
-	static navigationOptions = ({ navigation }) => {
+	static navigationOptions = ({ navigation, screenProps }) => {
 		return {
 			title: navigation.getParam('data').title,
 			headerStyle: {
-				backgroundColor: navigation.getParam('data').theme,
+				backgroundColor: screenProps.theme,
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
