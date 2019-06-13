@@ -8,6 +8,11 @@ import {SafeAreaView} from 'react-navigation';
 import {ThemeContext} from '../context/themeContext';
 
 export default class HomeScreen extends PureComponent {
+  static navigationOptions = () => {
+    return {
+      headerBackTitle: null,
+    };
+  };
   static contextType = ThemeContext;
   render() {
     const { theme } = this.context;
