@@ -8,7 +8,7 @@ import {SafeAreaView} from 'react-navigation';
 import {ThemeContext} from '../context/themeContext';
 
 export default class HomeScreen extends PureComponent {
-  static navigationOptions = () => {
+  static navigationOptions = ({ screenProps}) => {
     return {
       headerBackTitle: null,
     };
