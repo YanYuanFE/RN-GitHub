@@ -10,9 +10,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import { createAppContainer } from 'react-navigation';
+import HotUpdate, { ImmediateCheckCodePush } from 'react-native-code-push-dialog';
 import AppNav from './src/navigator/AppNav';
 import NavigationService from './src/services/NavigationService';
-import {Palette} from "./src/api/themes";
 import ThemeService from "./src/services/ThemeService";
 import { ThemeContext } from './src/context/themeContext';
 
@@ -29,6 +29,7 @@ class App extends PureComponent {
   };
 
   componentDidMount() {
+    ImmediateCheckCodePush();
     this.getTheme();
     this.listener = DeviceEventEmitter.addListener('THEME_CHANGED', this.getTheme);
   }
@@ -50,6 +51,7 @@ class App extends PureComponent {
     }
     return (
       <ThemeContext.Provider value={{theme}}>
+        <HotUpdate isActiveCheck={false} />
         <AppContainer
           screenProps={{ theme }}
           ref={navigationRef => NavigationService.setTopLevelNavigator(navigationRef)}

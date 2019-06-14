@@ -7,6 +7,7 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HotUpdate, { ImmediateCheckCodePush } from 'react-native-code-push-dialog';
 import NavigationBar from '../../components/NavigationBar';
 import { TYPE_LANGUAGE } from '../../services/LanguageService';
 import NavigationService from "../../services/NavigationService";
@@ -44,6 +45,10 @@ export default class My extends PureComponent {
 		});
 	};
 
+	handleUpdate = () => {
+		ImmediateCheckCodePush();
+	}
+
 	render() {
 		const { theme } = this.context;
 		return (
@@ -53,6 +58,7 @@ export default class My extends PureComponent {
 					title={'我的'}
 					statusBar={{backgroundColor: theme}}
 				/>
+				<HotUpdate isActiveCheck={false} />
 				<ScrollView>
 					<TouchableOpacity>
 						<View style={[styles.item, {height: 90}]}>
@@ -80,6 +86,12 @@ export default class My extends PureComponent {
 					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_THEME)}>
 						<View style={styles.group}>
 							<Text style={styles.title}>主题设置</Text>
+							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
+						</View>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={this.handleUpdate}>
+						<View style={styles.group}>
+							<Text style={styles.title}>检查更新</Text>
 							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
 						</View>
 					</TouchableOpacity>

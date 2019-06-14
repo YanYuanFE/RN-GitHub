@@ -90,7 +90,7 @@ class HomeNav extends PureComponent {
   }
 }
 
-const Home =  createBottomTabNavigator(
+const HomeNav =  createBottomTabNavigator(
   {
     Popular: Popular,
     Trending: Trending,
@@ -123,7 +123,7 @@ const Home =  createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(Home);
+export default HomeNav;
 
 const styles = StyleSheet.create({
   container: {
