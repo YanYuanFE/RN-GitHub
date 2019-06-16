@@ -6,6 +6,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
 import HotUpdate, { ImmediateCheckCodePush } from 'react-native-code-push-dialog';
 import NavigationBar from '../../components/NavigationBar';
@@ -47,56 +48,58 @@ export default class My extends PureComponent {
 
 	handleUpdate = () => {
 		ImmediateCheckCodePush();
-	}
+	};
 
 	render() {
 		const { theme } = this.context;
 		return (
-			<View style={styles.container}>
-				<NavigationBar
-					style={{backgroundColor: theme}}
-					title={'我的'}
-					statusBar={{backgroundColor: theme}}
-				/>
-				<HotUpdate isActiveCheck={false} />
-				<ScrollView>
-					<TouchableOpacity>
-						<View style={[styles.item, {height: 90}]}>
-							<View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-								<Icon name={'logo-github'} color={theme} size={40} />
-								<Text>RN-GitHub</Text>
+			<SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
+				<View style={styles.container}>
+					<NavigationBar
+						style={{backgroundColor: theme}}
+						title={'我的'}
+						statusBar={{backgroundColor: theme}}
+					/>
+					<HotUpdate isActiveCheck={false} />
+					<ScrollView>
+						<TouchableOpacity>
+							<View style={[styles.item, {height: 90}]}>
+								<View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+									<Icon name={'logo-github'} color={theme} size={40} />
+									<Text>RN-GitHub</Text>
+								</View>
 							</View>
-						</View>
-					</TouchableOpacity>
-					<Text style={styles.groupTitle}>最热管理</Text>
-					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
-						<View style={styles.group}>
-							<Text style={styles.title}>自定义标签</Text>
-							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
-						</View>
-					</TouchableOpacity>
-					<Text style={styles.groupTitle}>趋势管理</Text>
-					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_LANGUAGE)}>
-						<View style={styles.group}>
-							<Text style={styles.title}>自定义语言</Text>
-							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
-						</View>
-					</TouchableOpacity>
-					<Text style={styles.groupTitle}>设置</Text>
-					<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_THEME)}>
-						<View style={styles.group}>
-							<Text style={styles.title}>主题设置</Text>
-							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
-						</View>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={this.handleUpdate}>
-						<View style={styles.group}>
-							<Text style={styles.title}>检查更新</Text>
-							<Icon name={'ios-arrow-forward'} color={theme} size={25} />
-						</View>
-					</TouchableOpacity>
-				</ScrollView>
-			</View>
+						</TouchableOpacity>
+						<Text style={styles.groupTitle}>最热管理</Text>
+						<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_TAG)}>
+							<View style={styles.group}>
+								<Text style={styles.title}>自定义标签</Text>
+								<Icon name={'ios-arrow-forward'} color={theme} size={25} />
+							</View>
+						</TouchableOpacity>
+						<Text style={styles.groupTitle}>趋势管理</Text>
+						<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_LANGUAGE)}>
+							<View style={styles.group}>
+								<Text style={styles.title}>自定义语言</Text>
+								<Icon name={'ios-arrow-forward'} color={theme} size={25} />
+							</View>
+						</TouchableOpacity>
+						<Text style={styles.groupTitle}>设置</Text>
+						<TouchableOpacity onPress={() => this.handleClick(MENU.CUSTOM_THEME)}>
+							<View style={styles.group}>
+								<Text style={styles.title}>主题设置</Text>
+								<Icon name={'ios-arrow-forward'} color={theme} size={25} />
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={this.handleUpdate}>
+							<View style={styles.group}>
+								<Text style={styles.title}>检查更新</Text>
+								<Icon name={'ios-arrow-forward'} color={theme} size={25} />
+							</View>
+						</TouchableOpacity>
+					</ScrollView>
+				</View>
+			</SafeAreaView>
 		)
 	}
 }
@@ -122,6 +125,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		marginLeft: 10,
 		marginRight: 10,
+		paddingTop: 5,
+		paddingBottom: 5,
 		borderBottomWidth: 1,
 		borderBottomColor: '#E8E8E8',
 		borderStyle: 'solid',

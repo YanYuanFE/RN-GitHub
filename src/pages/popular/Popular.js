@@ -10,13 +10,13 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
-import Icon from "react-native-vector-icons/Ionicons";
+import {SafeAreaView} from 'react-navigation';
+import Icon from 'react-native-vector-icons/Ionicons';
 import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 import NavigationService from '../../services/NavigationService';
 import { ThemeContext } from '../../context/themeContext';
-import {SafeAreaView} from "react-navigation";
 
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);

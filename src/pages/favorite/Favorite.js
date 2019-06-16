@@ -6,6 +6,7 @@ import {
 	Text,
 	Dimensions
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import FavoriteTab from './FavoriteTab';
 import NavigationBar from '../../components/NavigationBar';
 import { TYPE } from '../../services/RepositoryService';
@@ -26,35 +27,37 @@ export default class Favorite extends PureComponent {
 		const PopularRoute = () => <FavoriteTab tabLabel="Popular" type={TYPE.Popular} />;
         const TrendingRoute = () => <FavoriteTab tabLabel="Trending" type={TYPE.Trending} />;
 		return (
-			<View style={styles.container}>
-				<NavigationBar
-					style={{backgroundColor: theme}}
-					title={'喜欢'}
-					statusBar={{backgroundColor: theme}}
-				/>
-				<TabView
-					navigationState={this.state}
-					renderScene={SceneMap({
-						Popular: PopularRoute,
-						Trending: TrendingRoute,
-					})}
-					onIndexChange={index => this.setState({ index })}
-					initialLayout={{ width: Dimensions.get('window').width }}
-					renderTabBar={(props) =>
-						<TabBar
-							{...props}
-							indicatorStyle={{ backgroundColor: 'white' }}
-							style={{ backgroundColor: theme }}
-							renderLabel={({ route, focused, color }) => (
-								<Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
-									{route.title}
-								</Text>
-							)}
-						/>
-					}
-				>
-				</TabView>
-			</View>
+			<SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
+				<View style={styles.container}>
+					<NavigationBar
+						style={{backgroundColor: theme}}
+						title={'喜欢'}
+						statusBar={{backgroundColor: theme}}
+					/>
+					<TabView
+						navigationState={this.state}
+						renderScene={SceneMap({
+							Popular: PopularRoute,
+							Trending: TrendingRoute,
+						})}
+						onIndexChange={index => this.setState({ index })}
+						initialLayout={{ width: Dimensions.get('window').width }}
+						renderTabBar={(props) =>
+							<TabBar
+								{...props}
+								indicatorStyle={{ backgroundColor: 'white' }}
+								style={{ backgroundColor: theme }}
+								renderLabel={({ route, focused, color }) => (
+									<Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
+										{route.title}
+									</Text>
+								)}
+							/>
+						}
+					>
+					</TabView>
+				</View>
+			</SafeAreaView>
 		)
 	}
 }
