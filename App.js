@@ -9,14 +9,13 @@ import {
   DeviceEventEmitter,
   StyleSheet,
 } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, SafeAreaView } from 'react-navigation';
 import HotUpdate, { ImmediateCheckCodePush } from 'react-native-code-push-dialog';
 import AppNav from './src/navigator/AppNav';
 import NavigationService from './src/services/NavigationService';
 import ThemeService from "./src/services/ThemeService";
 import { ThemeContext } from './src/context/themeContext';
 
-const AppContainer = createAppContainer(AppNav);
 const themeService = new ThemeService();
 
 class App extends PureComponent {
@@ -49,6 +48,8 @@ class App extends PureComponent {
     if (!theme) {
       return null;
     }
+    console.log(AppNav)
+    const AppContainer = createAppContainer(AppNav);
     return (
       <ThemeContext.Provider value={{theme}}>
         <HotUpdate isActiveCheck={false} />

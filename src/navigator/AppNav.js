@@ -5,6 +5,7 @@ import WebScreen from '../pages/web/WebView';
 import Tag from '../pages/my/Tag';
 import Theme from '../pages/my/Theme';
 import Search from '../pages/popular/Search';
+import HomeNav from './HomeNav';
 
 const pageNav = createStackNavigator(
   {
@@ -36,7 +37,7 @@ const pageNav = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Web',
     initialRouteParams: {
       oneSceneNum: 0,
       title: '最热'
@@ -45,8 +46,14 @@ const pageNav = createStackNavigator(
 );
 
 const AppNav = createSwitchNavigator({
-  Home: HomeScreen,
+  Home: HomeNav,
   Page: pageNav
+}, {
+  initialRouteName: 'Home',
+  initialRouteParams: {
+    oneSceneNum: 0,
+    title: '最热'
+  }
 });
 
 

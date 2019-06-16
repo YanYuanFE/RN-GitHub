@@ -16,6 +16,7 @@ import NavigationBar from '../../components/NavigationBar';
 import LanguageService, { TYPE_LANGUAGE } from '../../services/LanguageService';
 import NavigationService from '../../services/NavigationService';
 import { ThemeContext } from '../../context/themeContext';
+import {SafeAreaView} from "react-navigation";
 
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
@@ -67,40 +68,42 @@ export default class Popular extends PureComponent {
     }, {});
 
     return (
-      <View style={styles.container}>
-        <NavigationBar
-            style={{backgroundColor: theme}}
-            title={'最热'}
-            statusBar={{backgroundColor: theme}}
-            rightButton={
-              <TouchableOpacity onPress={this.handleClick} style={styles.search}>
-                <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
-              </TouchableOpacity>
-            }
-        />
-        {
-          loading ? <ActivityIndicator /> :
-            <TabView
-              navigationState={{index, routes}}
-              renderScene={SceneMap(mapRoute)}
-              onIndexChange={index => this.setState({ index })}
-              initialLayout={{ width: Dimensions.get('window').width }}
-              renderTabBar={(props) =>
-                <TabBar
-                  scrollEnabled={true}
-                  {...props}
-                  indicatorStyle={{ backgroundColor: 'white' }}
-                  style={{ backgroundColor: theme }}
-                  renderLabel={({ route, focused, color }) => (
-                    <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
-                      {route.key}
-                    </Text>
-                  )}
-                />
+      <SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
+        <View style={styles.container}>
+          <NavigationBar
+              style={{backgroundColor: theme}}
+              title={'最热'}
+              statusBar={{backgroundColor: theme}}
+              rightButton={
+                <TouchableOpacity onPress={this.handleClick} style={styles.search}>
+                  <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
+                </TouchableOpacity>
               }
-            />
-        }
-      </View>
+          />
+          {
+            loading ? <ActivityIndicator /> :
+              <TabView
+                navigationState={{index, routes}}
+                renderScene={SceneMap(mapRoute)}
+                onIndexChange={index => this.setState({ index })}
+                initialLayout={{ width: Dimensions.get('window').width }}
+                renderTabBar={(props) =>
+                  <TabBar
+                    scrollEnabled={true}
+                    {...props}
+                    indicatorStyle={{ backgroundColor: 'white' }}
+                    style={{ backgroundColor: theme }}
+                    renderLabel={({ route, focused, color }) => (
+                      <Text style={{ color: focused ? "#F5F5F5" : color, margin: 0 }}>
+                        {route.key}
+                      </Text>
+                    )}
+                  />
+                }
+              />
+          }
+        </View>
+      </SafeAreaView>
     )
   }
 };

@@ -24,7 +24,7 @@ const icons = {
   My: "perm-identity"
 };
 
-class HomeNav extends PureComponent {
+class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,9 +116,6 @@ const HomeNav =  createBottomTabNavigator(
     }),
     tabBarOptions: {
       inactiveTintColor: 'gray',
-      safeAreaInset: {
-        bottom: 'never'
-      }
     },
   }
 );
