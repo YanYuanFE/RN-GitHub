@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
-import HotUpdate, { ImmediateCheckCodePush } from 'react-native-code-push-dialog';
+import { ImmediateCheckCodePush } from 'react-native-code-push-dialog';
 import NavigationBar from '../../components/NavigationBar';
 import { TYPE_LANGUAGE } from '../../services/LanguageService';
 import NavigationService from "../../services/NavigationService";
@@ -60,7 +60,6 @@ export default class My extends PureComponent {
 						title={'我的'}
 						statusBar={{backgroundColor: theme}}
 					/>
-					<HotUpdate isActiveCheck={false} />
 					<ScrollView>
 						<TouchableOpacity>
 							<View style={[styles.item, {height: 90}]}>

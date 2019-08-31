@@ -28,12 +28,12 @@ class App extends PureComponent {
   };
 
   componentDidMount() {
-    ImmediateCheckCodePush();
     this.getTheme();
     this.listener = DeviceEventEmitter.addListener('THEME_CHANGED', this.getTheme);
+    ImmediateCheckCodePush();
   }
 
-  componentWillUnmount(): void {
+  componentWillUnmount() {
     this.listener && this.listener.remove();
   }
 
