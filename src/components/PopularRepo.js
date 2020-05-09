@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import NavigationService from '../services/NavigationService';
+// import NavigationService from '../services/NavigationService';
 
 const PopularRepo = ({data, onFavorite, theme}) => {
   const goDetail = () => {
-    NavigationService.navigate('Web', {
-      url: data.html_url,
-      title: data.full_name,
-    });
+    // NavigationService.navigate('Web', {
+    //   url: data.html_url,
+    //   title: data.full_name,
+    // });
   };
 
   const handleFavorite = () => {

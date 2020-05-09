@@ -8,16 +8,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import NavigationService from '../services/NavigationService';
+// import NavigationService from '../services/NavigationService';
 
 export default TrendingRepo;
 
 const TrendingRepo = ({data, onFavorite, theme}) => {
   const goDetail = () => {
-    NavigationService.navigate('Web', {
-      url: data.url,
-      title: data.name,
-    });
+    // NavigationService.navigate('Web', {
+    //   url: data.url,
+    //   title: data.name,
+    // });
   };
 
   const handleFavorite = () => {

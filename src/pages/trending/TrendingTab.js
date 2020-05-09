@@ -106,10 +106,10 @@ const TrendingTab = ({tabLabel, since}) => {
       ) : (
         <FlatList
           refreshing={loading}
-          onRefresh={this.fetchData}
-          keyExtractor={this._keyExtractor}
+          onRefresh={fetchData}
+          keyExtractor={_keyExtractor}
           data={dataSource}
-          renderItem={this.renderRow}
+          renderItem={renderRow}
         />
       )}
     </View>

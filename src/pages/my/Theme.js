@@ -19,7 +19,6 @@ const vMargin = (screenW - cellWH * cols) / (cols + 1);
 const hMargin = 25;
 const themeService = new ThemeService();
 
-export default Theme;
 const Theme = () => {
   const navigationOptions = ({navigation, screenProps}) => {
     return {
@@ -71,6 +70,8 @@ const Theme = () => {
     </View>
   );
 };
+
+export default Theme;
 
 const styles = StyleSheet.create({
   container: {

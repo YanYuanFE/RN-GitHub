@@ -1,18 +1,8 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-
+import React from 'react';
 import {StyleSheet, View, Text, Platform, StatusBar} from 'react-native';
 const NAVBAR_HEIGHT_ANDROID = 50;
 const NAVBAR_HEIGHT_IOS = 44;
 const STATUS_BAR_HEIGHT = 20;
-
-const StatusBarShape = {
-  backgroundColor: PropTypes.string,
-  barStyle: PropTypes.oneOf('default', 'light-content', 'drak-content'),
-  hidden: PropTypes.bool,
-};
-
-export default NavigationBar;
 
 const NavigationBar = ({
   statusBar = {
@@ -46,6 +36,8 @@ const NavigationBar = ({
 
   return <View style={[styles.container, style]}>{content}</View>;
 };
+
+export default NavigationBar;
 
 const styles = StyleSheet.create({
   container: {

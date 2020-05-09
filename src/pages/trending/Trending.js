@@ -7,14 +7,14 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import TrendingTab from './TrendingTab';
 import NavigationBar from '../../components/NavigationBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
-import {ThemeContext, useTheme} from '../../context/themeContext';
+import {useTheme} from '../../context/themeContext';
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 const sinceList = [
@@ -75,44 +75,42 @@ const Trending = () => {
     };
   }, {});
   return (
-    <SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
-      <View style={styles.container}>
-        <NavigationBar
-          style={{backgroundColor: theme}}
-          titleView={
-            <SinceView
-              since={since}
-              onChange={this.handleSinceChange}
-              theme={theme}
-            />
-          }
-          statusBar={{backgroundColor: theme}}
-        />
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          <TabView
-            navigationState={{index, routes}}
-            renderScene={SceneMap(mapRoute)}
-            onIndexChange={handleTabChange}
-            initialLayout={{width: Dimensions.get('window').width}}
-            renderTabBar={(props) => (
-              <TabBar
-                {...props}
-                scrollEnabled={true}
-                indicatorStyle={{backgroundColor: 'white'}}
-                style={{backgroundColor: theme}}
-                renderLabel={({route, focused, color}) => (
-                  <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
-                    {route.key}
-                  </Text>
-                )}
-              />
-            )}
+    <View style={styles.container}>
+      <NavigationBar
+        style={{backgroundColor: theme}}
+        titleView={
+          <SinceView
+            since={since}
+            onChange={this.handleSinceChange}
+            theme={theme}
           />
-        )}
-      </View>
-    </SafeAreaView>
+        }
+        statusBar={{backgroundColor: theme}}
+      />
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <TabView
+          navigationState={{index, routes}}
+          renderScene={SceneMap(mapRoute)}
+          onIndexChange={handleTabChange}
+          initialLayout={{width: Dimensions.get('window').width}}
+          renderTabBar={(props) => (
+            <TabBar
+              {...props}
+              scrollEnabled={true}
+              indicatorStyle={{backgroundColor: 'white'}}
+              style={{backgroundColor: theme}}
+              renderLabel={({route, focused, color}) => (
+                <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
+                  {route.key}
+                </Text>
+              )}
+            />
+          )}
+        />
+      )}
+    </View>
   );
 };
 

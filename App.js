@@ -10,9 +10,8 @@ import React, {useEffect, useState} from 'react';
 import {DeviceEventEmitter, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import HotUpdate, {ImmediateCheckCodePush} from 'react-native-code-push-dialog';
+// import HotUpdate, {ImmediateCheckCodePush} from 'react-native-code-push-dialog';
 import AppNav from './src/navigator/AppNav';
-import NavigationService from './src/services/NavigationService';
 import ThemeService from './src/services/ThemeService';
 import {ThemeProvider} from './src/context/themeContext';
 
@@ -27,7 +26,7 @@ const App = () => {
       'THEME_CHANGED',
       this.getTheme,
     );
-    ImmediateCheckCodePush();
+    // ImmediateCheckCodePush();
     return () => {
       listener && listener.remove();
     };
@@ -47,7 +46,7 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <ThemeProvider value={{primary: theme}}>
-          <HotUpdate isActiveCheck={false} />
+          {/*<HotUpdate isActiveCheck={false} />*/}
           <AppNav />
         </ThemeProvider>
       </NavigationContainer>

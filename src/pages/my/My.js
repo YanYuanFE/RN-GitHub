@@ -6,13 +6,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ImmediateCheckCodePush} from 'react-native-code-push-dialog';
+// import {ImmediateCheckCodePush} from 'react-native-code-push-dialog';
 import NavigationBar from '../../components/NavigationBar';
 import {TYPE_LANGUAGE} from '../../services/LanguageService';
-import NavigationService from '../../services/NavigationService';
-import {ThemeContext, useTheme} from '../../context/themeContext';
+// import NavigationService from '../../services/NavigationService';
+import {useTheme} from '../../context/themeContext';
 
 const MENU = {
   CUSTOM_TAG: {
@@ -38,16 +38,16 @@ const My = () => {
   const theme = useTheme();
   const handleClick = (target) => {
     console.log(this.props);
-    NavigationService.navigate(target.component, {
-      data: {
-        ...target,
-        theme,
-      },
-    });
+    // NavigationService.navigate(target.component, {
+    //   data: {
+    //     ...target,
+    //     theme,
+    //   },
+    // });
   };
 
   const handleUpdate = () => {
-    ImmediateCheckCodePush();
+    // ImmediateCheckCodePush();
   };
 
   return (

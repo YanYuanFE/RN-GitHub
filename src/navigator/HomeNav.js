@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
-import {StyleSheet, Image, Button, Text, View, Dimensions} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Popular from '../pages/popular/Popular';
 import Trending from '../pages/trending/Trending';
@@ -25,28 +25,38 @@ const tabRoutes = {
   My: My,
 };
 
+function Demo() {
+  return (
+    <View
+      style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </View>
+  );
+}
+
 const HomeNav = () => {
   const theme = useTheme();
   return (
-    <SafeAreaView>
-      <Tab.Navigator
-        initialRouteName="Popular"
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName = icons[route.name];
+    <Tab.Navigator
+      initialRouteName="Popular"
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName = icons[route.name];
 
-            return <Icon name={iconName} size={25} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: theme.primary,
-          inactiveTintColor: 'gray',
-        }}>
-        {Object.keys(tabRoutes, (key) => (
-          <Tab.Screen name={key} key={key} component={tabRoutes[key]} />
-        ))}
-      </Tab.Navigator>
-    </SafeAreaView>
+          return <Icon name={iconName} size={25} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: theme.primary,
+        inactiveTintColor: 'gray',
+      }}>
+      <Tab.Screen name="Popular" component={Popular} />
+      <Tab.Screen name="Trending" component={Trending} />
+      {/*{Object.keys(tabRoutes, (key) => (*/}
+      {/*  <Tab.Screen name={key} key={key} component={tabRoutes[key]} />*/}
+      {/*))}*/}
+    </Tab.Navigator>
   );
 };
 

@@ -12,16 +12,22 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.10.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/bottom-tabs": "^5.4.1",
     "@react-navigation/native": "^5.2.4",
     "@react-navigation/stack": "^5.2.19",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-check-box": "^2.1.7",
+    "react-native-code-push": "^6.2.0",
+    "react-native-code-push-dialog": "^1.0.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.7.0",
     "react-native-tab-view": "^2.14.0",
-    "react-native-vector-icons": "^6.6.0"
+    "react-native-vector-icons": "^6.6.0",
+    "react-native-walkthrough-tooltip": "^1.1.7",
+    "react-native-webview": "^9.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

@@ -1,4 +1,4 @@
-import React, {PureComponent, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -12,11 +12,9 @@ import {
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
-import {ThemeContext, useTheme} from '../../context/themeContext';
+import {useTheme} from '../../context/themeContext';
 
 const screenW = Dimensions.get('window').width;
-
-export default Tag;
 
 const Tag = () => {
   const navigationOptions = ({navigation, screenProps}) => {
@@ -46,7 +44,7 @@ const Tag = () => {
 
   useEffect(() => {
     const {navigation} = this.props;
-    navigation.setParams({save: this.handleSave});
+    navigation.setParams({save: handleSave});
     languageService = new LanguageService(navigation.getParam('data').flag);
     loadData();
   }, []);
@@ -125,6 +123,8 @@ const Tag = () => {
     </View>
   );
 };
+
+export default Tag;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import FavoriteTab from './FavoriteTab';
 import NavigationBar from '../../components/NavigationBar';
 import {TYPE} from '../../services/RepositoryService';

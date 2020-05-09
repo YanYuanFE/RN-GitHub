@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {StyleSheet} from 'react-native';
 
 import HomeNav from '../navigator/HomeNav';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {ThemeContext} from '../context/themeContext';
 
 export default class HomeScreen extends PureComponent {

@@ -28,7 +28,7 @@ const PopularTab = ({tabLabel}) => {
   }, []);
 
   const flushFavoriteState = () => {
-    const items = this.data;
+    const items = data;
     const favoriteKeys = favoriteKeys;
     const dataSource = items.map((item) => {
       return {
@@ -85,7 +85,6 @@ const PopularTab = ({tabLabel}) => {
   };
 
   const renderRow = ({item}) => {
-    const {theme} = this.context;
     return (
       <PopularRepo data={item} onFavorite={handleFavorite} theme={theme} />
     );
