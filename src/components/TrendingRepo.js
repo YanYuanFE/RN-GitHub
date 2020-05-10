@@ -10,8 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // import NavigationService from '../services/NavigationService';
 
-export default TrendingRepo;
-
 const TrendingRepo = ({data, onFavorite, theme}) => {
   const goDetail = () => {
     // NavigationService.navigate('Web', {
@@ -27,6 +25,7 @@ const TrendingRepo = ({data, onFavorite, theme}) => {
   if (!data) {
     return null;
   }
+
   return (
     <View style={styles.cell_container}>
       <Text style={styles.title}>{data.name}</Text>
@@ -47,7 +46,7 @@ const TrendingRepo = ({data, onFavorite, theme}) => {
         <TouchableOpacity onPress={handleFavorite}>
           <Icon
             name="grade"
-            color={data.isFavorite ? theme : '#E5E5E5'}
+            color={data.isFavorite ? theme.primary : '#E5E5E5'}
             size={25}
           />
         </TouchableOpacity>
@@ -55,6 +54,8 @@ const TrendingRepo = ({data, onFavorite, theme}) => {
     </View>
   );
 };
+
+export default TrendingRepo;
 
 const styles = StyleSheet.create({
   container: {

@@ -11,8 +11,8 @@ export default class ThemeService {
           reject(error);
         }
         if (!result) {
-          this.saveTheme(Palette.Blue['400']);
-          result = Palette.Blue['400'];
+          this.saveTheme(Palette.Blue['600']);
+          result = Palette.Blue['600'];
         }
         resolve(result);
       });

@@ -28,9 +28,8 @@ const PopularTab = ({tabLabel}) => {
   }, []);
 
   const flushFavoriteState = () => {
-    const items = data;
-    const favoriteKeys = favoriteKeys;
-    const dataSource = items.map((item) => {
+    console.log(data);
+    const dataSource = data.map((item) => {
       return {
         ...item,
         isFavorite: checkFavorite(item, favoriteKeys),

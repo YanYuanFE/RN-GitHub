@@ -74,18 +74,19 @@ const Trending = () => {
       [item.name]: route,
     };
   }, {});
+
   return (
     <View style={styles.container}>
       <NavigationBar
-        style={{backgroundColor: theme}}
+        style={{backgroundColor: theme.primary}}
         titleView={
           <SinceView
             since={since}
-            onChange={this.handleSinceChange}
+            onChange={handleSinceChange}
             theme={theme}
           />
         }
-        statusBar={{backgroundColor: theme}}
+        statusBar={{backgroundColor: theme.primary}}
       />
       {loading ? (
         <ActivityIndicator />
@@ -100,7 +101,7 @@ const Trending = () => {
               {...props}
               scrollEnabled={true}
               indicatorStyle={{backgroundColor: 'white'}}
-              style={{backgroundColor: theme}}
+              style={{backgroundColor: theme.primary}}
               renderLabel={({route, focused, color}) => (
                 <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
                   {route.key}
@@ -135,7 +136,7 @@ const SinceView = ({onChange, since, theme}) => {
           onPress={() => handleClick(item)}
           key={item.value}
           style={styles.sinceItem}>
-          <Text style={[styles.sinceText, {color: theme}]}>{item.label}</Text>
+          <Text style={[styles.sinceText, {color: theme.primary}]}>{item.label}</Text>
         </TouchableOpacity>
       ))}
     </View>

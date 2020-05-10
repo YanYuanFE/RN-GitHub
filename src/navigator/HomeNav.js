@@ -53,6 +53,8 @@ const HomeNav = () => {
       }}>
       <Tab.Screen name="Popular" component={Popular} />
       <Tab.Screen name="Trending" component={Trending} />
+      <Tab.Screen name="Favorite" component={Favorite} />
+      <Tab.Screen name="My" component={My} />
       {/*{Object.keys(tabRoutes, (key) => (*/}
       {/*  <Tab.Screen name={key} key={key} component={tabRoutes[key]} />*/}
       {/*))}*/}

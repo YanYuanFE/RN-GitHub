@@ -32,7 +32,6 @@ const MENU = {
   },
 };
 
-export default My;
 
 const My = () => {
   const theme = useTheme();
@@ -51,12 +50,12 @@ const My = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, {backgroundColor: theme}]}>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.primary}]}>
       <View style={styles.container}>
         <NavigationBar
-          style={{backgroundColor: theme}}
+          style={{backgroundColor: theme.primary}}
           title={'我的'}
-          statusBar={{backgroundColor: theme}}
+          statusBar={{backgroundColor: theme.primary}}
         />
         <ScrollView>
           <TouchableOpacity>
@@ -67,7 +66,7 @@ const My = () => {
                   justifyContent: 'center',
                   flex: 1,
                 }}>
-                <Icon name={'logo-github'} color={theme} size={40} />
+                <Icon name={'logo-github'} color={theme.primary} size={40} />
                 <Text>RN-GitHub</Text>
               </View>
             </View>
@@ -76,27 +75,27 @@ const My = () => {
           <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_TAG)}>
             <View style={styles.group}>
               <Text style={styles.title}>自定义标签</Text>
-              <Icon name={'ios-arrow-forward'} color={theme} size={25} />
+              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
             </View>
           </TouchableOpacity>
           <Text style={styles.groupTitle}>趋势管理</Text>
           <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_LANGUAGE)}>
             <View style={styles.group}>
               <Text style={styles.title}>自定义语言</Text>
-              <Icon name={'ios-arrow-forward'} color={theme} size={25} />
+              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
             </View>
           </TouchableOpacity>
           <Text style={styles.groupTitle}>设置</Text>
           <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_THEME)}>
             <View style={styles.group}>
               <Text style={styles.title}>主题设置</Text>
-              <Icon name={'ios-arrow-forward'} color={theme} size={25} />
+              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleUpdate}>
             <View style={styles.group}>
               <Text style={styles.title}>检查更新</Text>
-              <Icon name={'ios-arrow-forward'} color={theme} size={25} />
+              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
             </View>
           </TouchableOpacity>
         </ScrollView>
@@ -104,6 +103,9 @@ const My = () => {
     </SafeAreaView>
   );
 };
+
+export default My;
+
 
 const styles = StyleSheet.create({
   container: {

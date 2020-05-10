@@ -25,7 +25,9 @@ const NavigationBar = ({
       <StatusBar {...statusBar} barStyle="light-content" />
     </View>
   ) : null;
+
   let titleContent = titleView || <Text style={styles.title}>{title}</Text>;
+
   let content = hide ? null : (
     <View style={styles.navBar}>
       {getButtonElement(leftButton)}
@@ -33,6 +35,8 @@ const NavigationBar = ({
       {getButtonElement(rightButton)}
     </View>
   );
+
+  console.log(content, titleContent);
 
   return <View style={[styles.container, style]}>{content}</View>;
 };

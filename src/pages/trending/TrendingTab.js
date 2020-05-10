@@ -11,7 +11,7 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import TrendingRepo from '../../components/TrendingRepo';
 import FavoriteService from '../../services/FavoriteService';
 import {checkFavorite} from '../../utils/utils';
-import {ThemeContext, useTheme} from '../../context/themeContext';
+import {useTheme} from '../../context/themeContext';
 
 const favoriteService = new FavoriteService(TYPE.Trending);
 const trendingService = new RepositoryService(TYPE.Trending);
@@ -35,9 +35,7 @@ const TrendingTab = ({tabLabel, since}) => {
   }, []);
 
   const flushFavoriteState = () => {
-    const items = data;
-    const favoriteKeys = favoriteKeys;
-    const dataSource = items.map((item) => {
+    const dataSource = data.map((item) => {
       return {
         ...item,
         isFavorite: checkFavorite(item, favoriteKeys),
@@ -66,8 +64,8 @@ const TrendingTab = ({tabLabel, since}) => {
     setLoading(true);
     trendingService
       .fetchData(tabLabel, since.value)
-      .then((data) => {
-        data = data;
+      .then((res) => {
+        data = res;
         getFavoriteKeys();
       })
       .catch((error) => {
@@ -94,6 +92,8 @@ const TrendingTab = ({tabLabel, since}) => {
   };
 
   const _keyExtractor = (item, index) => item.url;
+
+  console.log(tabLabel, since, dataSource);
 
   return (
     <View style={styles.container}>

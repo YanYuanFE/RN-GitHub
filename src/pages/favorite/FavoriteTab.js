@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,36 +10,30 @@ import {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
 import TrendingRepo from '../../components/TrendingRepo';
-import {ThemeContext} from '../../context/themeContext';
+import {useTheme} from '../../context/themeContext';
 
-export default class FavoriteTab extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: [],
-      loading: false,
-    };
-    this.favoriteService = new FavoriteService(props.type);
-  }
+const FavoriteTab = ({type}) => {
+  const [dataSource, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  let favoriteKeys = [];
+  let data = [];
+  const theme = useTheme();
+  const favoriteService = new FavoriteService(type);
 
-  static contextType = ThemeContext;
-
-  componentDidMount() {
-    const {type} = this.props;
-    this.loadData();
-    this.listener = DeviceEventEmitter.addListener(
+  useEffect(() => {
+    loadData();
+    const listener = DeviceEventEmitter.addListener(
       `FAVORITECHANGED_${type}`,
-      this.loadData,
+      loadData,
     );
-  }
+    return () => {
+      listener && listener.remove();
+    };
+  }, []);
 
-  componentWillUnmount(): void {
-    this.listener && this.listener.remove();
-  }
-
-  loadData = () => {
-    this.setState({loading: true});
-    this.favoriteService
+  const loadData = () => {
+    setLoading(true);
+    favoriteService
       .getAllItems()
       .then((result) => {
         const dataSource = result.map((item) => {
@@ -48,19 +42,16 @@ export default class FavoriteTab extends PureComponent {
             isFavorite: true,
           };
         });
-        this.setState({
-          dataSource,
-          loading: false,
-        });
+        setData(dataSource);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        this.setState({loading: false});
+        setLoading(false);
       });
   };
 
-  handleFavorite = (item, isFavorite) => {
-    const {type} = this.props;
+  const handleFavorite = (item, isFavorite) => {
     const key = item.id ? item.id.toString() : item.name;
     const CHANGE_FLAG =
       type === TYPE.Popular
@@ -68,48 +59,40 @@ export default class FavoriteTab extends PureComponent {
         : 'FAVORITEDCHANGED_TRENDING';
     const cb = () => {
       DeviceEventEmitter.emit(CHANGE_FLAG);
-      this.loadData();
+      loadData();
     };
     if (isFavorite) {
-      this.favoriteService.saveFavoriteItem(key, JSON.stringify(item), cb);
+      favoriteService.saveFavoriteItem(key, JSON.stringify(item), cb);
     } else {
-      this.favoriteService.removeFavoriteItem(key, cb);
+      favoriteService.removeFavoriteItem(key, cb);
     }
   };
 
-  renderRow = ({item}) => {
-    const {type} = this.props;
-    const {theme} = this.context;
-    console.log(theme);
+  const renderRow = ({item}) => {
     return type === TYPE.Popular ? (
-      <PopularRepo data={item} onFavorite={this.handleFavorite} theme={theme} />
+      <PopularRepo data={item} onFavorite={handleFavorite} theme={theme} />
     ) : (
-      <TrendingRepo
-        data={item}
-        onFavorite={this.handleFavorite}
-        theme={theme}
-      />
+      <TrendingRepo data={item} onFavorite={handleFavorite} theme={theme} />
     );
   };
 
-  _keyExtractor = (item, index) => (item.id ? item.id + '' : item.name);
+  const _keyExtractor = (item, index) => (item.id ? item.id + '' : item.name);
 
-  render() {
-    const {dataSource, loading} = this.state;
-    return (
-      <View style={styles.container}>
-        <FlatList
-          style={styles.list}
-          refreshing={loading}
-          onRefresh={this.loadData}
-          keyExtractor={this._keyExtractor}
-          data={dataSource}
-          renderItem={this.renderRow}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <FlatList
+        style={styles.list}
+        refreshing={loading}
+        onRefresh={loadData}
+        keyExtractor={_keyExtractor}
+        data={dataSource}
+        renderItem={renderRow}
+      />
+    </View>
+  );
+};
+
+export default FavoriteTab;
 
 const styles = StyleSheet.create({
   container: {
