@@ -13,6 +13,7 @@ import NavigationBar from '../../components/NavigationBar';
 import {TYPE_LANGUAGE} from '../../services/LanguageService';
 // import NavigationService from '../../services/NavigationService';
 import {useTheme} from '../../context/themeContext';
+import {useNavigation} from '@react-navigation/native';
 
 const MENU = {
   CUSTOM_TAG: {
@@ -35,14 +36,15 @@ const MENU = {
 
 const My = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
+  console.log(navigation)
   const handleClick = (target) => {
-    console.log(this.props);
-    // NavigationService.navigate(target.component, {
-    //   data: {
-    //     ...target,
-    //     theme,
-    //   },
-    // });
+    navigation.push(target.component, {
+      data: {
+        ...target,
+        theme,
+      },
+    });
   };
 
   const handleUpdate = () => {

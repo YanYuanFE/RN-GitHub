@@ -13,8 +13,6 @@ const cellWH = 110;
 const vMargin = (screenW - cellWH * cols) / (cols + 1);
 const hMargin = 10;
 
-export default ThemeCard;
-
 const ThemeCard = ({data, onSelect}) => {
   const item = data.data;
   return (
@@ -44,6 +42,8 @@ const ThemeCard = ({data, onSelect}) => {
     </View>
   );
 };
+
+export default ThemeCard;
 
 const styles = StyleSheet.create({
   container: {

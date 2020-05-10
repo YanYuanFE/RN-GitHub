@@ -11,6 +11,7 @@ import {
 import ThemeCard from '../../components/ThemeCard';
 import {Palette} from '../../api/themes';
 import ThemeService from '../../services/ThemeService';
+import {useNavigation} from '@react-navigation/native';
 
 const screenW = Dimensions.get('window').width;
 const cols = 3;
@@ -20,6 +21,7 @@ const hMargin = 25;
 const themeService = new ThemeService();
 
 const Theme = () => {
+  const navigation = useNavigation();
   const navigationOptions = ({navigation, screenProps}) => {
     return {
       title: '主题设置',
@@ -40,7 +42,7 @@ const Theme = () => {
 
   const handleSelect = (key) => {
     console.log(key);
-    const {navigation} = this.props;
+
     const cb = () => {
       DeviceEventEmitter.emit('THEME_CHANGED');
       navigation.goBack();
