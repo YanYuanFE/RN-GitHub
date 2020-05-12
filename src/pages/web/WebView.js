@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useLayoutEffect} from 'react';
 import {
   View,
   ActivityIndicator,
@@ -7,26 +7,23 @@ import {
   Platform,
 } from 'react-native';
 import {WebView} from 'react-native-webview';
-import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../context/themeContext';
 
-const WebPage = () => {
+const WebPage = ({ navigation, route }) => {
   const theme = useTheme();
-  const navigation = useNavigation();
-  const navigationOptions = ({navigation, screenProps}) => {
-    return {
-      title: navigation.getParam('title'),
+  const {url, title} = route.params;
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: title,
       headerStyle: {
-        backgroundColor: screenProps.theme,
+        backgroundColor: theme.primary,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-    };
-  };
-
-  const url = navigation.getParam('url');
+    });
+  }, [title, theme]);
 
   return (
     <View style={styles.container}>

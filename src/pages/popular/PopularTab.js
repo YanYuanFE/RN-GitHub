@@ -28,7 +28,6 @@ const PopularTab = ({tabLabel}) => {
   }, []);
 
   const flushFavoriteState = () => {
-    console.log(data);
     const dataSource = data.map((item) => {
       return {
         ...item,

@@ -1,14 +1,15 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// import NavigationService from '../services/NavigationService';
+import {useNavigation} from '@react-navigation/native';
 
 const PopularRepo = ({data, onFavorite, theme}) => {
+  const navigation = useNavigation();
   const goDetail = () => {
-    // NavigationService.navigate('Web', {
-    //   url: data.html_url,
-    //   title: data.full_name,
-    // });
+    navigation.push('Web', {
+      url: data.html_url,
+      title: data.full_name,
+    });
   };
 
   const handleFavorite = () => {

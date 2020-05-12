@@ -40,10 +40,8 @@ const My = () => {
   console.log(navigation)
   const handleClick = (target) => {
     navigation.push(target.component, {
-      data: {
-        ...target,
-        theme,
-      },
+      ...target,
+      theme,
     });
   };
 

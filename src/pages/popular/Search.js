@@ -1,4 +1,4 @@
-import React, {PureComponent, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -13,40 +13,34 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import {checkFavorite} from '../../utils/utils';
 import PopularRepo from '../../components/PopularRepo';
-import {ThemeContext, useTheme} from '../../context/themeContext';
+import {useTheme} from '../../context/themeContext';
 
 const searchService = new RepositoryService();
 const favoriteService = new FavoriteService(TYPE.Popular);
 
-const Search = () => {
-  const navigationOptions = ({navigation, screenProps}) => {
-    return {
+const Search = ({ navigation, route }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
       title: '搜索',
       headerStyle: {
-        backgroundColor: screenProps.theme,
+        backgroundColor: theme.primary,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-    };
-  };
+    });
+  }, [navigation, theme]);
+
   const [dataSource, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const theme = useTheme();
-  const favoriteKeys = [];
-  const data = [];
-
-  useEffect(() => {
-    const {navigation} = this.props;
-    const {theme} = this.context;
-    navigation.setParams({theme});
-  }, []);
+  let favoriteKeys = [];
+  let data = [];
 
   const flushFavoriteState = () => {
     const items = data;
-    const favoriteKeys = favoriteKeys;
     const dataSource = items.map((item) => {
       return {
         ...item,
@@ -109,13 +103,13 @@ const Search = () => {
     <View style={styles.container}>
       <View style={styles.search}>
         <TextInput
-          style={[styles.input, {borderColor: theme}]}
+          style={[styles.input, {borderColor: theme.primary}]}
           autoFoucs
           value={value}
-          onChangeText={(value) => this.setState({value})}
+          onChangeText={(value) => setValue(value)}
         />
         <TouchableOpacity
-          style={[styles.title, {backgroundColor: theme}]}
+          style={[styles.title, {backgroundColor: theme.primary}]}
           onPress={handleSearch}>
           <Text style={styles.text}>搜索</Text>
         </TouchableOpacity>

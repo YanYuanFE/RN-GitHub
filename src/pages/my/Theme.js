@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useLayoutEffect, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,6 +11,7 @@ import {
 import ThemeCard from '../../components/ThemeCard';
 import {Palette} from '../../api/themes';
 import ThemeService from '../../services/ThemeService';
+import {useTheme} from '../../context/themeContext';
 import {useNavigation} from '@react-navigation/native';
 
 const screenW = Dimensions.get('window').width;
@@ -22,25 +23,26 @@ const themeService = new ThemeService();
 
 const Theme = () => {
   const navigation = useNavigation();
-  const navigationOptions = ({navigation, screenProps}) => {
-    return {
+  const theme = useTheme();
+  useLayoutEffect(() => {
+    navigation.setOptions({
       title: '主题设置',
       headerStyle: {
-        backgroundColor: screenProps.theme,
+        backgroundColor: theme.primary,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
       headerRight: (
-        <TouchableOpacity onPress={navigation.getParam('save')}>
+        <TouchableOpacity onPress={handleSelect}>
           <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
         </TouchableOpacity>
       ),
-    };
-  };
+    });
+  }, [navigation, handleSelect, theme]);
 
-  const handleSelect = (key) => {
+  const handleSelect = useCallback((key) => {
     console.log(key);
 
     const cb = () => {
@@ -48,7 +50,7 @@ const Theme = () => {
       navigation.goBack();
     };
     themeService.saveTheme(key, cb);
-  };
+  }, []);
 
   const renderRow = ({item}) => {
     return <ThemeCard data={item} onSelect={handleSelect} />;

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useLayoutEffect, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -16,36 +16,31 @@ import {useTheme} from '../../context/themeContext';
 
 const screenW = Dimensions.get('window').width;
 
-const Tag = () => {
-  const navigationOptions = ({navigation, screenProps}) => {
-    return {
-      title: navigation.getParam('data').title,
+const Tag = ({ route, navigation }) => {
+  const theme = useTheme();
+  const { data } = route.params;
+  const languageService = new LanguageService(data.flag);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: data.title,
       headerStyle: {
-        backgroundColor: screenProps.theme,
+        backgroundColor: theme.primary,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
       headerRight: (
-        <TouchableOpacity onPress={navigation.getParam('save')}>
+        <TouchableOpacity onPress={handleSave}>
           <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
         </TouchableOpacity>
       ),
-    };
-  };
+    });
+  }, [navigation, handleSave, data, theme]);
   const [dataList, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState('');
-  const theme = useTheme();
-  let languageService;
-
-  const changeDatas = [];
 
   useEffect(() => {
-    const {navigation} = this.props;
-    navigation.setParams({save: handleSave});
-    languageService = new LanguageService(navigation.getParam('data').flag);
     loadData();
   }, []);
 
@@ -77,24 +72,27 @@ const Tag = () => {
     console.log(this.changeDatas);
   };
 
-  const handleSave = () => {
-    const {navigation} = this.props;
-    // if (this.changeDatas.length === 0) {
-    // 	this.props.navigation.goBack();
-    // 	return;
-    // }
-    // this.changeDatas.forEach((item => {
-    // 	remove()
-    // }))
-    const cb = () => {
-      DeviceEventEmitter.emit('THEME_CHANGED');
-      navigation.goBack();
-    };
-
-    languageService.saveData(dataList, cb);
-  };
+  const handleSave = useCallback(
+    () => {
+      // if (this.changeDatas.length === 0) {
+      // 	this.props.navigation.goBack();
+      // 	return;
+      // }
+      // this.changeDatas.forEach((item => {
+      // 	remove()
+      // }))
+      const cb = () => {
+        DeviceEventEmitter.emit('THEME_CHANGED');
+        navigation.goBack();
+      };
+  
+      languageService.saveData(dataList, cb);
+    },
+    [],
+  );
 
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.wrapper}>

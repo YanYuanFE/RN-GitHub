@@ -65,9 +65,9 @@ const Popular = () => {
   return (
     <View style={styles.container}>
       <NavigationBar
-        style={{backgroundColor: theme}}
+        style={{backgroundColor: theme.primary}}
         title={'最热'}
-        statusBar={{backgroundColor: theme}}
+        statusBar={{backgroundColor: theme.primary}}
         rightButton={
           <TouchableOpacity onPress={this.handleClick} style={styles.search}>
             <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
