@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import {checkFavorite} from '../../utils/utils';
@@ -18,7 +19,7 @@ import {useTheme} from '../../context/themeContext';
 const searchService = new RepositoryService();
 const favoriteService = new FavoriteService(TYPE.Popular);
 
-const Search = ({ navigation, route }) => {
+const Search = ({navigation, route}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '搜索',
@@ -100,7 +101,7 @@ const Search = ({ navigation, route }) => {
   const _keyExtractor = (item, index) => item.id + '';
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.search}>
         <TextInput
           style={[styles.input, {borderColor: theme.primary}]}
@@ -131,7 +132,7 @@ const Search = ({ navigation, route }) => {
           />
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

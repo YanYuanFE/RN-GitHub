@@ -18,7 +18,12 @@ const Stack = createStackNavigator();
 const AppNav = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home">{HomeNav}</Stack.Screen>
+      <Stack.Screen
+        name="Home"
+        headerMode='none'
+      >
+        {HomeNav}
+      </Stack.Screen>
       {Object.keys(stackRoutes).map((key) => (
         <Stack.Screen name={key} component={stackRoutes[key]} key={key} />
       ))}

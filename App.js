@@ -22,10 +22,7 @@ const App = () => {
 
   useEffect(() => {
     getTheme();
-    const listener = DeviceEventEmitter.addListener(
-      'THEME_CHANGED',
-      this.getTheme,
-    );
+    const listener = DeviceEventEmitter.addListener('THEME_CHANGED', getTheme);
     // ImmediateCheckCodePush();
     return () => {
       listener && listener.remove();

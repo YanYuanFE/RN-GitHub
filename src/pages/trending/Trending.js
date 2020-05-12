@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import TrendingTab from './TrendingTab';
 import NavigationBar from '../../components/NavigationBar';
@@ -80,11 +79,7 @@ const Trending = () => {
       <NavigationBar
         style={{backgroundColor: theme.primary}}
         titleView={
-          <SinceView
-            since={since}
-            onChange={handleSinceChange}
-            theme={theme}
-          />
+          <SinceView since={since} onChange={handleSinceChange} theme={theme} />
         }
         statusBar={{backgroundColor: theme.primary}}
       />
@@ -121,9 +116,7 @@ const SinceView = ({onChange, since, theme}) => {
   const [toolTipVisible, setVisible] = useState(false);
 
   const togglePopover = () => {
-    setVisible((prevState) => {
-      return !prevState.toolTipVisible;
-    });
+    setVisible(!toolTipVisible);
   };
   const handleClick = (item) => {
     onChange(item);
@@ -136,7 +129,9 @@ const SinceView = ({onChange, since, theme}) => {
           onPress={() => handleClick(item)}
           key={item.value}
           style={styles.sinceItem}>
-          <Text style={[styles.sinceText, {color: theme.primary}]}>{item.label}</Text>
+          <Text style={[styles.sinceText, {color: theme.primary}]}>
+            {item.label}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>

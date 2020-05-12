@@ -15,7 +15,7 @@ const hMargin = 10;
 
 const ThemeCard = ({data, onSelect}) => {
   const item = data.data;
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.titleRow}>

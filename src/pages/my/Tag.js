@@ -11,19 +11,20 @@ import {
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
 import {useTheme} from '../../context/themeContext';
 
 const screenW = Dimensions.get('window').width;
 
-const Tag = ({ route, navigation }) => {
+const Tag = ({route, navigation}) => {
   const theme = useTheme();
-  const { data } = route.params;
-  const languageService = new LanguageService(data.flag);
+  const {title, flag} = route.params;
+  const languageService = new LanguageService(flag);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: data.title,
+      title: title,
       headerStyle: {
         backgroundColor: theme.primary,
       },
@@ -31,13 +32,13 @@ const Tag = ({ route, navigation }) => {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerRight: (
+      headerRight: () => (
         <TouchableOpacity onPress={handleSave}>
           <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
         </TouchableOpacity>
       ),
     });
-  }, [navigation, handleSave, data, theme]);
+  }, [navigation, handleSave, title, theme]);
   const [dataList, setData] = useState([]);
 
   useEffect(() => {
@@ -72,29 +73,26 @@ const Tag = ({ route, navigation }) => {
     console.log(this.changeDatas);
   };
 
-  const handleSave = useCallback(
-    () => {
-      // if (this.changeDatas.length === 0) {
-      // 	this.props.navigation.goBack();
-      // 	return;
-      // }
-      // this.changeDatas.forEach((item => {
-      // 	remove()
-      // }))
-      const cb = () => {
-        DeviceEventEmitter.emit('THEME_CHANGED');
-        navigation.goBack();
-      };
-  
-      languageService.saveData(dataList, cb);
-    },
-    [],
-  );
+  const handleSave = useCallback(() => {
+    // if (this.changeDatas.length === 0) {
+    // 	this.props.navigation.goBack();
+    // 	return;
+    // }
+    // this.changeDatas.forEach((item => {
+    // 	remove()
+    // }))
+    const cb = () => {
+      DeviceEventEmitter.emit('THEME_CHANGED');
+      navigation.goBack();
+    };
+
+    languageService.saveData(dataList, cb);
+  }, []);
 
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.wrapper}>
         {dataList.map((item, index) => {
           return (
@@ -105,12 +103,16 @@ const Tag = ({ route, navigation }) => {
               onClick={() => handleChange(item)}
               leftText={item.name}
               checkedImage={
-                <Icon name={`${iconType}-checkbox`} color={theme} size={25} />
+                <Icon
+                  name={`${iconType}-checkbox`}
+                  color={theme.primary}
+                  size={25}
+                />
               }
               unCheckedImage={
                 <Icon
                   name={`${iconType}-checkbox-outline`}
-                  color={theme}
+                  color={theme.primary}
                   size={25}
                 />
               }
@@ -118,7 +120,7 @@ const Tag = ({ route, navigation }) => {
           );
         })}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

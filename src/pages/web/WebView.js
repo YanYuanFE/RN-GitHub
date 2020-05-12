@@ -9,7 +9,7 @@ import {
 import {WebView} from 'react-native-webview';
 import {useTheme} from '../../context/themeContext';
 
-const WebPage = ({ navigation, route }) => {
+const WebPage = ({navigation, route}) => {
   const theme = useTheme();
   const {url, title} = route.params;
   useLayoutEffect(() => {

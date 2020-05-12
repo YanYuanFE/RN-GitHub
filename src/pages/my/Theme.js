@@ -8,6 +8,7 @@ import {
   Dimensions,
   FlatList,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import ThemeCard from '../../components/ThemeCard';
 import {Palette} from '../../api/themes';
 import ThemeService from '../../services/ThemeService';
@@ -23,6 +24,7 @@ const themeService = new ThemeService();
 
 const Theme = () => {
   const navigation = useNavigation();
+  console.log(navigation);
   const theme = useTheme();
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -34,7 +36,7 @@ const Theme = () => {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerRight: (
+      headerRight: () => (
         <TouchableOpacity onPress={handleSelect}>
           <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
         </TouchableOpacity>
@@ -44,7 +46,6 @@ const Theme = () => {
 
   const handleSelect = useCallback((key) => {
     console.log(key);
-
     const cb = () => {
       DeviceEventEmitter.emit('THEME_CHANGED');
       navigation.goBack();
@@ -65,13 +66,13 @@ const Theme = () => {
     };
   });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         keyExtractor={_keyExtractor}
         data={dataSource}
         renderItem={renderRow}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

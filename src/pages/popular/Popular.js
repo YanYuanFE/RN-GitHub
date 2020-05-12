@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useLayoutEffect} from 'react';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {
   StyleSheet,
@@ -18,7 +18,7 @@ import {useTheme} from '../../context/themeContext';
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 
-const Popular = () => {
+const Popular = ({navigation}) => {
   const [languages, setLanguages] = useState([]);
   const [index, setIndex] = useState(0);
   const [routes, setRoutes] = useState([]);
@@ -49,11 +49,28 @@ const Popular = () => {
       });
   };
 
-  const handleClick = () => {
-    // NavigationService.navigate('Search');
-  };
-
+  const handleClick = useCallback(() => {
+    navigation.navigate('Search');
+  }, []);
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '最热',
+      headerStyle: {
+        backgroundColor: theme.primary,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerRight: (
+        <TouchableOpacity onPress={handleClick} style={styles.search}>
+          <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [handleClick, theme]);
+
   const mapRoute = languages.reduce((map, item) => {
     const route = () => <PopularTab tabLabel={item.name} />;
     return {
@@ -69,7 +86,7 @@ const Popular = () => {
         title={'最热'}
         statusBar={{backgroundColor: theme.primary}}
         rightButton={
-          <TouchableOpacity onPress={this.handleClick} style={styles.search}>
+          <TouchableOpacity onPress={handleClick} style={styles.search}>
             <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
           </TouchableOpacity>
         }

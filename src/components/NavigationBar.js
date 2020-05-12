@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Platform, StatusBar} from 'react-native';
+import {useSafeArea} from 'react-native-safe-area-context';
 const NAVBAR_HEIGHT_ANDROID = 50;
 const NAVBAR_HEIGHT_IOS = 44;
 const STATUS_BAR_HEIGHT = 20;
@@ -16,6 +17,7 @@ const NavigationBar = ({
   titleView,
   style,
 }) => {
+  const insets = useSafeArea();
   const getButtonElement = (data) => {
     return <View style={styles.navBarButton}>{data ? data : null}</View>;
   };
@@ -36,9 +38,11 @@ const NavigationBar = ({
     </View>
   );
 
-  console.log(content, titleContent);
-
-  return <View style={[styles.container, style]}>{content}</View>;
+  return (
+    <View style={[styles.container, style, {paddingTop: insets.top}]}>
+      {content}
+    </View>
+  );
 };
 
 export default NavigationBar;

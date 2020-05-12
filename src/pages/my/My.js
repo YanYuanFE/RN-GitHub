@@ -33,11 +33,9 @@ const MENU = {
   },
 };
 
-
 const My = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  console.log(navigation)
   const handleClick = (target) => {
     navigation.push(target.component, {
       ...target,
@@ -50,62 +48,59 @@ const My = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, {backgroundColor: theme.primary}]}>
-      <View style={styles.container}>
-        <NavigationBar
-          style={{backgroundColor: theme.primary}}
-          title={'我的'}
-          statusBar={{backgroundColor: theme.primary}}
-        />
-        <ScrollView>
-          <TouchableOpacity>
-            <View style={[styles.item, {height: 90}]}>
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flex: 1,
-                }}>
-                <Icon name={'logo-github'} color={theme.primary} size={40} />
-                <Text>RN-GitHub</Text>
-              </View>
+    <View style={styles.container}>
+      <NavigationBar
+        style={{backgroundColor: theme.primary}}
+        title={'我的'}
+        statusBar={{backgroundColor: theme.primary}}
+      />
+      <ScrollView>
+        <TouchableOpacity>
+          <View style={[styles.item, {height: 90}]}>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+              }}>
+              <Icon name={'logo-github'} color={theme.primary} size={40} />
+              <Text>RN-GitHub</Text>
             </View>
-          </TouchableOpacity>
-          <Text style={styles.groupTitle}>最热管理</Text>
-          <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_TAG)}>
-            <View style={styles.group}>
-              <Text style={styles.title}>自定义标签</Text>
-              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.groupTitle}>趋势管理</Text>
-          <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_LANGUAGE)}>
-            <View style={styles.group}>
-              <Text style={styles.title}>自定义语言</Text>
-              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.groupTitle}>设置</Text>
-          <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_THEME)}>
-            <View style={styles.group}>
-              <Text style={styles.title}>主题设置</Text>
-              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleUpdate}>
-            <View style={styles.group}>
-              <Text style={styles.title}>检查更新</Text>
-              <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.groupTitle}>最热管理</Text>
+        <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_TAG)}>
+          <View style={styles.group}>
+            <Text style={styles.title}>自定义标签</Text>
+            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.groupTitle}>趋势管理</Text>
+        <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_LANGUAGE)}>
+          <View style={styles.group}>
+            <Text style={styles.title}>自定义语言</Text>
+            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.groupTitle}>设置</Text>
+        <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_THEME)}>
+          <View style={styles.group}>
+            <Text style={styles.title}>主题设置</Text>
+            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleUpdate}>
+          <View style={styles.group}>
+            <Text style={styles.title}>检查更新</Text>
+            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
   );
 };
 
 export default My;
-
 
 const styles = StyleSheet.create({
   container: {
