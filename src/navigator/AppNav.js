@@ -20,7 +20,11 @@ const AppNav = () => {
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
-        headerMode='none'
+        // headerMode='none'
+        options={{
+          headerShown: false,
+          title: '首页'
+        }}
       >
         {HomeNav}
       </Stack.Screen>

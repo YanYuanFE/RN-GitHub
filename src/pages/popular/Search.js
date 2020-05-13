@@ -91,17 +91,17 @@ const Search = ({navigation, route}) => {
       favoriteService.saveFavoriteItem(
         item.id.toString(),
         JSON.stringify(item),
-        this.handleSearch,
+        handleSearch,
       );
     } else {
-      favoriteService.removeFavoriteItem(item.id.toString(), this.loadData);
+      favoriteService.removeFavoriteItem(item.id.toString(), handleSearch);
     }
   };
 
   const _keyExtractor = (item, index) => item.id + '';
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.search}>
         <TextInput
           style={[styles.input, {borderColor: theme.primary}]}
@@ -132,7 +132,7 @@ const Search = ({navigation, route}) => {
           />
         )}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -141,6 +141,7 @@ export default Search;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 10,
   },
   loading: {
     flex: 1,
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
   search: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 45,
+    height: 40,
     marginRight: 10,
   },
 });

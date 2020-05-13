@@ -1,10 +1,9 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
   Image,
-  TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -30,9 +29,9 @@ const TrendingRepo = ({data, onFavorite, theme}) => {
   return (
     <View style={styles.cell_container}>
       <Text style={styles.title}>{data.name}</Text>
-      <TouchableHighlight onPress={goDetail}>
+      <TouchableOpacity onPress={goDetail}>
         <Text style={styles.description}>{data.description}</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
       <View style={styles.row}>
         <View style={styles.row}>
           <Text style={styles.author}>Built by </Text>

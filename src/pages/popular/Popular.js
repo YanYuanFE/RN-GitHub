@@ -52,24 +52,8 @@ const Popular = ({navigation}) => {
   const handleClick = useCallback(() => {
     navigation.navigate('Search');
   }, []);
+  
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '最热',
-      headerStyle: {
-        backgroundColor: theme.primary,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerRight: (
-        <TouchableOpacity onPress={handleClick} style={styles.search}>
-          <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
-        </TouchableOpacity>
-      ),
-    });
-  }, [handleClick, theme]);
 
   const mapRoute = languages.reduce((map, item) => {
     const route = () => <PopularTab tabLabel={item.name} />;
