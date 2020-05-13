@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
 import {useTheme} from '../../context/themeContext';
 
@@ -92,7 +91,7 @@ const Tag = ({route, navigation}) => {
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.wrapper}>
         {dataList.map((item, index) => {
           return (
@@ -120,7 +119,7 @@ const Tag = ({route, navigation}) => {
           );
         })}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

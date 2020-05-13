@@ -8,7 +8,6 @@ import {
   Dimensions,
   FlatList,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import ThemeCard from '../../components/ThemeCard';
 import {Palette} from '../../api/themes';
 import ThemeService from '../../services/ThemeService';
@@ -66,13 +65,13 @@ const Theme = () => {
     };
   });
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         keyExtractor={_keyExtractor}
         data={dataSource}
         renderItem={renderRow}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
