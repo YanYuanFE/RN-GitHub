@@ -23,25 +23,18 @@ const themeService = new ThemeService();
 
 const Theme = () => {
   const navigation = useNavigation();
-  console.log(navigation);
   const theme = useTheme();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '主题设置',
-      headerStyle: {
-        backgroundColor: theme.primary,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
       headerRight: () => (
         <TouchableOpacity onPress={handleSelect}>
           <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
         </TouchableOpacity>
       ),
     });
-  }, [navigation, handleSelect, theme]);
+  }, [navigation, handleSelect]);
 
   const handleSelect = useCallback((key) => {
     console.log(key);

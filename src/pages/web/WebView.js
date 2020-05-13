@@ -15,15 +15,8 @@ const WebPage = ({navigation, route}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: title,
-      headerStyle: {
-        backgroundColor: theme.primary,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
     });
-  }, [title, theme]);
+  }, [title]);
 
   return (
     <View style={styles.container}>

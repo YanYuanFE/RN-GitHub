@@ -24,20 +24,14 @@ const Tag = ({route, navigation}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: title,
-      headerStyle: {
-        backgroundColor: theme.primary,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
       headerRight: () => (
         <TouchableOpacity onPress={handleSave}>
           <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
         </TouchableOpacity>
       ),
     });
-  }, [navigation, handleSave, title, theme]);
+  }, [navigation, handleSave, title]);
+  
   const [dataList, setData] = useState([]);
 
   useEffect(() => {
