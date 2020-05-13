@@ -13,7 +13,7 @@ import NavigationBar from '../../components/NavigationBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 const sinceList = [
@@ -36,7 +36,7 @@ const Trending = () => {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [since, setSince] = useState(sinceList[0]);
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   useEffect(() => {
     loadLanguage();
@@ -77,11 +77,15 @@ const Trending = () => {
   return (
     <View style={styles.container}>
       <NavigationBar
-        style={{backgroundColor: theme.primary}}
+        style={{backgroundColor: colors.primary}}
         titleView={
-          <SinceView since={since} onChange={handleSinceChange} theme={theme} />
+          <SinceView
+            since={since}
+            onChange={handleSinceChange}
+            colors={colors}
+          />
         }
-        statusBar={{backgroundColor: theme.primary}}
+        statusBar={{backgroundColor: colors.primary}}
       />
       {loading ? (
         <ActivityIndicator />
@@ -96,7 +100,7 @@ const Trending = () => {
               {...props}
               scrollEnabled={true}
               indicatorStyle={{backgroundColor: 'white'}}
-              style={{backgroundColor: theme.primary}}
+              style={{backgroundColor: colors.primary}}
               renderLabel={({route, focused, color}) => (
                 <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
                   {route.key}
@@ -112,7 +116,7 @@ const Trending = () => {
 
 export default Trending;
 
-const SinceView = ({onChange, since, theme}) => {
+const SinceView = ({onChange, since, colors}) => {
   const [toolTipVisible, setVisible] = useState(false);
 
   const togglePopover = () => {
@@ -129,7 +133,7 @@ const SinceView = ({onChange, since, theme}) => {
           onPress={() => handleClick(item)}
           key={item.value}
           style={styles.sinceItem}>
-          <Text style={[styles.sinceText, {color: theme.primary}]}>
+          <Text style={[styles.sinceText, {color: colors.primary}]}>
             {item.label}
           </Text>
         </TouchableOpacity>

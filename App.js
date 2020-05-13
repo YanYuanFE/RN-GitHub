@@ -8,22 +8,30 @@
 
 import React, {useEffect, useState} from 'react';
 import {DeviceEventEmitter, StyleSheet} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-// import HotUpdate, {ImmediateCheckCodePush} from 'react-native-code-push-dialog';
 import AppNav from './src/navigator/AppNav';
 import ThemeService from './src/services/ThemeService';
-import {ThemeProvider} from './src/context/themeContext';
 
 const themeService = new ThemeService();
 
+const getAppTheme = (primary) => {
+  return {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: primary,
+    },
+  }
+}
+
 const App = () => {
   const [theme, setTheme] = useState(null);
+  console.log(DefaultTheme);
 
   useEffect(() => {
     getTheme();
     const listener = DeviceEventEmitter.addListener('THEME_CHANGED', getTheme);
-    // ImmediateCheckCodePush();
     return () => {
       listener && listener.remove();
     };
@@ -31,7 +39,7 @@ const App = () => {
 
   const getTheme = () => {
     themeService.getTheme().then((data) => {
-      setTheme(data);
+      setTheme(getAppTheme(data));
     });
   };
 
@@ -41,11 +49,8 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <ThemeProvider value={{primary: theme}}>
-          {/*<HotUpdate isActiveCheck={false} />*/}
-          <AppNav />
-        </ThemeProvider>
+      <NavigationContainer theme={theme}>
+        <AppNav />
       </NavigationContainer>
     </SafeAreaProvider>
   );

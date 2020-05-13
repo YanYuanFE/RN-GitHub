@@ -12,12 +12,12 @@ import {
 import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const screenW = Dimensions.get('window').width;
 
 const Tag = ({route, navigation}) => {
-  const theme = useTheme();
+  const {colors} = useTheme();
   const {title, flag} = route.params;
   const languageService = new LanguageService(flag);
 
@@ -31,7 +31,7 @@ const Tag = ({route, navigation}) => {
       ),
     });
   }, [navigation, handleSave, title]);
-  
+
   const [dataList, setData] = useState([]);
 
   useEffect(() => {
@@ -59,11 +59,11 @@ const Tag = ({route, navigation}) => {
           }
         : item;
     });
-    console.log(changeList);
+    // console.log(changeList);
     setData(dataList);
     // data.checked = !data.checked;
     // updateArray(this.changeDatas, data);
-    console.log(this.changeDatas);
+    // console.log(this.changeDatas);
   };
 
   const handleSave = useCallback(() => {
@@ -98,14 +98,14 @@ const Tag = ({route, navigation}) => {
               checkedImage={
                 <Icon
                   name={`${iconType}-checkbox`}
-                  color={theme.primary}
+                  color={colors.primary}
                   size={25}
                 />
               }
               unCheckedImage={
                 <Icon
                   name={`${iconType}-checkbox-outline`}
-                  color={theme.primary}
+                  color={colors.primary}
                   size={25}
                 />
               }

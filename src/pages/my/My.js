@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -6,13 +6,10 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import {ImmediateCheckCodePush} from 'react-native-code-push-dialog';
 import NavigationBar from '../../components/NavigationBar';
 import {TYPE_LANGUAGE} from '../../services/LanguageService';
-// import NavigationService from '../../services/NavigationService';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
 
 const MENU = {
@@ -34,12 +31,11 @@ const MENU = {
 };
 
 const My = () => {
-  const theme = useTheme();
+  const {colors} = useTheme();
   const navigation = useNavigation();
   const handleClick = (target) => {
     navigation.push(target.component, {
       ...target,
-      theme,
     });
   };
 
@@ -50,9 +46,9 @@ const My = () => {
   return (
     <View style={styles.container}>
       <NavigationBar
-        style={{backgroundColor: theme.primary}}
+        style={{backgroundColor: colors.primary}}
         title={'我的'}
-        statusBar={{backgroundColor: theme.primary}}
+        statusBar={{backgroundColor: colors.primary}}
       />
       <ScrollView>
         <TouchableOpacity>
@@ -63,7 +59,7 @@ const My = () => {
                 justifyContent: 'center',
                 flex: 1,
               }}>
-              <Icon name={'logo-github'} color={theme.primary} size={40} />
+              <Icon name={'logo-github'} color={colors.primary} size={40} />
               <Text>RN-GitHub</Text>
             </View>
           </View>
@@ -72,27 +68,27 @@ const My = () => {
         <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_TAG)}>
           <View style={styles.group}>
             <Text style={styles.title}>自定义标签</Text>
-            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+            <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
         <Text style={styles.groupTitle}>趋势管理</Text>
         <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_LANGUAGE)}>
           <View style={styles.group}>
             <Text style={styles.title}>自定义语言</Text>
-            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+            <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
         <Text style={styles.groupTitle}>设置</Text>
         <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_THEME)}>
           <View style={styles.group}>
             <Text style={styles.title}>主题设置</Text>
-            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+            <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleUpdate}>
           <View style={styles.group}>
             <Text style={styles.title}>检查更新</Text>
-            <Icon name={'ios-arrow-forward'} color={theme.primary} size={25} />
+            <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
       </ScrollView>

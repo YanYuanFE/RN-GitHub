@@ -5,7 +5,7 @@ import Tag from '../pages/my/Tag';
 import Theme from '../pages/my/Theme';
 import Search from '../pages/popular/Search';
 import HomeNav from './HomeNav';
-import {useTheme} from '../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const stackRoutes = {
   Web: WebScreen,
@@ -17,7 +17,7 @@ const stackRoutes = {
 const Stack = createStackNavigator();
 
 const AppNav = () => {
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -26,19 +26,18 @@ const AppNav = () => {
         // headerMode='none'
         options={{
           headerShown: false,
-          title: '首页'
-        }}
-      >
+          title: '首页',
+        }}>
         {HomeNav}
       </Stack.Screen>
       {Object.keys(stackRoutes).map((key) => (
-        <Stack.Screen 
-          name={key} 
-          component={stackRoutes[key]} 
+        <Stack.Screen
+          name={key}
+          component={stackRoutes[key]}
           key={key}
           options={{
             headerStyle: {
-              backgroundColor: theme.primary,
+              backgroundColor: colors.primary,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

@@ -11,7 +11,7 @@ import {
 import ThemeCard from '../../components/ThemeCard';
 import {Palette} from '../../api/themes';
 import ThemeService from '../../services/ThemeService';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
 
 const screenW = Dimensions.get('window').width;
@@ -23,7 +23,7 @@ const themeService = new ThemeService();
 
 const Theme = () => {
   const navigation = useNavigation();
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   useLayoutEffect(() => {
     navigation.setOptions({

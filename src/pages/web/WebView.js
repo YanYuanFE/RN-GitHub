@@ -7,10 +7,10 @@ import {
   Platform,
 } from 'react-native';
 import {WebView} from 'react-native-webview';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const WebPage = ({navigation, route}) => {
-  const theme = useTheme();
+  const {colors} = useTheme();
   const {url, title} = route.params;
   useLayoutEffect(() => {
     navigation.setOptions({

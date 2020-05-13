@@ -1,13 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Popular from '../pages/popular/Popular';
 import Trending from '../pages/trending/Trending';
 import Favorite from '../pages/favorite/Favorite';
 import My from '../pages/my/My';
-import {useTheme} from '../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const icons = {
   Popular: 'all-inclusive',
@@ -25,18 +24,8 @@ const tabRoutes = {
   My: My,
 };
 
-function Demo() {
-  return (
-    <View
-      style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
-      <Text>This is top text.</Text>
-      <Text>This is bottom text.</Text>
-    </View>
-  );
-}
-
 const HomeNav = () => {
-  const theme = useTheme();
+  const {colors} = useTheme();
   return (
     <Tab.Navigator
       initialRouteName="Popular"
@@ -48,7 +37,7 @@ const HomeNav = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: theme.primary,
+        activeTintColor: colors.primary,
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Popular" component={Popular} />

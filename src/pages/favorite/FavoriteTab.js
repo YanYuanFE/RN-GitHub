@@ -10,14 +10,14 @@ import {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
 import TrendingRepo from '../../components/TrendingRepo';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const FavoriteTab = ({type}) => {
   const [dataSource, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   let favoriteKeys = [];
   let data = [];
-  const theme = useTheme();
+  const {colors} = useTheme();
   const favoriteService = new FavoriteService(type);
 
   useEffect(() => {
@@ -70,9 +70,9 @@ const FavoriteTab = ({type}) => {
 
   const renderRow = ({item}) => {
     return type === TYPE.Popular ? (
-      <PopularRepo data={item} onFavorite={handleFavorite} theme={theme} />
+      <PopularRepo data={item} onFavorite={handleFavorite} colors={colors} />
     ) : (
-      <TrendingRepo data={item} onFavorite={handleFavorite} theme={theme} />
+      <TrendingRepo data={item} onFavorite={handleFavorite} colors={colors} />
     );
   };
 

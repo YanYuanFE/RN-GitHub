@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 
-const TrendingRepo = ({data, onFavorite, theme}) => {
+const TrendingRepo = ({data, onFavorite, colors}) => {
   const navigation = useNavigation();
   const goDetail = () => {
     navigation.push('Web', {
@@ -46,7 +40,7 @@ const TrendingRepo = ({data, onFavorite, theme}) => {
         <TouchableOpacity onPress={handleFavorite}>
           <Icon
             name="grade"
-            color={data.isFavorite ? theme.primary : '#E5E5E5'}
+            color={data.isFavorite ? colors.primary : '#E5E5E5'}
             size={25}
           />
         </TouchableOpacity>

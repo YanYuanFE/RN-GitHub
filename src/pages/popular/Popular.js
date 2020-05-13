@@ -14,7 +14,7 @@ import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
 // import NavigationService from '../../services/NavigationService';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 
@@ -23,7 +23,7 @@ const Popular = ({navigation}) => {
   const [index, setIndex] = useState(0);
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(false);
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   useEffect(() => {
     loadLanguage();
@@ -52,7 +52,7 @@ const Popular = ({navigation}) => {
   const handleClick = useCallback(() => {
     navigation.navigate('Search');
   }, []);
-  
+
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
 
   const mapRoute = languages.reduce((map, item) => {
@@ -66,9 +66,9 @@ const Popular = ({navigation}) => {
   return (
     <View style={styles.container}>
       <NavigationBar
-        style={{backgroundColor: theme.primary}}
+        style={{backgroundColor: colors.primary}}
         title={'最热'}
-        statusBar={{backgroundColor: theme.primary}}
+        statusBar={{backgroundColor: colors.primary}}
         rightButton={
           <TouchableOpacity onPress={handleClick} style={styles.search}>
             <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
@@ -88,7 +88,7 @@ const Popular = ({navigation}) => {
               scrollEnabled={true}
               {...props}
               indicatorStyle={{backgroundColor: 'white'}}
-              style={{backgroundColor: theme.primary}}
+              style={{backgroundColor: colors.primary}}
               renderLabel={({route, focused, color}) => (
                 <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
                   {route.key}

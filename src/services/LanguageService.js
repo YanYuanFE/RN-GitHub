@@ -22,7 +22,6 @@ export default class LanguageService {
         if (!result) {
           const data =
             this.flag === TYPE_LANGUAGE.FLAG_LANGUAGE ? langsData : keysData;
-          console.log(data);
           this.saveData(data);
           resolve(data);
         } else {

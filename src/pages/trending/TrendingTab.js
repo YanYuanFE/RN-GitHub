@@ -11,7 +11,7 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import TrendingRepo from '../../components/TrendingRepo';
 import FavoriteService from '../../services/FavoriteService';
 import {checkFavorite} from '../../utils/utils';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const favoriteService = new FavoriteService(TYPE.Trending);
 const trendingService = new RepositoryService(TYPE.Trending);
@@ -21,7 +21,7 @@ const TrendingTab = ({tabLabel, since}) => {
   const [loading, setLoading] = useState(false);
   let favoriteKeys = [];
   let data = [];
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   useEffect(() => {
     fetchData();
@@ -87,7 +87,7 @@ const TrendingTab = ({tabLabel, since}) => {
 
   const renderRow = ({item}) => {
     return (
-      <TrendingRepo data={item} onFavorite={handleFavorite} theme={theme} />
+      <TrendingRepo data={item} onFavorite={handleFavorite} colors={colors} />
     );
   };
 

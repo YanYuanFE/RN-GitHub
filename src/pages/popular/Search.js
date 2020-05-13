@@ -14,7 +14,7 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import {checkFavorite} from '../../utils/utils';
 import PopularRepo from '../../components/PopularRepo';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const searchService = new RepositoryService();
 const favoriteService = new FavoriteService(TYPE.Popular);
@@ -24,19 +24,19 @@ const Search = ({navigation, route}) => {
     navigation.setOptions({
       title: '搜索',
       headerStyle: {
-        backgroundColor: theme.primary,
+        backgroundColor: colors.primary,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
     });
-  }, [navigation, theme]);
+  }, [navigation, colors]);
 
   const [dataSource, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
-  const theme = useTheme();
+  const {colors} = useTheme();
   let favoriteKeys = [];
   let data = [];
 
@@ -82,7 +82,7 @@ const Search = ({navigation, route}) => {
 
   const renderRow = ({item}) => {
     return (
-      <PopularRepo data={item} onFavorite={handleFavorite} theme={theme} />
+      <PopularRepo data={item} onFavorite={handleFavorite} colors={colors} />
     );
   };
 
@@ -104,13 +104,13 @@ const Search = ({navigation, route}) => {
     <View style={styles.container}>
       <View style={styles.search}>
         <TextInput
-          style={[styles.input, {borderColor: theme.primary}]}
+          style={[styles.input, {borderColor: colors.primary}]}
           autoFoucs
           value={value}
           onChangeText={(value) => setValue(value)}
         />
         <TouchableOpacity
-          style={[styles.title, {backgroundColor: theme.primary}]}
+          style={[styles.title, {backgroundColor: colors.primary}]}
           onPress={handleSearch}>
           <Text style={styles.text}>搜索</Text>
         </TouchableOpacity>

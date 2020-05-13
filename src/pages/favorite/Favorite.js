@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import FavoriteTab from './FavoriteTab';
 import NavigationBar from '../../components/NavigationBar';
 import {TYPE} from '../../services/RepositoryService';
-import {ThemeContext, useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const Favorite = () => {
   const [index, setIndex] = useState(0);
@@ -13,7 +12,7 @@ const Favorite = () => {
     {key: 'Popular', title: '最热'},
     {key: 'Trending', title: '趋势'},
   ]);
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   const PopularRoute = () => (
     <FavoriteTab tabLabel="Popular" type={TYPE.Popular} />
@@ -24,9 +23,9 @@ const Favorite = () => {
   return (
     <View style={styles.container}>
       <NavigationBar
-        style={{backgroundColor: theme.primary}}
+        style={{backgroundColor: colors.primary}}
         title={'喜欢'}
-        statusBar={{backgroundColor: theme.primary}}
+        statusBar={{backgroundColor: colors.primary}}
       />
       <TabView
         navigationState={{index, routes}}
@@ -40,7 +39,7 @@ const Favorite = () => {
           <TabBar
             {...props}
             indicatorStyle={{backgroundColor: 'white'}}
-            style={{backgroundColor: theme.primary}}
+            style={{backgroundColor: colors.primary}}
             renderLabel={({route, focused, color}) => (
               <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
                 {route.title}

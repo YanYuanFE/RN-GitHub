@@ -4,7 +4,7 @@ import RepositoryService, {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
 import {checkFavorite} from '../../utils/utils';
-import {useTheme} from '../../context/themeContext';
+import {useTheme} from '@react-navigation/native';
 
 const popularService = new RepositoryService(TYPE.Popular);
 const favoriteService = new FavoriteService(TYPE.Popular);
@@ -14,7 +14,7 @@ const PopularTab = ({tabLabel}) => {
   const [loading, setLoading] = useState(false);
   let favoriteKeys = [];
   let data = [];
-  const theme = useTheme();
+  const {colors} = useTheme();
 
   useEffect(() => {
     loadData();
@@ -84,7 +84,7 @@ const PopularTab = ({tabLabel}) => {
 
   const renderRow = ({item}) => {
     return (
-      <PopularRepo data={item} onFavorite={handleFavorite} theme={theme} />
+      <PopularRepo data={item} onFavorite={handleFavorite} colors={colors} />
     );
   };
 
