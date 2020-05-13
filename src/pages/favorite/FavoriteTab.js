@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  DeviceEventEmitter,
-} from 'react-native';
+import {StyleSheet, View, FlatList, DeviceEventEmitter} from 'react-native';
 import {TYPE} from '../../services/RepositoryService';
 import FavoriteService from '../../services/FavoriteService';
 import PopularRepo from '../../components/PopularRepo';
@@ -15,8 +9,6 @@ import {useTheme} from '@react-navigation/native';
 const FavoriteTab = ({type}) => {
   const [dataSource, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  let favoriteKeys = [];
-  let data = [];
   const {colors} = useTheme();
   const favoriteService = new FavoriteService(type);
 
@@ -97,8 +89,6 @@ export default FavoriteTab;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   list: {
     flex: 1,

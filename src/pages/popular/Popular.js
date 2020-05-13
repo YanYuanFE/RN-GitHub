@@ -1,10 +1,7 @@
-import React, {useState, useEffect, useCallback, useLayoutEffect} from 'react';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   StyleSheet,
   View,
-  Text,
-  Dimensions,
   ActivityIndicator,
   TouchableOpacity,
   Platform,
@@ -13,15 +10,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import PopularTab from './PopularTab';
 import NavigationBar from '../../components/NavigationBar';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
-// import NavigationService from '../../services/NavigationService';
 import {useTheme} from '@react-navigation/native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+
+const Tab = createMaterialTopTabNavigator();
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_KEY);
 
 const Popular = ({navigation}) => {
   const [languages, setLanguages] = useState([]);
-  const [index, setIndex] = useState(0);
-  const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(false);
   const {colors} = useTheme();
 
@@ -37,12 +34,6 @@ const Popular = ({navigation}) => {
         const languages = result.filter((item) => item.checked);
         setLanguages(languages);
         setLoading(false);
-        setRoutes(
-          languages.map((language) => ({
-            key: language.name,
-            title: language.name,
-          })),
-        );
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +42,7 @@ const Popular = ({navigation}) => {
 
   const handleClick = useCallback(() => {
     navigation.navigate('Search');
-  }, []);
+  }, [navigation]);
 
   const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
 
@@ -75,28 +66,14 @@ const Popular = ({navigation}) => {
           </TouchableOpacity>
         }
       />
-      {loading ? (
+      {loading || languages.length === 0 ? (
         <ActivityIndicator />
       ) : (
-        <TabView
-          navigationState={{index, routes}}
-          renderScene={SceneMap(mapRoute)}
-          onIndexChange={(index) => setIndex(index)}
-          initialLayout={{width: Dimensions.get('window').width}}
-          renderTabBar={(props) => (
-            <TabBar
-              scrollEnabled={true}
-              {...props}
-              indicatorStyle={{backgroundColor: 'white'}}
-              style={{backgroundColor: colors.primary}}
-              renderLabel={({route, focused, color}) => (
-                <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
-                  {route.key}
-                </Text>
-              )}
-            />
-          )}
-        />
+        <Tab.Navigator tabBarOptions={{scrollEnabled: true}}>
+          {Object.keys(mapRoute).map((name) => (
+            <Tab.Screen name={name} component={mapRoute[name]} key={name} />
+          ))}
+        </Tab.Navigator>
       )}
     </View>
   );

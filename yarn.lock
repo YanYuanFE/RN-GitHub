@@ -1149,6 +1149,13 @@
     react-is "^16.13.0"
     use-subscription "^1.4.0"
 
+"@react-navigation/material-top-tabs@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.2.2.tgz#9373fc624a0037ebeb2df6fd5c6d39b7b7768e7c"
+  integrity sha512-SPnDb0p88CVv7zm1/FxijL1SgUkllbrmWINxaJSMDJAJE/NlDet8vapKeI5zF4irk2OFYNkebIAvaip/sR0okQ==
+  dependencies:
+    color "^3.1.2"
+
 "@react-navigation/native@^5.2.4":
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.2.4.tgz#e175a50541e8157a595e265209215f02ad5bd181"

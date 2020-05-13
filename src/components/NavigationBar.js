@@ -19,7 +19,7 @@ const NavigationBar = ({
 }) => {
   const insets = useSafeArea();
   const getButtonElement = (data) => {
-    return <View style={styles.navBarButton}>{data ? data : null}</View>;
+    return <View style={styles.navBarButton}>{data}</View>;
   };
 
   let statusBarComp = !statusBar.hidden ? (
@@ -32,9 +32,9 @@ const NavigationBar = ({
 
   let content = hide ? null : (
     <View style={styles.navBar}>
-      {getButtonElement(leftButton)}
+      {leftButton && getButtonElement(leftButton)}
       <View style={styles.titleViewContainer}>{titleContent}</View>
-      {getButtonElement(rightButton)}
+      {rightButton && getButtonElement(rightButton)}
     </View>
   );
 

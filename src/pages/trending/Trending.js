@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  Dimensions,
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
@@ -11,9 +10,11 @@ import Tooltip from 'react-native-walkthrough-tooltip';
 import TrendingTab from './TrendingTab';
 import NavigationBar from '../../components/NavigationBar';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
 import {useTheme} from '@react-navigation/native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+
+const Tab = createMaterialTopTabNavigator();
 
 const languageService = new LanguageService(TYPE_LANGUAGE.FLAG_LANGUAGE);
 const sinceList = [
@@ -32,8 +33,6 @@ const sinceList = [
 ];
 const Trending = () => {
   const [languages, setLanguages] = useState([]);
-  const [index, setIndex] = useState(0);
-  const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [since, setSince] = useState(sinceList[0]);
   const {colors} = useTheme();
@@ -50,19 +49,11 @@ const Trending = () => {
         const languages = result.filter((item) => item.checked);
         setLanguages(languages);
         setLoading(false);
-        setRoutes(
-          languages.map((language) => ({
-            key: language.name,
-            title: language.name,
-          })),
-        );
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  const handleTabChange = (index) => setIndex(index);
 
   const handleSinceChange = (item) => setSince(item);
 
@@ -87,28 +78,14 @@ const Trending = () => {
         }
         statusBar={{backgroundColor: colors.primary}}
       />
-      {loading ? (
+      {loading || languages.length === 0 ? (
         <ActivityIndicator />
       ) : (
-        <TabView
-          navigationState={{index, routes}}
-          renderScene={SceneMap(mapRoute)}
-          onIndexChange={handleTabChange}
-          initialLayout={{width: Dimensions.get('window').width}}
-          renderTabBar={(props) => (
-            <TabBar
-              {...props}
-              scrollEnabled={true}
-              indicatorStyle={{backgroundColor: 'white'}}
-              style={{backgroundColor: colors.primary}}
-              renderLabel={({route, focused, color}) => (
-                <Text style={{color: focused ? '#F5F5F5' : color, margin: 0}}>
-                  {route.key}
-                </Text>
-              )}
-            />
-          )}
-        />
+        <Tab.Navigator tabBarOptions={{scrollEnabled: true}}>
+          {Object.keys(mapRoute).map((name) => (
+            <Tab.Screen name={name} component={mapRoute[name]} key={name} />
+          ))}
+        </Tab.Navigator>
       )}
     </View>
   );
