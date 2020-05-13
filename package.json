@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^5.2.19",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-appearance": "^0.3.4",
     "react-native-check-box": "^2.1.7",
     "react-native-code-push": "^6.2.0",
     "react-native-code-push-dialog": "^1.0.2",

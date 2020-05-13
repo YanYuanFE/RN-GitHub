@@ -93,8 +93,6 @@ const TrendingTab = ({tabLabel, since}) => {
 
   const _keyExtractor = (item, index) => item.url;
 
-  console.log(tabLabel, since, dataSource);
-
   return (
     <View style={styles.container}>
       {loading ? (
