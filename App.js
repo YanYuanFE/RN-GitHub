@@ -41,8 +41,14 @@ const App = () => {
   useEffect(() => {
     getTheme();
     const listener = DeviceEventEmitter.addListener('THEME_CHANGED', getTheme);
+    const subscription = Appearance.addChangeListener((preferences) => {
+      // do something with color scheme
+      console.log(preferences);
+      Appearance.set(preferences);
+    });
     return () => {
       listener && listener.remove();
+      subscription.remove();
     };
   }, [getTheme]);
 
@@ -64,12 +70,6 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
-
-const subscription = Appearance.addChangeListener(({colorScheme}) => {
-  // do something with color scheme
-});
-
-subscription.remove();
 
 export default App;
 

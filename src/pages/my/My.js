@@ -44,7 +44,7 @@ const My = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.background}]}>
       <NavigationBar
         style={{backgroundColor: colors.primary}}
         title={'我的'}
@@ -60,34 +60,36 @@ const My = () => {
                 flex: 1,
               }}>
               <Icon name={'logo-github'} color={colors.primary} size={40} />
-              <Text>RN-GitHub</Text>
+              <Text style={[styles.title, {color: colors.text}]}>
+                RN-GitHub
+              </Text>
             </View>
           </View>
         </TouchableOpacity>
         <Text style={styles.groupTitle}>最热管理</Text>
         <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_TAG)}>
           <View style={styles.group}>
-            <Text style={styles.title}>自定义标签</Text>
+            <Text style={[styles.title, {color: colors.text}]}>自定义标签</Text>
             <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
         <Text style={styles.groupTitle}>趋势管理</Text>
         <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_LANGUAGE)}>
           <View style={styles.group}>
-            <Text style={styles.title}>自定义语言</Text>
+            <Text style={[styles.title, {color: colors.text}]}>自定义语言</Text>
             <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
         <Text style={styles.groupTitle}>设置</Text>
         <TouchableOpacity onPress={() => handleClick(MENU.CUSTOM_THEME)}>
           <View style={styles.group}>
-            <Text style={styles.title}>主题设置</Text>
+            <Text style={[styles.title, {color: colors.text}]}>主题设置</Text>
             <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleUpdate}>
           <View style={styles.group}>
-            <Text style={styles.title}>检查更新</Text>
+            <Text style={[styles.title, {color: colors.text}]}>检查更新</Text>
             <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
@@ -101,7 +103,6 @@ export default My;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
   },
   loading: {
     flex: 1,
@@ -136,7 +137,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    backgroundColor: 'white',
     padding: 10,
     height: 60,
     alignItems: 'center',
