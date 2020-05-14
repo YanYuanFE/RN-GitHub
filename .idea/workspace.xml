@@ -40,6 +40,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fde42618-52ba-413c-917a-c878eb9ef894" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/rnGithub.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/rnGithub.xcodeproj/project.pbxproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +98,7 @@
       <workItem from="1588990748738" duration="12246000" />
       <workItem from="1589278539057" duration="438000" />
       <workItem from="1589351091072" duration="9106000" />
-      <workItem from="1589450241237" duration="791000" />
+      <workItem from="1589450241237" duration="1493000" />
     </task>
     <servers />
   </component>
