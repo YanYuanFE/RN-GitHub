@@ -9,9 +9,9 @@ import {
   DeviceEventEmitter,
   Dimensions,
 } from 'react-native';
-import CheckBox from 'react-native-check-box';
+import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/Ionicons';
-import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
+import LanguageService from '../../services/LanguageService';
 import {useTheme} from '@react-navigation/native';
 
 const screenW = Dimensions.get('window').width;
@@ -82,34 +82,23 @@ const Tag = ({route, navigation}) => {
     languageService.saveData(dataList, cb);
   }, []);
 
-  const iconType = Platform.OS === 'IOS' ? 'ios' : 'md';
-
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.wrapper}>
         {dataList.map((item, index) => {
           return (
-            <CheckBox
-              isChecked={item.checked}
-              key={item.name}
-              style={styles.checkbox}
-              onClick={() => handleChange(item)}
-              leftText={item.name}
-              checkedImage={
-                <Icon
-                  name={`${iconType}-checkbox`}
-                  color={colors.primary}
-                  size={25}
-                />
-              }
-              unCheckedImage={
-                <Icon
-                  name={`${iconType}-checkbox-outline`}
-                  color={colors.primary}
-                  size={25}
-                />
-              }
-            />
+            <View key={item.name} style={styles.item}>
+              <CheckBox
+                  tintColors={{
+                    true: colors.primary
+                  }}
+                  onCheckColor={colors.primary}
+                  onTintColor={colors.primary}
+                  value={item.checked}
+                  onValueChange={() => handleChange(item)}
+              />
+              <Text style={styles.text}>{item.name}</Text>
+            </View>
           );
         })}
       </ScrollView>
@@ -128,19 +117,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  item: {
-    flexDirection: 'row',
-  },
   line: {
     flex: 1,
     height: 0.3,
     backgroundColor: 'darkgray',
   },
-  checkbox: {
+  item: {
     width: screenW / 2 - 2,
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#E8E8E8',
     borderStyle: 'solid',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  text: {
+    marginLeft: 5,
   },
 });

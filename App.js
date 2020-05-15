@@ -45,6 +45,7 @@ const App = () => {
       // do something with color scheme
       console.log(preferences);
       Appearance.set(preferences);
+      getTheme();
     });
     return () => {
       listener && listener.remove();

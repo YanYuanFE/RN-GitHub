@@ -40,7 +40,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fde42618-52ba-413c-917a-c878eb9ef894" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/rnGithub.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/rnGithub.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/my/Tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/my/Tag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +60,9 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1bZXQX70fS3YU8gyfD5HvVQATUW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -98,7 +104,7 @@
       <workItem from="1588990748738" duration="12246000" />
       <workItem from="1589278539057" duration="438000" />
       <workItem from="1589351091072" duration="9106000" />
-      <workItem from="1589450241237" duration="1493000" />
+      <workItem from="1589450241237" duration="5889000" />
     </task>
     <servers />
   </component>
@@ -130,10 +136,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="165" key="VcsDiffUtil.ChangesDialog" timestamp="1588990052728">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state x="100" y="123" width="1240" height="603" key="DiffContextDialog" timestamp="1589452122985">
+      <screen x="0" y="23" width="1440" height="803" />
     </state>
-    <state x="424" y="165" key="VcsDiffUtil.ChangesDialog/0.23.1440.803/-1920.23.1920.1057@0.23.1440.803" timestamp="1588927643850" />
+    <state x="100" y="123" width="1240" height="603" key="DiffContextDialog/0.23.1440.803/-1920.23.1920.1057@0.23.1440.803" timestamp="1589452122985" />
+    <state x="424" y="165" key="VcsDiffUtil.ChangesDialog" timestamp="1589451912664">
+      <screen x="0" y="23" width="1440" height="803" />
+    </state>
+    <state x="424" y="165" key="VcsDiffUtil.ChangesDialog/0.23.1440.803/-1920.23.1920.1057@0.23.1440.803" timestamp="1589451912664" />
     <state x="424" y="165" key="VcsDiffUtil.ChangesDialog/0.23.1440.804/-1920.23.1920.1057@0.23.1440.804" timestamp="1588990052728" />
     <state x="418" y="180" width="643" height="604" key="find.popup" timestamp="1589353620175">
       <screen x="0" y="23" width="1440" height="803" />
