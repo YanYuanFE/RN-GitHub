@@ -89,13 +89,13 @@ const Tag = ({route, navigation}) => {
           return (
             <View key={item.name} style={styles.item}>
               <CheckBox
-                  tintColors={{
-                    true: colors.primary
-                  }}
-                  onCheckColor={colors.primary}
-                  onTintColor={colors.primary}
-                  value={item.checked}
-                  onValueChange={() => handleChange(item)}
+                tintColors={{
+                  true: colors.primary,
+                }}
+                onCheckColor={colors.primary}
+                onTintColor={colors.primary}
+                value={item.checked}
+                onValueChange={() => handleChange(item)}
               />
               <Text style={styles.text}>{item.name}</Text>
             </View>

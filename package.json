@@ -20,8 +20,6 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-appearance": "^0.3.4",
-    "react-native-code-push": "^6.2.0",
-    "react-native-code-push-dialog": "^1.0.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^0.7.3",
