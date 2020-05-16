@@ -3,14 +3,11 @@ import {
   View,
   ActivityIndicator,
   StyleSheet,
-  StatusBar,
   Platform,
 } from 'react-native';
 import {WebView} from 'react-native-webview';
-import {useTheme} from '@react-navigation/native';
 
 const WebPage = ({navigation, route}) => {
-  const {colors} = useTheme();
   const {url, title} = route.params;
   useLayoutEffect(() => {
     navigation.setOptions({

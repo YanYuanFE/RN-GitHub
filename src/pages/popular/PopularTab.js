@@ -28,13 +28,14 @@ const PopularTab = ({tabLabel}) => {
   }, []);
 
   const flushFavoriteState = () => {
-    const dataSource = data.map((item) => {
+    const list = data.map((item) => {
       return {
         ...item,
         isFavorite: checkFavorite(item, favoriteKeys),
       };
     });
-    setData(dataSource);
+    console.log(list);
+    setData(list);
     setLoading(false);
   };
 

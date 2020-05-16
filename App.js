@@ -20,23 +20,31 @@ import ThemeService from './src/services/ThemeService';
 
 const themeService = new ThemeService();
 
-const getAppTheme = (scheme, primary) => {
-  const Theme = scheme === 'dark' ? DarkTheme : DefaultTheme;
-  return {
-    ...Theme,
-    colors: {
-      ...Theme.colors,
-      primary: primary,
-    },
-  };
-};
-
-Appearance.getColorScheme();
-
 const App = () => {
   const [theme, setTheme] = useState(null);
   const scheme = useColorScheme();
-  console.log(theme);
+  console.log(scheme);
+
+  const getAppTheme = useCallback(
+    (primary) => {
+      const Theme = scheme === 'dark' ? DarkTheme : DefaultTheme;
+      return {
+        ...Theme,
+        colors: {
+          ...Theme.colors,
+          primary: primary,
+        },
+      };
+    },
+    [scheme],
+  );
+
+  const getTheme = useCallback(() => {
+    themeService.getTheme().then((data) => {
+      console.log(data);
+      setTheme(getAppTheme(data));
+    });
+  }, [getAppTheme]);
 
   useEffect(() => {
     getTheme();
@@ -52,12 +60,6 @@ const App = () => {
       subscription.remove();
     };
   }, [getTheme]);
-
-  const getTheme = useCallback(() => {
-    themeService.getTheme().then((data) => {
-      setTheme(getAppTheme(scheme, data));
-    });
-  }, [scheme]);
 
   if (!theme) {
     return null;
