@@ -170,13 +170,14 @@ const styles = StyleSheet.create({
     height: 600,
   },
   sinceText: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    textAlign: 'center',
   },
   sinceView: {
     backgroundColor: '#FFF',
+    flexDirection: 'column',
+    flex: 1,
   },
   sinceItem: {
-    marginTop: 10,
+    flex: 1,
   },
 });
