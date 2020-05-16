@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Platform,
+  DeviceEventEmitter,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PopularTab from './PopularTab';
@@ -24,6 +25,14 @@ const Popular = ({navigation}) => {
 
   useEffect(() => {
     loadLanguage();
+    const listener = DeviceEventEmitter.addListener(
+      TYPE_LANGUAGE.FLAG_KEY + '_CHANGED',
+      loadLanguage,
+    );
+
+    return () => {
+      listener.remove();
+    };
   }, []);
 
   const loadLanguage = () => {
@@ -31,8 +40,8 @@ const Popular = ({navigation}) => {
     languageService
       .fetchData()
       .then((result) => {
-        const languages = result.filter((item) => item.checked);
-        setLanguages(languages);
+        const data = result.filter((item) => item.checked);
+        setLanguages(data);
         setLoading(false);
       })
       .catch((error) => {

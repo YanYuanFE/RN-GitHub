@@ -1,10 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {
-  View,
-  ActivityIndicator,
-  StyleSheet,
-  Platform,
-} from 'react-native';
+import {View, ActivityIndicator, StyleSheet, Platform} from 'react-native';
 import {WebView} from 'react-native-webview';
 
 const WebPage = ({navigation, route}) => {

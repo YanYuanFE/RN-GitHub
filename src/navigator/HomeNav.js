@@ -31,7 +31,7 @@ const HomeNav = () => {
       initialRouteName="Popular"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
-          let iconName = icons[route.name];
+          const iconName = icons[route.name];
 
           return <Icon name={iconName} size={25} color={color} />;
         },
@@ -44,9 +44,6 @@ const HomeNav = () => {
       <Tab.Screen name="Trending" component={Trending} />
       <Tab.Screen name="Favorite" component={Favorite} />
       <Tab.Screen name="My" component={My} />
-      {/*{Object.keys(tabRoutes, (key) => (*/}
-      {/*  <Tab.Screen name={key} key={key} component={tabRoutes[key]} />*/}
-      {/*))}*/}
     </Tab.Navigator>
   );
 };

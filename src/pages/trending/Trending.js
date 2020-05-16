@@ -5,6 +5,7 @@ import {
   Text,
   ActivityIndicator,
   TouchableOpacity,
+  DeviceEventEmitter,
 } from 'react-native';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import TrendingTab from './TrendingTab';
@@ -39,6 +40,14 @@ const Trending = () => {
 
   useEffect(() => {
     loadLanguage();
+    const listener = DeviceEventEmitter.addListener(
+      TYPE_LANGUAGE.FLAG_LANGUAGE + '_CHANGED',
+      loadLanguage,
+    );
+
+    return () => {
+      listener.remove();
+    };
   }, []);
 
   const loadLanguage = () => {
@@ -46,8 +55,8 @@ const Trending = () => {
     languageService
       .fetchData()
       .then((result) => {
-        const languages = result.filter((item) => item.checked);
-        setLanguages(languages);
+        const data = result.filter((item) => item.checked);
+        setLanguages(data);
         setLoading(false);
       })
       .catch((error) => {

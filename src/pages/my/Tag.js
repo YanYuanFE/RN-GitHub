@@ -5,12 +5,10 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Platform,
   DeviceEventEmitter,
   Dimensions,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService from '../../services/LanguageService';
 import {useTheme} from '@react-navigation/native';
 
@@ -20,17 +18,6 @@ const Tag = ({route, navigation}) => {
   const {colors} = useTheme();
   const {title, flag} = route.params;
   const languageService = new LanguageService(flag);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: title,
-      headerRight: () => (
-        <TouchableOpacity onPress={handleSave}>
-          <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation, handleSave, title]);
 
   const [dataList, setData] = useState([]);
 
@@ -51,7 +38,7 @@ const Tag = ({route, navigation}) => {
   };
 
   const handleChange = (data) => {
-    const changeList = dataList.map((item) => {
+    const list = dataList.map((item) => {
       return item.name === data.name
         ? {
             ...data,
@@ -59,28 +46,28 @@ const Tag = ({route, navigation}) => {
           }
         : item;
     });
-    // console.log(changeList);
-    setData(dataList);
-    // data.checked = !data.checked;
-    // updateArray(this.changeDatas, data);
-    // console.log(this.changeDatas);
+    setData(list);
   };
 
   const handleSave = useCallback(() => {
-    // if (this.changeDatas.length === 0) {
-    // 	this.props.navigation.goBack();
-    // 	return;
-    // }
-    // this.changeDatas.forEach((item => {
-    // 	remove()
-    // }))
     const cb = () => {
-      DeviceEventEmitter.emit('THEME_CHANGED');
+      DeviceEventEmitter.emit(flag + '_CHANGED');
       navigation.goBack();
     };
 
     languageService.saveData(dataList, cb);
-  }, []);
+  }, [dataList]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: title,
+      headerRight: () => (
+        <TouchableOpacity onPress={handleSave}>
+          <Text style={{color: '#FFF', marginRight: 10}}>保存</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, handleSave, title]);
 
   return (
     <View style={styles.container}>
