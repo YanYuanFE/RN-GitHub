@@ -17,22 +17,22 @@ const PopularRepo = ({data, onFavorite, colors}) => {
   };
 
   return (
-    <View style={styles.cell_container}>
-      <Text style={styles.title}>{data.full_name}</Text>
+    <View style={[styles.cell_container, {backgroundColor: colors.card, borderColor: colors.border}]}>
+      <Text style={[styles.title, {color: colors.text}]}>{data.full_name}</Text>
       <TouchableOpacity onPress={goDetail}>
         <Text style={styles.description}>{data.description}</Text>
       </TouchableOpacity>
       <View style={styles.row}>
         <View style={styles.row}>
-          <Text>Author:</Text>
+          <Text style={{color: colors.text}}>Author:</Text>
           <Image
             style={styles.avatar}
             source={{uri: data.owner && data.owner.avatar_url}}
           />
         </View>
         <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-          <Text>Star:</Text>
-          <Text>{data.stargazers_count}</Text>
+          <Text style={{color: colors.text}}>Star:</Text>
+          <Text style={{color: colors.text}}>{data.stargazers_count}</Text>
         </View>
         <TouchableOpacity onPress={handleFavorite}>
           <Icon
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     marginBottom: 2,
-    color: '#212121',
+//    color: '#212121',
     flex: 1,
   },
   description: {
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
   },
   cell_container: {
     flex: 1,
-    backgroundColor: '#FFF',
     padding: 10,
     marginLeft: 5,
     marginRight: 5,

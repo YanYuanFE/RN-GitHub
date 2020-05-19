@@ -34,7 +34,6 @@ const PopularTab = ({tabLabel}) => {
         isFavorite: checkFavorite(item, favoriteKeys),
       };
     });
-    console.log(list);
     setData(list);
     setLoading(false);
   };

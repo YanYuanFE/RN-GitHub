@@ -21,8 +21,8 @@ const TrendingRepo = ({data, onFavorite, colors}) => {
   }
 
   return (
-    <View style={styles.cell_container}>
-      <Text style={styles.title}>{data.name}</Text>
+    <View style={[styles.cell_container, {backgroundColor: colors.card, borderColor: colors.border}]}>
+      <Text style={[styles.title, {color: colors.text}]}>{data.name}</Text>
       <TouchableOpacity onPress={goDetail}>
         <Text style={styles.description}>{data.description}</Text>
       </TouchableOpacity>

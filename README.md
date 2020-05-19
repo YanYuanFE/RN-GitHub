@@ -11,15 +11,13 @@ A Github client of React Native.
 *  react-navigation 5.2
 *  react-native-vector-icons
 
-施工中。。。
-
 ## 🔨 快速开始
 
 ```bash
 $ git clone https://github.com/YanYuanFE/RN-GitHub.git
 $ cd RN-Github
-$ npm install
-$ react-native link
+$ yarn
+$ cd ios && pod install // ios
 $ react-native run-android / run-ios
 ```
 
@@ -27,14 +25,25 @@ $ react-native run-android / run-ios
 
 * iOS <br/>
 
-<img src="http://img.yanyuanfe.cn/popular1.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/trending.png" width="400" />
+<img src="http://img.yanyuanfe.cn/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-19%20at%2022.25.56.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-19%20at%2022.26.04.png" width="400" />
 <br/>
 
-<img src="http://img.yanyuanfe.cn/favorite.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/my.png" width="400" />
+<img src="http://img.yanyuanfe.cn/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-19%20at%2022.26.08.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-19%20at%2022.26.40.png" width="400" />
 <br/>
 
-<img src="http://img.yanyuanfe.cn/theme.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/popular.png" width="400" />
+<img src="http://img.yanyuanfe.cn/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-19%20at%2022.26.55.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-19%20at%2022.30.45.png" width="400" />
 
+* Android <br/>
+
+<img src="http://img.yanyuanfe.cn/Screenshot_1589899203.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Screenshot_1589899242.png" width="400" />
+<br/>
+
+<img src="http://img.yanyuanfe.cn/Screenshot_1589899250.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Screenshot_1589899254.png" width="400" />
+<br/>
+
+<img src="http://img.yanyuanfe.cn/Screenshot_1589899264.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Screenshot_1589899330.png" width="400" />
+<br/>
+<img src="http://img.yanyuanfe.cn/Screenshot_1589899341.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;
 ## License
 
 [MIT][mit-license]

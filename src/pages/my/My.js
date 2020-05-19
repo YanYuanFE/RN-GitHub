@@ -87,12 +87,12 @@ const My = () => {
             <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleUpdate}>
-          <View style={styles.group}>
-            <Text style={[styles.title, {color: colors.text}]}>检查更新</Text>
-            <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />
-          </View>
-        </TouchableOpacity>
+        {/*<TouchableOpacity onPress={handleUpdate}>*/}
+        {/*  <View style={styles.group}>*/}
+        {/*    <Text style={[styles.title, {color: colors.text}]}>检查更新</Text>*/}
+        {/*    <Icon name={'ios-arrow-forward'} color={colors.primary} size={25} />*/}
+        {/*  </View>*/}
+        {/*</TouchableOpacity>*/}
       </ScrollView>
     </View>
   );

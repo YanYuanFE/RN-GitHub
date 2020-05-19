@@ -64,6 +64,7 @@ const App = () => {
   if (!theme) {
     return null;
   }
+  console.log(theme)
 
   return (
     <SafeAreaProvider>
