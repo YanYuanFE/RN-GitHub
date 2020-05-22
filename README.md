@@ -21,6 +21,9 @@ $ cd ios && pod install // ios
 $ react-native run-android / run-ios
 ```
 
+## 🙊 常见问题
+* IOS build失败解决办法 https://github.com/oblador/react-native-vector-icons/issues/1144
+
 ## 💅 截图
 
 * iOS <br/>
@@ -44,6 +47,7 @@ $ react-native run-android / run-ios
 <img src="http://img.yanyuanfe.cn/Screenshot_1589899264.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.yanyuanfe.cn/Screenshot_1589899330.png" width="400" />
 <br/>
 <img src="http://img.yanyuanfe.cn/Screenshot_1589899341.png" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;
+
 ## License
 
 [MIT][mit-license]
