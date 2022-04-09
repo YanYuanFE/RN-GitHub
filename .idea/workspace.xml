@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="091c82f0-b4c1-4e0f-9f77-4f8cdaa65d91" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigator/AppNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigator/AppNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigator/HomeNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigator/HomeNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/favorite/Favorite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/favorite/Favorite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/my/My.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/my/My.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/popular/Popular.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/popular/Popular.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/trending/Trending.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/trending/Trending.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/web/WebView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/web/WebView.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

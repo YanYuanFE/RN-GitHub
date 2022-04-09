@@ -90,7 +90,7 @@ const Trending = ({navigation}) => {
       {loading || languages.length === 0 ? (
         <ActivityIndicator />
       ) : (
-        <Tab.Navigator tabBarOptions={{scrollEnabled: true}}>
+        <Tab.Navigator screenOptions={{tabBarScrollEnabled: true}}>
           {Object.keys(mapRoute).map((name) => (
             <Tab.Screen name={name} component={mapRoute[name]} key={name} />
           ))}
