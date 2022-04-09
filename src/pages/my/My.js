@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import NavigationBar from '../../components/NavigationBar';
 import {TYPE_LANGUAGE} from '../../services/LanguageService';
 import {useTheme} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
@@ -45,11 +44,6 @@ const My = () => {
 
   return (
     <View style={[styles.container, {backgroundColor: colors.background}]}>
-      <NavigationBar
-        style={{backgroundColor: colors.primary}}
-        title={'我的'}
-        statusBar={{backgroundColor: colors.primary}}
-      />
       <ScrollView>
         <TouchableOpacity>
           <View style={[styles.item, {height: 90}]}>

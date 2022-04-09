@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import TrendingTab from './TrendingTab';
-import NavigationBar from '../../components/NavigationBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
 import {useTheme} from '@react-navigation/native';
@@ -32,11 +31,23 @@ const sinceList = [
     value: 'monthly',
   },
 ];
-const Trending = () => {
+const Trending = ({navigation}) => {
   const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [since, setSince] = useState(sinceList[0]);
   const {colors} = useTheme();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+          <SinceView
+              since={since}
+              onChange={handleSinceChange}
+              colors={colors}
+          />
+      ),
+    });
+  }, [navigation, colors]);
 
   useEffect(() => {
     loadLanguage();
@@ -76,17 +87,6 @@ const Trending = () => {
 
   return (
     <View style={styles.container}>
-      <NavigationBar
-        style={{backgroundColor: colors.primary}}
-        titleView={
-          <SinceView
-            since={since}
-            onChange={handleSinceChange}
-            colors={colors}
-          />
-        }
-        statusBar={{backgroundColor: colors.primary}}
-      />
       {loading || languages.length === 0 ? (
         <ActivityIndicator />
       ) : (
@@ -136,7 +136,7 @@ const SinceView = ({onChange, since, colors}) => {
         onClose={togglePopover}>
         <TouchableOpacity style={styles.titleView} onPress={togglePopover}>
           <Text style={styles.title}>{`趋势 ${since.label}`}</Text>
-          <Icon name={'ios-arrow-down'} color={'#FFF'} size={12} />
+          <Icon name={'ios-arrow-down'} color={colors.primary} size={12} />
         </TouchableOpacity>
       </Tooltip>
     </View>
@@ -159,12 +159,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: '#FFFFFF',
+    // color: '#FFFFFF',
     fontWeight: '400',
   },
   tabContainer: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#FFF',
   },
   tabList: {
     height: 600,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   sinceView: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'red',
     flexDirection: 'column',
     flex: 1,
   },

@@ -20,14 +20,8 @@ const AppNav = () => {
   const {colors} = useTheme();
 
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        // headerMode='none'
-        options={{
-          headerShown: false,
-          title: '首页',
-        }}>
+    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home">
         {HomeNav}
       </Stack.Screen>
       {Object.keys(stackRoutes).map((key) => (
@@ -36,6 +30,7 @@ const AppNav = () => {
           component={stackRoutes[key]}
           key={key}
           options={{
+            headerShown: true,
             headerStyle: {
               backgroundColor: colors.primary,
             },

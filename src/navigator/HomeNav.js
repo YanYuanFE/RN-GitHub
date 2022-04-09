@@ -40,10 +40,22 @@ const HomeNav = () => {
         activeTintColor: colors.primary,
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Popular" component={Popular} />
+      <Tab.Screen
+          name="Popular"
+          component={Popular}
+          options={{
+              headerTitle: '最热',
+          }}
+      />
       <Tab.Screen name="Trending" component={Trending} />
-      <Tab.Screen name="Favorite" component={Favorite} />
-      <Tab.Screen name="My" component={My} />
+      <Tab.Screen name="Favorite" component={Favorite}
+                  options={{
+                      headerTitle: '喜欢',
+                  }}
+      />
+      <Tab.Screen name="My" component={My} options={{
+          headerTitle: '我的',
+      }} />
     </Tab.Navigator>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback, useLayoutEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PopularTab from './PopularTab';
-import NavigationBar from '../../components/NavigationBar';
 import LanguageService, {TYPE_LANGUAGE} from '../../services/LanguageService';
 import {useTheme} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -22,6 +21,16 @@ const Popular = ({navigation}) => {
   const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
   const {colors} = useTheme();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+            <TouchableOpacity onPress={handleClick} style={styles.search}>
+          <Icon name={`${iconType}-search`} color={colors.primary} size={25} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, colors]);
 
   useEffect(() => {
     loadLanguage();
@@ -65,16 +74,6 @@ const Popular = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <NavigationBar
-        style={{backgroundColor: colors.primary}}
-        title={'最热'}
-        statusBar={{backgroundColor: colors.primary}}
-        rightButton={
-          <TouchableOpacity onPress={handleClick} style={styles.search}>
-            <Icon name={`${iconType}-search`} color={'#FFF'} size={25} />
-          </TouchableOpacity>
-        }
-      />
       {loading || languages.length === 0 ? (
         <ActivityIndicator />
       ) : (
@@ -108,9 +107,6 @@ const styles = StyleSheet.create({
     height: 600,
   },
   search: {
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#FFF',
   },
 });

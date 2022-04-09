@@ -13,8 +13,8 @@ const WebPage = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <WebView
+          style={styles.view}
         source={{uri: url}}
-        style={{marginTop: 0}}
         startInLoadingState={true}
         renderLoading={() => <ActivityIndicator />}
         onError={(syntheticEvent) => {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f3f3f4',
   },
-  statusBar: {
-    height: Platform.OS === 'ios' ? 44 : 0,
+  view: {
+    flex: 1,
   },
 });
